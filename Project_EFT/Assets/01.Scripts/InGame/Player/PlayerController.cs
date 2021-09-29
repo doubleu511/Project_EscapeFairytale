@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private Animator playerAnim;
+
+    public PlayerState playerState = PlayerState.NORMAL;
+
     public float speed = 5;
     public float gravity = -9.81f;
 
@@ -11,9 +15,15 @@ public class PlayerController : MonoBehaviour
 
     CharacterController cc;
 
+    private void Awake()
+    {
+        playerAnim = GetComponent<Animator>();
+    }
+
     void Start()
     {
         cc = GetComponent<CharacterController>();
+        StartCoroutine(SpeedCheck());
     }
 
     void Update()
@@ -39,5 +49,17 @@ public class PlayerController : MonoBehaviour
         dir.y = yVelocity;
 
         cc.Move(dir * speed * Time.deltaTime);
+    }
+
+    IEnumerator SpeedCheck()
+    {
+        while(true)
+        {
+            Vector3 currentPos = transform.position;
+            yield return new WaitForFixedUpdate();
+            Vector3 secondPos = transform.position;
+
+            playerAnim.SetFloat("speed", Vector3.Distance(currentPos,secondPos));
+        }
     }
 }
