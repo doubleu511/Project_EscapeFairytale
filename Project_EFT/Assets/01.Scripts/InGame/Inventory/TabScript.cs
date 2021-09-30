@@ -38,6 +38,7 @@ public class TabScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IDropHa
         // Set Data
         dragAndDropContainer.itemId = itemId;
         dragAndDropContainer.image.sprite = myImg.sprite;
+        dragAndDropContainer.movingTab = this;
         isDragging = true;
     }
     // 드래그 오브젝트에서 발생
@@ -62,8 +63,8 @@ public class TabScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IDropHa
             else
             {
                 // Clear Data
-                myImg.sprite = null;
                 itemId = -1;
+                myImg.sprite = null;
             }
         }
 
@@ -89,6 +90,12 @@ public class TabScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IDropHa
             // put data from drop object to Container.  
             dragAndDropContainer.image.sprite = tempSprite;
             dragAndDropContainer.itemId = tempItemId;
+
+            if (dragAndDropContainer.movingTab == GameManager.Instance.selectedTab)
+            {
+                GameManager.Instance.selectedItemUI.transform.position = transform.position;
+                GameManager.Instance.selectedTab = this;
+            }
         }
         else
         {
@@ -101,7 +108,11 @@ public class TabScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IDropHa
         if (itemId != -1)
         {
             GameManager.Instance.selectedItemId = itemId;
+            GameManager.Instance.selectedTab = this;
             GameManager.Instance.inventoryManager.SelectedItemRefresh();
+
+            GameManager.Instance.selectedItemUI.SetActive(true);
+            GameManager.Instance.selectedItemUI.transform.position = transform.position;
         }
     }
 }

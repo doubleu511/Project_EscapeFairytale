@@ -12,9 +12,12 @@ public class GameManager : MonoBehaviour
     [Header("Player")]
     public PlayerController player;
 
+    [Header("Inventory")]
     public ItemData itemData;
     public ItemDataInfo[] playerInventory = new ItemDataInfo[6];
     public int selectedItemId;
+    public TabScript selectedTab;
+    public GameObject selectedItemUI;
 
     private void Awake()
     {

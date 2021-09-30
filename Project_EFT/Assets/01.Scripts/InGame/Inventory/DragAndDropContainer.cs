@@ -7,11 +7,7 @@ public class DragAndDropContainer : MonoBehaviour
 {
     public int itemId;
     public Image image;
+    public TabScript movingTab;
     // public MyData data;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        gameObject.SetActive(false);
-    }
 }

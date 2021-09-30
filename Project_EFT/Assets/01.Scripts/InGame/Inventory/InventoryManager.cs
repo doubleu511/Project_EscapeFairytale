@@ -35,6 +35,14 @@ public class InventoryManager : MonoBehaviour
 
     public void SelectedItemRefresh()
     {
-        selectedImg.sprite = GameManager.Instance.itemData.infos[GameManager.Instance.selectedItemId].itemSprite;
+        if (GameManager.Instance.selectedItemId != -1)
+        {
+            selectedImg.sprite = GameManager.Instance.itemData.infos[GameManager.Instance.selectedItemId].itemSprite;
+        }
+        else
+        {
+            selectedImg.sprite = null;
+            GameManager.Instance.selectedItemUI.SetActive(false);
+        }
     }
 }
