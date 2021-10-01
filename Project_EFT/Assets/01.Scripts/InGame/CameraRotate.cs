@@ -24,7 +24,8 @@ public class CameraRotate : MonoBehaviour
             //x을 돌리는 이유 x축이 이동이 아니라 x축을 회전 해서 위아래 보는 방향은 x축이여야 한다.
 
             //2. 회전을 한다.
-            transform.eulerAngles = new Vector3(-rx, ry, 0);
+            transform.localEulerAngles = new Vector3(-rx, 0, 0);
+            GameManager.Instance.player.transform.eulerAngles = new Vector3(0, ry, 0);
             //X축의 회전은 양수가 증가되면 아래, 음수가 증가되면 위로 돌아간다. (그래서 x축을 -를 넣었다)
         }
     }

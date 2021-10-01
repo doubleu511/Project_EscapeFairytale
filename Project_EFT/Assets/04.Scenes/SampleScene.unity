@@ -1103,6 +1103,7 @@ GameObject:
   - component: {fileID: 520852151}
   - component: {fileID: 520852156}
   - component: {fileID: 520852155}
+  - component: {fileID: 520852158}
   - component: {fileID: 520852157}
   m_Layer: 0
   m_Name: Player
@@ -1239,6 +1240,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &520852158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520852150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c950d11348cda7842ad6c815b0707ce6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 963194225}
 --- !u!1 &536360969
 GameObject:
   m_ObjectHideFlags: 0
@@ -3533,7 +3547,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2020648139}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0

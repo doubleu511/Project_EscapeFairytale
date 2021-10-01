@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 dir = Vector3.right * h + Vector3.forward * v;
 
-        dir = Camera.main.transform.TransformDirection(dir);
+        dir = transform.TransformDirection(dir);
         dir.Normalize();
         dir.y = yVelocity;
 
