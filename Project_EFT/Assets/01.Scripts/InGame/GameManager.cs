@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        MouseEvent.MouseLock(true);
+        MouseEvent.MouseLock(false);
     }
 
     void Update()

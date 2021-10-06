@@ -96,6 +96,11 @@ public class TabScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IDropHa
                 GameManager.Instance.selectedItemUI.transform.position = transform.position;
                 GameManager.Instance.selectedTab = this;
             }
+            else if (GameManager.Instance.selectedTab == this)
+            {
+                GameManager.Instance.selectedItemUI.transform.position = dragAndDropContainer.movingTab.transform.position;
+                GameManager.Instance.selectedTab = dragAndDropContainer.movingTab;
+            }
         }
         else
         {
@@ -107,8 +112,22 @@ public class TabScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IDropHa
     {
         if (itemId != -1)
         {
-            GameManager.Instance.selectedItemId = itemId;
-            GameManager.Instance.selectedTab = this;
+            if(GameManager.Instance.selectedTab == this)
+            {
+                GameManager.Instance.inventoryManager.tabClickCount++;
+
+                if(GameManager.Instance.inventoryManager.tabClickCount >= 2)
+                {
+                    GameManager.Instance.inventoryManager.tabClickCount = 0;
+                    GameManager.Instance.inventoryManager.ItemDetailOpen();
+                }
+            }
+            else
+            {
+                GameManager.Instance.selectedItemId = itemId;
+                GameManager.Instance.inventoryManager.tabClickCount = 0;
+                GameManager.Instance.selectedTab = this;
+            }
             GameManager.Instance.inventoryManager.SelectedItemRefresh();
 
             GameManager.Instance.selectedItemUI.SetActive(true);

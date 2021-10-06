@@ -10,11 +10,11 @@ public class PlayerInput : MonoBehaviour
         {
             if (GameManager.Instance.player.playerState == PlayerState.NORMAL)
             {
-                GameManager.Instance.inventoryManager.Open();
+                GameManager.Instance.inventoryManager.InventoryOpen();
             }
             else if (GameManager.Instance.player.playerState == PlayerState.OPEN_INVENTORY)
             {
-                GameManager.Instance.inventoryManager.Close();
+                GameManager.Instance.inventoryManager.InventoryClose();
             }
         }
 
@@ -22,7 +22,7 @@ public class PlayerInput : MonoBehaviour
         {
             if (GameManager.Instance.player.playerState == PlayerState.OPEN_INVENTORY)
             {
-                GameManager.Instance.inventoryManager.Close();
+                GameManager.Instance.inventoryManager.InventoryClose();
             }
         }
     }

@@ -8,8 +8,8 @@ public class PlayerAction : MonoBehaviour
 
     void Update()
     {
-        bool isHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 10, 1 << LayerMask.NameToLayer("Default"));
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 10);
+        bool isHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 3, 1 << LayerMask.NameToLayer("Default"));
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 3);
 
         if (isHit)
         {
