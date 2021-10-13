@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/ItemData", order = 1)]
@@ -13,4 +14,5 @@ public class ItemDataInfo
     public string itemName;
     public string itemLore;
     public Sprite itemSprite;
+    public GameObject itemPrefab;
 }

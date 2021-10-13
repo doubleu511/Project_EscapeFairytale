@@ -17,6 +17,7 @@ public class InventoryManager : MonoBehaviour
     public Button backBtn;
     public Button into3DBtn;
 
+    [Space(10)]
     public Image selectedImg;
     public TabScript[] tabs;
 
@@ -33,9 +34,10 @@ public class InventoryManager : MonoBehaviour
 
     public void Popup(CanvasGroup group, bool open, float time = 0.5f)
     {
+        group.DOKill();
         if (!open)
         {
-            DOTween.To(() => group.alpha, value => group.alpha = value, 0, time).OnComplete(() =>
+            group.DOFade(0,time).OnComplete(() =>
             {
                 group.blocksRaycasts = false;
                 group.interactable = false;
@@ -45,7 +47,7 @@ public class InventoryManager : MonoBehaviour
         {
             group.blocksRaycasts = true;
             group.interactable = true;
-            DOTween.To(() => group.alpha, value => group.alpha = value, 1, time);
+            group.DOFade(1, time);
         }
     }
 
@@ -93,5 +95,46 @@ public class InventoryManager : MonoBehaviour
             selectedImg.sprite = null;
             GameManager.Instance.selectedItemUI.SetActive(false);
         }
+    }
+
+    public bool TryGetNullTab(out TabScript tab)
+    {
+        for (int i = 0; i < tabs.Length; i++)
+        {
+            if (tabs[i].itemId == -1)
+            {
+                tab = tabs[i];
+                return true;
+            }
+        }
+
+        tab = null;
+        return false;
+    }
+
+    public void SetNullTab(int tabIndex)
+    {
+        tabs[tabIndex].itemId = -1;
+        if (tabIndex == GameManager.Instance.selectedTab.tabId)
+        {
+            GameManager.Instance.selectedItemId = -1;
+            GameManager.Instance.selectedTab = null;
+        }
+
+        GameManager.Instance.inventoryManager.SelectedItemRefresh();
+        foreach (TabScript item in GameManager.Instance.inventoryManager.tabs)
+        {
+            item.Refresh();
+        }
+    }
+
+    public void TIP_FullInventory()
+    {
+        UIManager.Tip_RBAppear(null, "인벤토리가 가득 찼습니다!", 0.5f, 3, 2);
+    }
+
+    public void TIP_ItemGotTipAppear(Sprite sprite)
+    {
+        UIManager.Tip_RBAppear(sprite, "아이템을 획득하였습니다.", 0.5f, 3, 2);
     }
 }

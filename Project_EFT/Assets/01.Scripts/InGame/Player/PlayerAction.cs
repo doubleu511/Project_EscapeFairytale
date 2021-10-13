@@ -4,16 +4,45 @@ using UnityEngine;
 
 public class PlayerAction : MonoBehaviour
 {
+    public static GameObject currentObj = null;
     RaycastHit hit;
 
     void Update()
     {
-        bool isHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 3, 1 << LayerMask.NameToLayer("Default"));
+        bool isHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 3, 1 << LayerMask.NameToLayer("Item"));
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 3);
 
         if (isHit)
         {
-            Debug.Log(hit.collider.gameObject.name);
+            if (hit.collider.CompareTag("SelectableObject"))
+            {
+                hit.collider.GetComponent<SelectableObject>().OnHighlighted();
+
+                if (currentObj != hit.collider.gameObject)
+                {
+                    if (currentObj != null)
+                    {
+                        currentObj.GetComponent<SelectableObject>().OnDisHighlighted();
+                    }
+                    currentObj = hit.collider.gameObject;
+                }
+            }
+            else
+            {
+                if (currentObj != null)
+                {
+                    currentObj.GetComponent<SelectableObject>().OnDisHighlighted();
+                    currentObj = null;
+                }
+            }
+        }
+        else
+        {
+            if (currentObj != null)
+            {
+                currentObj.GetComponent<SelectableObject>().OnDisHighlighted();
+                currentObj = null;
+            }
         }
     }
 }

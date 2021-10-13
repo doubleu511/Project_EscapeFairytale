@@ -7,11 +7,24 @@ using UnityEngine.EventSystems;
 public class TabScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IDropHandler, IEndDragHandler, IPointerClickHandler
 {
     public int itemId;
+    [System.NonSerialized] public int tabId;
 
     public Image myImg;
     public DragAndDropContainer dragAndDropContainer;
 
+
     bool isDragging = false;
+
+    private void Awake()
+    {
+        for(int i = 0; i <GameManager.Instance.inventoryManager.tabs.Length;i++)
+        {
+            if(GameManager.Instance.inventoryManager.tabs[i] == this)
+            {
+                tabId = i;
+            }
+        }
+    }
 
     public void Refresh()
     {

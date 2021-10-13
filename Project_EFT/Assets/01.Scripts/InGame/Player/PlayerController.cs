@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
         dir.Normalize();
         dir.y = yVelocity;
 
-        cc.Move(dir * speed * Time.deltaTime);
+        cc.Move(dir * speed * transform.localScale.x * Time.deltaTime);
     }
 
     IEnumerator SpeedCheck()
@@ -56,10 +56,12 @@ public class PlayerController : MonoBehaviour
         while(true)
         {
             Vector3 currentPos = transform.position;
-            yield return new WaitForFixedUpdate();
+            yield return new WaitForSeconds(0.1f);
             Vector3 secondPos = transform.position;
 
-            playerAnim.SetFloat("speed", Vector3.Distance(currentPos,secondPos));
+            Vector3 dis = currentPos - secondPos;
+
+            playerAnim.SetFloat("speed", (dis.sqrMagnitude / transform.localScale.x / transform.localScale.x) * 1000); // ³Ê¹« ÀÛ¾Æ¼­ 10,000 °öÇØÁÜ
         }
     }
 }

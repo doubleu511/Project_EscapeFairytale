@@ -1,6 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,10 +18,14 @@ public class GameManager : MonoBehaviour
 
     [Header("Inventory")]
     public ItemData itemData;
-    public ItemDataInfo[] playerInventory = new ItemDataInfo[6];
     public int selectedItemId;
     public TabScript selectedTab;
     public GameObject selectedItemUI;
+
+    [Header("ItemEffects")]
+    public UnityEvent[] itemUseCallback;
+
+
 
     private void Awake()
     {
@@ -34,8 +42,5 @@ public class GameManager : MonoBehaviour
         MouseEvent.MouseLock(false);
     }
 
-    void Update()
-    {
-        
-    }
+
 }
