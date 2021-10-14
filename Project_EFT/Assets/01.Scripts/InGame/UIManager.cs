@@ -23,6 +23,11 @@ public class UIManager : MonoBehaviour
     public RectTransform tip_size_arrow;
     public RectTransform[] tip_size_signs;
 
+    [Header("GameOver")]
+    public CanvasGroup gameOverScreen;
+    public CanvasGroup gameOverDetail;
+    public Image gameOverReason;
+
     private void Awake()
     {
         if(!instance)
@@ -48,5 +53,22 @@ public class UIManager : MonoBehaviour
         instance.tip_size_arrow.DOMoveX(instance.tip_size_signs[index].transform.position.x, 1.5f).SetEase(Ease.OutBounce);
 
         instance.tip_size.DOFade(0, 0.5f).SetDelay(3f);
+    }
+
+    public static void GameOverUI(Sprite reasonSprite)
+    {
+        //GameManager.Instance.player.playerState = PlayerState.DEAD; 는 죽을게 확정될때 해준다.
+
+        instance.gameOverReason.sprite = reasonSprite;
+
+        instance.gameOverScreen.interactable = true;
+        instance.gameOverScreen.blocksRaycasts = true;
+        instance.gameOverScreen.DOFade(1, 2).OnComplete(() =>
+        {
+            instance.gameOverDetail.DOFade(1, 0.1f).SetDelay(3).OnComplete(() =>
+            {
+                GameManager.Instance.isGameOver = true;
+            });
+        });
     }
 }

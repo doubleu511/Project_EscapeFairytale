@@ -10,8 +10,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+     public bool isGameOver = false;
+
     [Header("Management")]
     public InventoryManager inventoryManager;
+    public SpriteBox spriteBox;
 
     [Header("Player")]
     public PlayerController player;
@@ -24,8 +27,6 @@ public class GameManager : MonoBehaviour
 
     [Header("ItemEffects")]
     public UnityEvent[] itemUseCallback;
-
-
 
     private void Awake()
     {
@@ -41,6 +42,4 @@ public class GameManager : MonoBehaviour
     {
         MouseEvent.MouseLock(false);
     }
-
-
 }

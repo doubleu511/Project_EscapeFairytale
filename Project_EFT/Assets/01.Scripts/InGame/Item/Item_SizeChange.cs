@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class Item_SizeChange : MonoBehaviour
 {
-    public int sizeValueRaw = 0;
+    public static int sizeValueRaw = 0;
     public float currentSize = 1;
     private float[] sizeScaleValues = new float[3] { 0.1f, 1f, 5f };
 

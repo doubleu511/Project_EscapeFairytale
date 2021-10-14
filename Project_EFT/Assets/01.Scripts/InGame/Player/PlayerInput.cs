@@ -6,7 +6,14 @@ public class PlayerInput : MonoBehaviour
 {
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        InputInGame();
+    }
+
+    void InputInGame()
+    {
+        if (GameManager.Instance.player.playerState == PlayerState.DEAD) return;
+
+        if (Input.GetKeyDown(KeyCode.E))
         {
             if (GameManager.Instance.player.playerState == PlayerState.NORMAL)
             {

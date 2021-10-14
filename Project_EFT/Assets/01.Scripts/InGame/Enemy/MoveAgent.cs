@@ -12,8 +12,8 @@ public class MoveAgent : MonoBehaviour
     public int nextIndex;
     private NavMeshAgent agent;
 
-    private readonly float patrolSpeed = 1.5f;
-    private readonly float traceSpeed = 4.0f;
+    public float patrolSpeed = 1.5f;
+    public float traceSpeed = 4.0f;
 
     private bool _patrolling;
     public bool patrolling{
@@ -32,6 +32,7 @@ public class MoveAgent : MonoBehaviour
         get {return _traceTarget;}
         set {
             _traceTarget = value;
+            patrolling = false;
             agent.speed = traceSpeed;
             TraceTarget(_traceTarget);
         }
@@ -88,7 +89,7 @@ public class MoveAgent : MonoBehaviour
     void Update()
     {
         if(!_patrolling) return;
-        
+
         if(agent.velocity.sqrMagnitude >= 0.04f && agent.remainingDistance <= 0.5f){
             nextIndex = (++nextIndex) % wayPoints.Count;
             MoveWayPoint();

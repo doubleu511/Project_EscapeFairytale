@@ -48,7 +48,19 @@ public class PlayerController : MonoBehaviour
         dir.Normalize();
         dir.y = yVelocity;
 
-        cc.Move(dir * speed * transform.localScale.x * Time.deltaTime);
+        cc.Move(dir * speed * ScaleToSpeed() * Time.deltaTime);
+    }
+
+    float ScaleToSpeed()
+    {
+        if(transform.localScale.x <= 0.5)
+        {
+            return transform.localScale.x * 2;
+        }
+        else
+        {
+            return transform.localScale.x;
+        }
     }
 
     IEnumerator SpeedCheck()
