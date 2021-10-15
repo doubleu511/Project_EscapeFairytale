@@ -9,7 +9,7 @@ public class PlayerAction : MonoBehaviour
 
     void Update()
     {
-        bool isHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 3, 1 << LayerMask.NameToLayer("Item"));
+        bool isHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 2 * (transform.localScale.x > 2.5f ? 5 : 1), 1 << LayerMask.NameToLayer("Item"));
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 3);
 
         if (isHit)

@@ -25,6 +25,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Rendering;
+using DG.Tweening;
 
 namespace cakeslice
 {
@@ -54,6 +55,9 @@ namespace cakeslice
 		public Color lineColor0 = Color.red;
 		public Color lineColor1 = Color.green;
 		public Color lineColor2 = Color.blue;
+
+		public Color lineColor0_anim1 = Color.red;
+		public Color lineColor0_anim2 = Color.red;
 
 		public bool additiveRendering = false;
 
@@ -126,6 +130,19 @@ namespace cakeslice
 			}
 
 			Instance = this;
+
+			ColorChange(true);
+		}
+
+		private void ColorChange(bool start)
+        {
+			if (start)
+			{
+				DOTween.To(() => lineColor0, value => lineColor0 = value, lineColor0_anim1, 2).OnComplete(() => ColorChange(false));
+			}else
+            {
+				DOTween.To(() => lineColor0, value => lineColor0 = value, lineColor0_anim2, 2).OnComplete(() => ColorChange(true));
+			}
 		}
 
 		void Start()

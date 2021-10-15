@@ -13,11 +13,10 @@ public class Item_SizeChange : MonoBehaviour
     {
         if (sizeValueRaw < 1)
         {
-            Debug.Log("커질꺼에요");
             sizeValueRaw++;
             currentSize = sizeScaleValues[sizeValueRaw + 1];
             UIManager.Tip_SizeChange(sizeValueRaw + 1);
-            GameManager.Instance.player.transform.DOScale(currentSize, 2);
+            GameManager.Instance.player.transform.DOScale(currentSize, 2).SetUpdate(UpdateType.Fixed);
             GameManager.Instance.inventoryManager.SetNullTab(GameManager.Instance.selectedTab.tabId);
         }
         else
@@ -30,11 +29,10 @@ public class Item_SizeChange : MonoBehaviour
     {
         if (sizeValueRaw > -1)
         {
-            Debug.Log("작아질꺼에요");
             sizeValueRaw--;
             currentSize = sizeScaleValues[sizeValueRaw + 1];
             UIManager.Tip_SizeChange(sizeValueRaw + 1);
-            GameManager.Instance.player.transform.DOScale(currentSize, 2);
+            GameManager.Instance.player.transform.DOScale(currentSize, 2).SetUpdate(UpdateType.Fixed);
             GameManager.Instance.inventoryManager.SetNullTab(GameManager.Instance.selectedTab.tabId);
         }
         else

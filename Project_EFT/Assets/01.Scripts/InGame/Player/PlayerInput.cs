@@ -48,9 +48,12 @@ public class PlayerInput : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F)) // 아이템 사용
         {
-            if (GameManager.Instance.itemUseCallback[GameManager.Instance.selectedItemId] != null)
+            if (GameManager.Instance.selectedItemId != -1)
             {
-                GameManager.Instance.itemUseCallback[GameManager.Instance.selectedItemId].Invoke();
+                if (GameManager.Instance.itemUseCallback[GameManager.Instance.selectedItemId] != null)
+                {
+                    GameManager.Instance.itemUseCallback[GameManager.Instance.selectedItemId].Invoke();
+                }
             }
         }
 
