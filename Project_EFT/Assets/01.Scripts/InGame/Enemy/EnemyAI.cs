@@ -114,10 +114,9 @@ public class EnemyAI : MonoBehaviour
         bool isView = false;
         RaycastHit hit;
         Vector3 dir = (playerTr.position - transform.position);
-        Debug.DrawRay(transform.position, dir, Color.red, 1);
+        //Debug.DrawRay(transform.position, dir, Color.red, 1);
         if (Physics.Raycast(transform.position, dir, out hit, 100, layerMask))
         {
-            Debug.Log(hit.collider.gameObject.name);
             isView = (hit.collider.gameObject.CompareTag("Player"));
         }
         return isView;
