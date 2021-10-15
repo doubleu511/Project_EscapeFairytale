@@ -4,20 +4,17 @@ using UnityEngine;
 
 public class PickableObject : SelectableObject
 {
-    private Rigidbody rb;
-
     public int itemId;
 
     protected override void Awake()
     {
         base.Awake();
-        rb = GetComponent<Rigidbody>();
     }
 
-    public override void OnHighlighted()
+    public override void OnHighlighted(string text)
     {
-        base.OnHighlighted();
-        UIManager.instance.cursorBtTipText.text = "클릭하여 아이템을 획득할 수 있습니다.";
+        base.OnHighlighted(text);
+        UIManager.instance.cursorBtTipText.text = text;
     }
 
     public override void OnDisHighlighted()

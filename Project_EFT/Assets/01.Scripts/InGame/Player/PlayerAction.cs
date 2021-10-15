@@ -16,7 +16,8 @@ public class PlayerAction : MonoBehaviour
         {
             if (hit.collider.CompareTag("SelectableObject"))
             {
-                hit.collider.GetComponent<SelectableObject>().OnHighlighted();
+                SelectableObject obj = hit.collider.GetComponent<SelectableObject>();
+                obj.OnHighlighted(obj.selectText);
 
                 if (currentObj != hit.collider.gameObject)
                 {

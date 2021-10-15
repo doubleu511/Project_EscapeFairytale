@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(cakeslice.Outline))]
 public class SelectableObject : MonoBehaviour
 {
+    public string selectText;
     cakeslice.Outline outline;
 
     protected virtual void Awake()
@@ -12,7 +13,7 @@ public class SelectableObject : MonoBehaviour
         outline = GetComponent<cakeslice.Outline>();
     }
 
-    public virtual void OnHighlighted()
+    public virtual void OnHighlighted(string text)
     {
         outline.enabled = true;
     }
