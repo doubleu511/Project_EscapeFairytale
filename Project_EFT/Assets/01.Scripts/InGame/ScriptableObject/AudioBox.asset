@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1663335a8ad6efb4580cfbc0a993764f, type: 3}
+  m_Name: AudioBox
+  m_EditorClassIdentifier: 
+  ambient_dead_by_shoes: {fileID: 8300000, guid: 0ea42b78fd769414399fde0e62c9308d, type: 3}
+  ambient_rising1: {fileID: 8300000, guid: 664da1a328224e646b288248dc1481d4, type: 3}
+  ambient_rising2: {fileID: 8300000, guid: eb8866f25408d9c4d969f4be9718d5ad, type: 3}
+  object_book_close: {fileID: 8300000, guid: 8ddbdecb50963394e8b04bcc5d2d3fe5, type: 3}
+  object_book_nextpage: {fileID: 8300000, guid: 2f0b7824c8f1fdc478f170cc3d45452c, type: 3}
+  object_book_pickup: {fileID: 8300000, guid: ce75c33f81fa05143921923baae715f9, type: 3}
+  RedShoes_redshoes_walk1_left: {fileID: 8300000, guid: 058131ebebadeeb4a8def027724f1f10, type: 3}
+  RedShoes_redshoes_walk1_right: {fileID: 8300000, guid: 8da1f4db99319d84f85597bcb6a52f7a, type: 3}
+  RedShoes_redshoes_walk2_left: {fileID: 8300000, guid: c3d90241b6860934c92269292b89ec87, type: 3}
+  RedShoes_redshoes_walk2_right: {fileID: 8300000, guid: 7204d3bd4be0beb4899e53206522cdbf, type: 3}

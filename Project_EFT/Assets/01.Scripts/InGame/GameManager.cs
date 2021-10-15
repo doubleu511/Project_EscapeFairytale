@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [Header("Management")]
     public InventoryManager inventoryManager;
     public SpriteBox spriteBox;
+    public AudioBox audioBox;
 
     [Header("Player")]
     public PlayerController player;
@@ -27,6 +28,9 @@ public class GameManager : MonoBehaviour
 
     [Header("ItemEffects")]
     public UnityEvent[] itemUseCallback;
+
+    [Header("AudioSource")]
+    public AudioSource defaultSFXSource;
 
     private void Awake()
     {
@@ -41,5 +45,15 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         MouseEvent.MouseLock(false);
+    }
+
+    public static void PlaySFX(AudioSource source, AudioClip clip, float volume = 1)
+    {
+        source.PlayOneShot(clip, volume);
+    }
+
+    public static void PlaySFX(AudioClip clip, float volume = 1)
+    {
+        Instance.defaultSFXSource.PlayOneShot(clip, volume);
     }
 }
