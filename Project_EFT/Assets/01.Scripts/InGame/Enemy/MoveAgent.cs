@@ -13,7 +13,7 @@ public class MoveAgent : MonoBehaviour
     private NavMeshAgent agent;
 
     public float patrolSpeed = 1.5f;
-    public float traceSpeed = 4.0f;
+    public float traceSpeed = 6.0f;
 
     private bool _patrolling;
     public bool patrolling{

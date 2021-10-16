@@ -5,11 +5,13 @@ using UnityEngine;
 public class PlayerAction : MonoBehaviour
 {
     public static GameObject currentObj = null;
+
+    public LayerMask hitAbleLayer;
     RaycastHit hit;
 
     void Update()
     {
-        bool isHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 2 * (transform.localScale.x > 2.5f ? 5 : 1), 1 << LayerMask.NameToLayer("Item"));
+        bool isHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 2 * (transform.localScale.x > 2.5f ? 5 : 1), hitAbleLayer);
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 3);
 
         if (isHit)
