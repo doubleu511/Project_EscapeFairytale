@@ -7,7 +7,7 @@ public class Item_SizeChange : MonoBehaviour
 {
     public static int sizeValueRaw = 0;
     public float currentSize = 1;
-    private float[] sizeScaleValues = new float[3] { 0.1f, 1f, 5f };
+    private float[] sizeScaleValues = new float[3] { 0.033f, 1f, 5f };
 
     public void OnUseBig()
     {

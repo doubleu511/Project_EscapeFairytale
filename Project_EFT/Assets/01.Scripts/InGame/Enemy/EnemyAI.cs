@@ -140,8 +140,8 @@ public class EnemyAI : MonoBehaviour
         RaycastHit hit;
         Vector3 dir = (playerTr.position - transform.position);
         dir.y = 0;
-        Debug.DrawRay(transform.position + new Vector3(0,0.1f,0), dir, Color.red, 1);
-        if (Physics.Raycast(transform.position + new Vector3(0, 0.1f, 0), dir, out hit, 100, layerMask))
+        Debug.DrawRay(transform.position + new Vector3(0,playerTr.localScale.y,0), dir, Color.red, 1);
+        if (Physics.Raycast(transform.position + new Vector3(0, playerTr.localScale.y, 0), dir, out hit, 100, layerMask))
         {
             Debug.Log(hit.collider.gameObject.name);
             isView = (hit.collider.gameObject.CompareTag("Player"));

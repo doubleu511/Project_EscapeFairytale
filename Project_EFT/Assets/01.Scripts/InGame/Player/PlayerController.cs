@@ -53,9 +53,9 @@ public class PlayerController : MonoBehaviour
 
     float ScaleToSpeed()
     {
-        if(transform.localScale.x <= 0.5)
+        if(transform.localScale.x <= 0.04)
         {
-            return transform.localScale.x * 2;
+            return transform.localScale.x * 6;
         }
         else
         {
