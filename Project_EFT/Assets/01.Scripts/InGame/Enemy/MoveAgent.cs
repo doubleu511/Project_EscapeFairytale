@@ -59,13 +59,6 @@ public class MoveAgent : MonoBehaviour
         agent.speed = patrolSpeed; //처음 패트롤 속도로
     }
 
-    public void Stop()
-    {
-        agent.isStopped = true;
-        agent.velocity = Vector3.zero;
-        _patrolling = false;
-    }
-
     void Start()
     {
 

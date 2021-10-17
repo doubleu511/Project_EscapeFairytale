@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
     private Animator playerAnim;
 
     public PlayerState playerState = PlayerState.NORMAL;
-
     public float speed = 5;
     public float gravity = -9.81f;
 

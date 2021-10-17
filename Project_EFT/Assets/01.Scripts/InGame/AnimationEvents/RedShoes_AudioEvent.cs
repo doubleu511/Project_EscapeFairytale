@@ -5,15 +5,16 @@ using UnityEngine;
 public class RedShoes_AudioEvent : MonoBehaviour
 {
     private AudioSource redShoesAudioSource;
+    public EnemyAI enemyAI;
 
     void Awake()
     {
         redShoesAudioSource = transform.parent.GetComponent<AudioSource>();
     }
 
-    private void LeftWalkSFX(int index)
+    private void LeftWalkSFX()
     {
-        switch (index)
+        switch (enemyAI.heelSoundIndex)
         {
             case 0:
                 GameManager.PlaySFX(redShoesAudioSource, GameManager.Instance.audioBox.RedShoes_redshoes_walk1_left);
@@ -24,10 +25,10 @@ public class RedShoes_AudioEvent : MonoBehaviour
         }
     }
 
-    private void RightWalkSFX(int index)
+    private void RightWalkSFX()
     {
 
-        switch (index)
+        switch (enemyAI.heelSoundIndex)
         {
             case 0:
                 GameManager.PlaySFX(redShoesAudioSource, GameManager.Instance.audioBox.RedShoes_redshoes_walk1_right);

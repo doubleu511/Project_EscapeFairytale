@@ -20,6 +20,13 @@ public class EnemyAI : MonoBehaviour
     public float traceDist = 10.0f;
     public float judgeDelay = 0.3f;
 
+    public int heelSoundIndex = 0;
+
+    [Range(0, 360)]
+    public float viewAngle = 120.0f;
+
+    public LayerMask playerLayerMask;
+
     private bool alreadyChasing = false;
 
     private WaitForSeconds ws;
@@ -50,9 +57,28 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        //anim.SetFloat(hashSpeed, moveAgent.speed);
         left_anim.SetFloat("speed", agent.speed / 2);
         right_anim.SetFloat("speed", agent.speed / 2);
+
+        //anim.SetFloat(hashSpeed, moveAgent.speed);
+        if (state == EnemyState.TRACE)
+        {
+            if(!IsContactShoes())
+            {
+                heelSoundIndex = 1;
+
+                left_anim.SetFloat("speed", agent.speed / 1.5f);
+                right_anim.SetFloat("speed", agent.speed / 1.5f);
+            }
+            else
+            {
+                heelSoundIndex = 0;
+            }
+        }
+        else
+        {
+            heelSoundIndex = 0;
+        }
     }
 
     IEnumerator CheckState()
@@ -66,10 +92,11 @@ public class EnemyAI : MonoBehaviour
 
             float dist = (playerTr.position - transform.position).sqrMagnitude;
 
-            Debug.Log(IsViewPlayer());
+            bool traceCondition1 = IsViewPlayer() && dist <= traceDist * traceDist;
+            bool traceCondition2 = unconditionallyTrace;
 
             //공격사거리 내라면 공격            
-            if(dist <= attackDist * attackDist){
+            if (dist <= attackDist * attackDist){
                 if (IsViewPlayer())
                 {
                     // 만약 중간 상태면 겜오버
@@ -88,8 +115,9 @@ public class EnemyAI : MonoBehaviour
                     }
                     state = EnemyState.ATTACK;
                 }
-            }else if(IsViewPlayer() && dist <= traceDist * traceDist)
+            }else if(traceCondition1 || traceCondition2)
             {
+                TraceTime(10);
                 if (!alreadyChasing)
                 {
                     int random = Random.Range(0, 2);
@@ -119,22 +147,36 @@ public class EnemyAI : MonoBehaviour
             yield return ws;
             switch(state){
                 case EnemyState.PATROL:
+                    left_anim.SetBool("walk", true);
+                    right_anim.SetBool("walk", true);
                     moveAgent.patrolling = true;
                     //anim.SetBool(hashMove, true);
                     break;
                 case EnemyState.TRACE:
+                    left_anim.SetBool("walk", true);
+                    right_anim.SetBool("walk", true);
                     moveAgent.traceTarget = playerTr.position;
                     //anim.SetBool(hashMove, true);
                     break;
                 case EnemyState.ATTACK:
-                    moveAgent.Stop();
+                    Stop();
                     //anim.SetBool(hashMove, false);
                     break;
             }
         }
     }
 
-    public bool IsViewPlayer()
+    public void Stop()
+    {
+        left_anim.SetBool("walk", false);
+        right_anim.SetBool("walk", false);
+
+        agent.isStopped = true;
+        agent.velocity = Vector3.zero;
+        moveAgent.patrolling = false;
+    }
+
+    private bool IsViewPlayer()
     {
         bool isView = false;
         RaycastHit hit;
@@ -143,7 +185,7 @@ public class EnemyAI : MonoBehaviour
         Debug.DrawRay(transform.position + new Vector3(0,playerTr.localScale.y,0), dir, Color.red, 1);
         if (Physics.Raycast(transform.position + new Vector3(0, playerTr.localScale.y, 0), dir, out hit, 100, layerMask))
         {
-            Debug.Log(hit.collider.gameObject.name);
+            //Debug.Log(hit.collider.gameObject.name);
             isView = (hit.collider.gameObject.CompareTag("Player"));
         }
         return isView;
@@ -165,6 +207,39 @@ public class EnemyAI : MonoBehaviour
     {
         yield return new WaitForSeconds(10);
         waiting = false;
+    }
+
+    private bool IsContactShoes()
+    {
+        bool isContact = false;
+        Collider[] colls = Physics.OverlapSphere(transform.position, traceDist, playerLayerMask);
+        if (colls.Length >= 1)
+        {
+            Vector3 dir = (transform.position - playerTr.position).normalized;
+
+            if (Vector3.Angle(playerTr.forward, dir) < viewAngle * 0.5f)
+            {
+                isContact = true;
+            }
+        }
+        return isContact;
+    }
+
+    private bool unconditionallyTrace = false;
+
+    private void TraceTime(float time)
+    {
+        if(!alreadyChasing)
+        {
+            unconditionallyTrace = true;
+            StartCoroutine(TraceCoolTime(time));
+        }
+    }
+
+    IEnumerator TraceCoolTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        unconditionallyTrace = false;
     }
 
     #region ANIMATION_EVENTS

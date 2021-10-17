@@ -15,14 +15,17 @@ public class PlayerInput : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (GameManager.Instance.player.playerState == PlayerState.NORMAL)
+            if (GameManager.Instance.player.playerState != PlayerState.OPEN_BOOK)
             {
-                GameManager.Instance.inventoryManager.InventoryOpen();
-            }
-            else if (GameManager.Instance.player.playerState == PlayerState.OPEN_INVENTORY)
-            {
-                GameManager.Instance.inventoryManager.InventoryClose();
-                GameManager.Instance.inventoryManager.ItemDetailClose();
+                if (GameManager.Instance.player.playerState == PlayerState.NORMAL)
+                {
+                    GameManager.Instance.inventoryManager.InventoryOpen();
+                }
+                else if (GameManager.Instance.player.playerState == PlayerState.OPEN_INVENTORY)
+                {
+                    GameManager.Instance.inventoryManager.InventoryClose();
+                    GameManager.Instance.inventoryManager.ItemDetailClose();
+                }
             }
         }
 
@@ -32,6 +35,12 @@ public class PlayerInput : MonoBehaviour
             {
                 GameManager.Instance.inventoryManager.InventoryClose();
                 GameManager.Instance.inventoryManager.ItemDetailClose();
+            }
+            else if (GameManager.Instance.player.playerState == PlayerState.OPEN_BOOK)
+            {
+                GameManager.Instance.player.playerState = PlayerState.NORMAL;
+                UIManager.BookDefaultUI(false);
+                MouseEvent.MouseLock(true);
             }
         }
 
@@ -66,6 +75,26 @@ public class PlayerInput : MonoBehaviour
 
                 Rigidbody rb = Instantiate(GameManager.Instance.itemData.infos[itemId].itemPrefab, transform.position, transform.rotation).GetComponent<Rigidbody>();
                 rb.AddForce(Camera.main.transform.forward * 4, ForceMode.Impulse);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.B)) // å UI
+        {
+            if (GameManager.Instance.player.playerState != PlayerState.OPEN_INVENTORY)
+            {
+                if(GameManager.Instance.player.playerState == PlayerState.NORMAL)
+                {
+                    GameManager.Instance.player.playerState = PlayerState.OPEN_BOOK;
+                    MouseEvent.MouseLock(false);
+                    UIManager.BookDefaultUI(true);
+                }
+                else if (GameManager.Instance.player.playerState == PlayerState.OPEN_BOOK)
+                {
+                    GameManager.Instance.player.playerState = PlayerState.NORMAL;
+                    MouseEvent.MouseLock(true);
+                    UIManager.BookDefaultUI(false);
+
+                }
             }
         }
     }
