@@ -162,7 +162,7 @@ public class UIManager : MonoBehaviour
 
     private void BookDetailPage()
     {
-        Debug.Log($"currentPage : {page}, maxPage : {(bookSprites.Length / 2)}");
+        Debug.Log($"currentPage : {page}, maxPage : {bookSprites.Length / 2 - ((bookSprites.Length % 2) == 0 ? 1 : 0)}");
 
         if (page == 0)
         {
