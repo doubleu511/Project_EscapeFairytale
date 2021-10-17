@@ -28,6 +28,11 @@ public class UIManager : MonoBehaviour
     public CanvasGroup gameOverDetail;
     public Image gameOverReason;
 
+    [Header("Letter")]
+    public CanvasGroup letterCanvasGroup;
+    public Image letterImg;
+    public Text letterTxt;
+
     private void Awake()
     {
         if(!instance)
@@ -70,5 +75,19 @@ public class UIManager : MonoBehaviour
                 GameManager.Instance.isGameOver = true;
             });
         });
+    }
+
+    public static void LetterUI(Sprite letter)
+    {
+        instance.letterCanvasGroup.alpha = 1;
+        instance.letterImg.sprite = letter;
+        instance.letterTxt.text = "";
+    }
+
+    public static void LetterUI(Sprite letterImg, string letterTxt)
+    {
+        instance.letterCanvasGroup.alpha = 1;
+        instance.letterImg.sprite = letterImg;
+        instance.letterTxt.text = letterTxt;
     }
 }

@@ -14,13 +14,11 @@ public class PickableObject : SelectableObject
     public override void OnHighlighted(string text)
     {
         base.OnHighlighted(text);
-        UIManager.instance.cursorBtTipText.text = text;
     }
 
     public override void OnDisHighlighted()
     {
         base.OnDisHighlighted();
-        UIManager.instance.cursorBtTipText.text = "";
     }
 
     public override void OnClicked()

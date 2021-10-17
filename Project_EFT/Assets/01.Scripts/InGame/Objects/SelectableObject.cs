@@ -16,11 +16,13 @@ public class SelectableObject : MonoBehaviour
     public virtual void OnHighlighted(string text)
     {
         outline.enabled = true;
+        UIManager.instance.cursorBtTipText.text = text;
     }
 
     public virtual void OnDisHighlighted()
     {
         outline.enabled = false;
+        UIManager.instance.cursorBtTipText.text = "";
     }
 
     public virtual void OnClicked()
