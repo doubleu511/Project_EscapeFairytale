@@ -112,18 +112,26 @@ public class EnemyAI : MonoBehaviour
 
                         GameManager.Instance.player.playerState = PlayerState.DEAD;
                         //MouseEvent.MouseLock(false);
-                        //UIManager.GameOverUI(GameManager.Instance.spriteBox.Reason_Shoes);
-                        
-                        Camera.main.transform.localRotation = Quaternion.identity;
-                        Camera.main.transform.DOShakeRotation(2, 10, 100, 0, false);
-                        GameManager.Instance.player.GetComponent<Animator>().Play("Player_DeadbyShoes");
-                        Stop();
-                        agent.enabled = false;
-                        transform.position = GameManager.Instance.player.transform.position;
-                        transform.rotation = Quaternion.Euler(0, GameManager.Instance.player.transform.eulerAngles.y, 0);
                         redShoesAmbientSource.volume = 0;
                         GameManager.PlaySFX(GameManager.Instance.audioBox.ambient_dead_by_shoes);
 
+                        Camera.main.transform.localRotation = Quaternion.identity;
+                        Camera.main.transform.DOShakeRotation(8, 1, 70, 5, false).SetDelay(2).SetEase(Ease.OutExpo);
+                        StartCoroutine(ScreenToGameOver());
+                        GameManager.Instance.player.GetComponent<Animator>().Play("Player_DeadbyShoes");
+
+                        Stop();
+                        agent.enabled = false;
+
+                        transform.position = GameManager.Instance.player.transform.position;
+                        transform.rotation = Quaternion.Euler(0, GameManager.Instance.player.transform.eulerAngles.y, 0);
+
+                        UIManager.ChangeToMainCamera();
+
+                        if (PlayerAction.currentObj != null)
+                        {
+                            PlayerAction.currentObj.GetComponent<SelectableObject>().OnDisHighlighted();
+                        }
                     }
                     else if (Item_SizeChange.sizeValueRaw == -1)
                     {
@@ -181,6 +189,12 @@ public class EnemyAI : MonoBehaviour
                     break;
             }
         }
+    }
+
+    IEnumerator ScreenToGameOver()
+    {
+        yield return new WaitForSecondsRealtime(6.5f);
+        UIManager.GameOverUI(GameManager.Instance.spriteBox.Reason_Shoes);
     }
 
     public void Stop()

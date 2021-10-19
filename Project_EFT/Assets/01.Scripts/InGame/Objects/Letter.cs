@@ -6,7 +6,7 @@ public class Letter : SelectableObject
 {
     public Sprite letterSprite;
 
-    [TextArea(5, 10)]
+    [TextArea(5, 20)]
     public string letterTxt;
 
     public override void OnDisHighlighted()

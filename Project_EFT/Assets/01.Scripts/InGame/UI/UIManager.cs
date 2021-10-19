@@ -122,12 +122,10 @@ public class UIManager : MonoBehaviour
 
         instance.gameOverScreen.interactable = true;
         instance.gameOverScreen.blocksRaycasts = true;
-        instance.gameOverScreen.DOFade(1, 2).OnComplete(() =>
+        instance.gameOverScreen.alpha = 1;
+        instance.gameOverDetail.DOFade(1, 0.1f).SetDelay(3).OnComplete(() =>
         {
-            instance.gameOverDetail.DOFade(1, 0.1f).SetDelay(3).OnComplete(() =>
-            {
-                GameManager.Instance.isGameOver = true;
-            });
+            GameManager.Instance.isGameOver = true;
         });
     }
 
