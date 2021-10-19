@@ -50,6 +50,12 @@ public class UIManager : MonoBehaviour
     private Color endPageColor;
     private int page = 0;
 
+    [Header("SubCameraEvent")]
+    public Camera subCamera;
+    private Camera mainCamera;
+    public Button subCamera_Back;
+    public Image cameraAim;
+
     private void Awake()
     {
         if(!instance)
@@ -80,15 +86,11 @@ public class UIManager : MonoBehaviour
                 BookDetailPage();
             });
 
-            bookPageCloseBtn.onClick.AddListener(() =>
-            {
-                bookDetail.alpha = 0;
-                bookDetail.blocksRaycasts = false;
-                bookDetail.interactable = false;
-                GameManager.PlaySFX(GameManager.Instance.audioBox.object_book_close);
-                page = 0;
-            });
+            bookPageCloseBtn.onClick.AddListener(BookDetailClose);
         }
+
+        mainCamera = Camera.main;
+        subCamera_Back.onClick.AddListener(ChangeToMainCamera);
     }
 
     public static void Tip_RBAppear(Sprite sprite, string text, float appearTime, float waitTime, float disappearTime)
@@ -160,6 +162,15 @@ public class UIManager : MonoBehaviour
         instance.BookDetailPage();
     }
 
+    public static void BookDetailClose()
+    {
+        instance.bookDetail.alpha = 0;
+        instance.bookDetail.blocksRaycasts = false;
+        instance.bookDetail.interactable = false;
+        GameManager.PlaySFX(GameManager.Instance.audioBox.object_book_close);
+        instance.page = 0;
+    }
+
     private void BookDetailPage()
     {
         Debug.Log($"currentPage : {page}, maxPage : {bookSprites.Length / 2 - ((bookSprites.Length % 2) == 0 ? 1 : 0)}");
@@ -197,5 +208,33 @@ public class UIManager : MonoBehaviour
         }
 
         bookPageLeft.sprite = bookSprites[page * 2];
+    }
+
+    public static void ChangeToSubCamera(Vector3 pos, Quaternion rotation)
+    {
+        GetMainCam().gameObject.SetActive(false);
+        instance.cameraAim.gameObject.SetActive(false);
+        instance.subCamera.transform.position = pos;
+        instance.subCamera.transform.rotation = rotation;
+        instance.subCamera.gameObject.SetActive(true);
+        instance.subCamera_Back.gameObject.SetActive(true);
+        MouseEvent.MouseLock(false);
+        GameManager.Instance.player.isSubCam = true;
+    }
+
+    public static Camera GetMainCam()
+    {
+        return instance.mainCamera;
+    }
+
+    public static void ChangeToMainCamera()
+    {
+        GetMainCam().gameObject.SetActive(true);
+        instance.cameraAim.gameObject.SetActive(true);
+        instance.cursorBtTipText.rectTransform.anchoredPosition = new Vector3(0, -64, 0);
+        instance.subCamera.gameObject.SetActive(false);
+        instance.subCamera_Back.gameObject.SetActive(false);
+        MouseEvent.MouseLock(true);
+        GameManager.Instance.player.isSubCam = false;
     }
 }

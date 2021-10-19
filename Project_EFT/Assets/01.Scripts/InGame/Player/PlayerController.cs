@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private Animator playerAnim;
 
+    public bool isSubCam = false;
     public PlayerState playerState = PlayerState.NORMAL;
     public float speed = 5;
     public float gravity = -9.81f;
@@ -27,6 +28,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.player.playerState == PlayerState.DEAD) return;
+
         if (!cc.isGrounded)
         {
             yVelocity += gravity * Time.deltaTime;

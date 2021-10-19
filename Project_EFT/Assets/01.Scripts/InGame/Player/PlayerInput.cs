@@ -40,7 +40,10 @@ public class PlayerInput : MonoBehaviour
             {
                 GameManager.Instance.player.playerState = PlayerState.NORMAL;
                 UIManager.BookDefaultUI(false);
-                MouseEvent.MouseLock(true);
+                UIManager.BookDetailClose();
+
+                if(!GameManager.Instance.player.isSubCam)
+                    MouseEvent.MouseLock(true);
             }
         }
 
@@ -68,13 +71,16 @@ public class PlayerInput : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q)) // 아이템 버리기
         {
-            if (GameManager.Instance.selectedItemId != -1)
+            if (!GameManager.Instance.player.isSubCam)
             {
-                int itemId = GameManager.Instance.selectedItemId;
-                GameManager.Instance.inventoryManager.SetNullTab(GameManager.Instance.selectedTab.tabId);
+                if (GameManager.Instance.selectedItemId != -1)
+                {
+                    int itemId = GameManager.Instance.selectedItemId;
+                    GameManager.Instance.inventoryManager.SetNullTab(GameManager.Instance.selectedTab.tabId);
 
-                Rigidbody rb = Instantiate(GameManager.Instance.itemData.infos[itemId].itemPrefab, transform.position, transform.rotation).GetComponent<Rigidbody>();
-                rb.AddForce(Camera.main.transform.forward * 4, ForceMode.Impulse);
+                    Rigidbody rb = Instantiate(GameManager.Instance.itemData.infos[itemId].itemPrefab, transform.position, transform.rotation).GetComponent<Rigidbody>();
+                    rb.AddForce(Camera.main.transform.forward * 4, ForceMode.Impulse);
+                }
             }
         }
 
@@ -91,9 +97,11 @@ public class PlayerInput : MonoBehaviour
                 else if (GameManager.Instance.player.playerState == PlayerState.OPEN_BOOK)
                 {
                     GameManager.Instance.player.playerState = PlayerState.NORMAL;
-                    MouseEvent.MouseLock(true);
-                    UIManager.BookDefaultUI(false);
 
+                    if (!GameManager.Instance.player.isSubCam)
+                        MouseEvent.MouseLock(true);
+                    UIManager.BookDefaultUI(false);
+                    UIManager.BookDetailClose();
                 }
             }
         }

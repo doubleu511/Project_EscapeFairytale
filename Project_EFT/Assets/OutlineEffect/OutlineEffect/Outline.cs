@@ -38,7 +38,7 @@ namespace cakeslice
 		public MeshFilter MeshFilter { get; private set; }
 
 		public int color;
-		public bool eraseRenderer;
+		public bool eraseRenderer = true;
 
 		private void Awake()
 		{

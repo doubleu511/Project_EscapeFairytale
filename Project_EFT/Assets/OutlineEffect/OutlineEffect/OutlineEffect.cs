@@ -123,14 +123,6 @@ namespace cakeslice
 
 		private void Awake()
 		{
-			if (Instance != null)
-			{
-				Destroy(this);
-				throw new System.Exception("you can only have one outline camera in the scene");
-			}
-
-			Instance = this;
-
 			ColorChange(true);
 		}
 
@@ -310,6 +302,7 @@ namespace cakeslice
 
 		private void OnEnable()
 		{
+			Instance = this;
 			Outline[] o = FindObjectsOfType<Outline>();
 			if (autoEnableOutlines)
 			{

@@ -11,6 +11,8 @@ public class Item_SizeChange : MonoBehaviour
 
     public void OnUseBig()
     {
+        if (GameManager.Instance.player.isSubCam) return;
+
         if (sizeValueRaw < 1)
         {
             sizeValueRaw++;
@@ -27,6 +29,8 @@ public class Item_SizeChange : MonoBehaviour
 
     public void OnUseSmall()
     {
+        if (GameManager.Instance.player.isSubCam) return;
+
         if (sizeValueRaw > -1)
         {
             sizeValueRaw--;

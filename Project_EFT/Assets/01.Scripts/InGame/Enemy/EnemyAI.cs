@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -37,6 +38,8 @@ public class EnemyAI : MonoBehaviour
     public Animator right_anim;
 
     public LayerMask layerMask;
+
+    public AudioSource redShoesAmbientSource;
 
     void Awake()
     {
@@ -88,6 +91,8 @@ public class EnemyAI : MonoBehaviour
                 yield return ws;
             }
 
+            if (GameManager.Instance.player.playerState == PlayerState.DEAD) yield break;
+
             // 여기서 아마 기절 만들듯
 
             float dist = (playerTr.position - transform.position).sqrMagnitude;
@@ -103,11 +108,22 @@ public class EnemyAI : MonoBehaviour
                     // 작은 상태면 공격
                     if(Item_SizeChange.sizeValueRaw == 0)
                     {
-                        /*
+                        if (GameManager.Instance.player.isSubCam) UIManager.ChangeToMainCamera();
+
                         GameManager.Instance.player.playerState = PlayerState.DEAD;
-                        MouseEvent.MouseLock(false);
-                        UIManager.GameOverUI(GameManager.Instance.spriteBox.Reason_Shoes);
-                        */
+                        //MouseEvent.MouseLock(false);
+                        //UIManager.GameOverUI(GameManager.Instance.spriteBox.Reason_Shoes);
+                        
+                        Camera.main.transform.localRotation = Quaternion.identity;
+                        Camera.main.transform.DOShakeRotation(2, 10, 100, 0, false);
+                        GameManager.Instance.player.GetComponent<Animator>().Play("Player_DeadbyShoes");
+                        Stop();
+                        agent.enabled = false;
+                        transform.position = GameManager.Instance.player.transform.position;
+                        transform.rotation = Quaternion.Euler(0, GameManager.Instance.player.transform.eulerAngles.y, 0);
+                        redShoesAmbientSource.volume = 0;
+                        GameManager.PlaySFX(GameManager.Instance.audioBox.ambient_dead_by_shoes);
+
                     }
                     else if (Item_SizeChange.sizeValueRaw == -1)
                     {
@@ -145,7 +161,8 @@ public class EnemyAI : MonoBehaviour
     {
         while(true){
             yield return ws;
-            switch(state){
+            if (GameManager.Instance.player.playerState == PlayerState.DEAD) yield break;
+            switch (state){
                 case EnemyState.PATROL:
                     left_anim.SetBool("walk", true);
                     right_anim.SetBool("walk", true);

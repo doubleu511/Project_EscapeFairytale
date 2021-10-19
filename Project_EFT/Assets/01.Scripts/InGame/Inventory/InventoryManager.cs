@@ -66,7 +66,9 @@ public class InventoryManager : MonoBehaviour
     public void InventoryClose()
     {
         Popup(inventoryPanel, false);
-        MouseEvent.MouseLock(true);
+
+        if (!GameManager.Instance.player.isSubCam)
+            MouseEvent.MouseLock(true);
         GameManager.Instance.player.playerState = PlayerState.NORMAL;
     }
 
