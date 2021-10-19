@@ -1133,9 +1133,12 @@ GameObject:
   - component: {fileID: 128465824}
   - component: {fileID: 128465823}
   - component: {fileID: 128465822}
-  m_Layer: 0
+  - component: {fileID: 128465827}
+  - component: {fileID: 128465826}
+  - component: {fileID: 128465825}
+  m_Layer: 6
   m_Name: Book_RedShoes
-  m_TagString: Untagged
+  m_TagString: SelectableObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1203,6 +1206,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &128465825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128465821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc19dd4e34243bb4a9ca9312052b1f23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectText: "\uD074\uB9AD\uD558\uC5EC \uC544\uC774\uD15C\uC744 \uD68D\uB4DD\uD560
+    \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+  itemId: 3
+--- !u!114 &128465826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128465821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 1
+--- !u!65 &128465827
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128465821}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.20660563, y: 0.30137396, z: 0.04}
+  m_Center: {x: -0.097071014, y: 0, z: 0}
 --- !u!1 &129303262
 GameObject:
   m_ObjectHideFlags: 0
@@ -2091,7 +2136,7 @@ MonoBehaviour:
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 1
+  m_ChildControlWidth: 0
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
@@ -3464,8 +3509,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b00f8549bcbacd48a8caa932091ef63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noteSprites: []
-  endPageColor: {r: 0, g: 0, b: 0, a: 0}
+  noteSprites:
+  - {fileID: 21300000, guid: ca768fcd67b6f3f488c7a3d8e28e813f, type: 3}
+  endPageColor: {r: 0.16981131, g: 0.12547043, b: 0.07913847, a: 1}
   color_anim1: {r: 1, g: 0.64705884, b: 0, a: 1}
   color_anim2: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &389755767
@@ -4859,7 +4905,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &573214752
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4997,7 +5043,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 660, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &574639292
 MonoBehaviour:
@@ -6665,9 +6711,12 @@ GameObject:
   - component: {fileID: 761978359}
   - component: {fileID: 761978358}
   - component: {fileID: 761978357}
-  m_Layer: 0
+  - component: {fileID: 761978362}
+  - component: {fileID: 761978361}
+  - component: {fileID: 761978360}
+  m_Layer: 6
   m_Name: Book_Pinocio
-  m_TagString: Untagged
+  m_TagString: SelectableObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6735,6 +6784,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &761978360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761978356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc19dd4e34243bb4a9ca9312052b1f23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectText: "\uD074\uB9AD\uD558\uC5EC \uC544\uC774\uD15C\uC744 \uD68D\uB4DD\uD560
+    \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+  itemId: 5
+--- !u!114 &761978361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761978356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 1
+--- !u!65 &761978362
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761978356}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.20660573, y: 0.30137396, z: 0.04}
+  m_Center: {x: -0.09707101, y: 0, z: 0}
 --- !u!1 &762444504
 GameObject:
   m_ObjectHideFlags: 0
@@ -7793,8 +7884,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b00f8549bcbacd48a8caa932091ef63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noteSprites: []
-  endPageColor: {r: 0, g: 0, b: 0, a: 0}
+  noteSprites:
+  - {fileID: 21300000, guid: 54ba470a8167a7e468fd7d93e2339e8c, type: 3}
+  - {fileID: 21300000, guid: 2e4e508f7dc1cf241bf44ec3c448e49e, type: 3}
+  - {fileID: 21300000, guid: 1fe8feb08f37c1041842ec4f22ea7509, type: 3}
+  endPageColor: {r: 0.49056602, g: 0, b: 0, a: 1}
   color_anim1: {r: 1, g: 0.64705884, b: 0, a: 1}
   color_anim2: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &860037428
@@ -9655,9 +9749,12 @@ GameObject:
   - component: {fileID: 1065177287}
   - component: {fileID: 1065177286}
   - component: {fileID: 1065177285}
-  m_Layer: 0
+  - component: {fileID: 1065177290}
+  - component: {fileID: 1065177289}
+  - component: {fileID: 1065177288}
+  m_Layer: 6
   m_Name: Book_SunandMoon
-  m_TagString: Untagged
+  m_TagString: SelectableObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9725,6 +9822,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1065177288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065177284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc19dd4e34243bb4a9ca9312052b1f23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectText: "\uD074\uB9AD\uD558\uC5EC \uC544\uC774\uD15C\uC744 \uD68D\uB4DD\uD560
+    \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+  itemId: 1
+--- !u!114 &1065177289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065177284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 1
+--- !u!65 &1065177290
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065177284}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.20660575, y: 0.30137396, z: 0.04}
+  m_Center: {x: -0.097071, y: 0, z: 0}
 --- !u!1 &1065279652
 GameObject:
   m_ObjectHideFlags: 0
@@ -10397,8 +10536,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b00f8549bcbacd48a8caa932091ef63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noteSprites: []
-  endPageColor: {r: 0, g: 0, b: 0, a: 0}
+  noteSprites:
+  - {fileID: 21300000, guid: c592f847e0f14654abea2664d7a240dc, type: 3}
+  endPageColor: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 1}
   color_anim1: {r: 1, g: 0.64705884, b: 0, a: 1}
   color_anim2: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1157470235
@@ -11856,7 +11996,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 660, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1276868027
 MonoBehaviour:
@@ -17587,9 +17727,12 @@ GameObject:
   - component: {fileID: 1990076178}
   - component: {fileID: 1990076177}
   - component: {fileID: 1990076176}
-  m_Layer: 0
+  - component: {fileID: 1990076181}
+  - component: {fileID: 1990076180}
+  - component: {fileID: 1990076179}
+  m_Layer: 6
   m_Name: Book_BootsCat
-  m_TagString: Untagged
+  m_TagString: SelectableObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17657,6 +17800,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1990076179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990076175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc19dd4e34243bb4a9ca9312052b1f23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectText: "\uD074\uB9AD\uD558\uC5EC \uC544\uC774\uD15C\uC744 \uD68D\uB4DD\uD560
+    \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+  itemId: 4
+--- !u!114 &1990076180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990076175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 1
+--- !u!65 &1990076181
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990076175}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.20660567, y: 0.30137396, z: 0.04}
+  m_Center: {x: -0.09707099, y: 0, z: 0}
 --- !u!1 &1992737020
 GameObject:
   m_ObjectHideFlags: 0
@@ -17763,8 +17948,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b00f8549bcbacd48a8caa932091ef63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noteSprites: []
-  endPageColor: {r: 0, g: 0, b: 0, a: 0}
+  noteSprites:
+  - {fileID: 21300000, guid: 0c59d6948dc26e747984046246361a31, type: 3}
+  - {fileID: 21300000, guid: 266a3f41591ce704794e210aceb02bca, type: 3}
+  - {fileID: 21300000, guid: a32b7339763611741abe9f542067db4e, type: 3}
+  - {fileID: 21300000, guid: 0c59d6948dc26e747984046246361a31, type: 3}
+  endPageColor: {r: 0.046614863, g: 0.2264151, b: 0, a: 1}
   color_anim1: {r: 1, g: 0.64705884, b: 0, a: 1}
   color_anim2: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1992737026
