@@ -6,32 +6,23 @@ using UnityEngine;
 public class SelectableObject : MonoBehaviour
 {
     public string selectText;
+    public bool ignoreRaycast = false;
+    public bool ignoreRaycast_inSubCam = false;
     cakeslice.Outline outline;
 
-    [SerializeField]
-    private List<SelectableObject> selectableObjects; // 부모만 설정해준다.
+    [System.NonSerialized]
+    public SelectableObject_Parent parentObj = null;
 
     protected virtual void Awake()
     {
         outline = GetComponent<cakeslice.Outline>();
     }
 
-    private void Start()
-    {
-        if(selectableObjects.Count > 0)
-        {
-            for(int i = 0; i<selectableObjects.Count;i++)
-            {
-                selectableObjects[i].selectableObjects = selectableObjects;
-            }
-        }
-    }
-
     public virtual void OnHighlighted(string text)
     {
-        if (selectableObjects.Count > 0)
+        if (parentObj != null)
         {
-            foreach (SelectableObject item in selectableObjects)
+            foreach (SelectableObject item in parentObj.selectableObjects)
             {
                 item.outline.eraseRenderer = false;
                 cakeslice.OutlineEffect.Instance?.AddOutline(item.outline);
@@ -47,9 +38,9 @@ public class SelectableObject : MonoBehaviour
 
     public virtual void OnDisHighlighted()
     {
-        if (selectableObjects.Count > 0)
+        if (parentObj != null)
         {
-            foreach (SelectableObject item in selectableObjects)
+            foreach (SelectableObject item in parentObj.selectableObjects)
             {
                 item.outline.eraseRenderer = true;
                 cakeslice.OutlineEffect.Instance?.RemoveOutline(item.outline);
@@ -65,6 +56,9 @@ public class SelectableObject : MonoBehaviour
 
     public virtual void OnClicked()
     {
-
+        if (parentObj != null)
+        {
+            parentObj.OnClicked();
+        }
     }
 }

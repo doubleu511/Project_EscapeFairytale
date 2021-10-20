@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         MouseEvent.MouseLock(false);
-        //UIManager.ChangeToSubCamera(Vector3.one, Quaternion.Euler(0,0,0));
+        UIManager.ChangeToSubCamera(Vector3.one, Quaternion.Euler(0,0,0));
     }
 
     public static void PlaySFX(AudioSource source, AudioClip clip, float volume = 1)

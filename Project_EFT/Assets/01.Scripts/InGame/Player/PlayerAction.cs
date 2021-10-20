@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlayerAction : MonoBehaviour
 {
     public static GameObject currentObj = null;
+    public static Vector3 hitPos;
 
     public LayerMask hitAbleLayer;
+    public LayerMask subCam_detailLayer;
     RaycastHit hit;
-    Ray ray;
+    public static Ray ray;
 
     void Update()
     {
@@ -25,7 +27,7 @@ public class PlayerAction : MonoBehaviour
         {
             ray = UIManager.instance.subCamera.ScreenPointToRay(Input.mousePosition);
             
-            isHit = Physics.Raycast(ray, out hit, 10, hitAbleLayer);
+            isHit = Physics.Raycast(ray, out hit, 10, subCam_detailLayer);
             UIManager.instance.cursorBtTipText.transform.position = UIManager.instance.subCamera.WorldToScreenPoint(ray.origin) - new Vector3(0, 50f, 0);
         }
 
@@ -34,15 +36,19 @@ public class PlayerAction : MonoBehaviour
             if (hit.collider.CompareTag("SelectableObject"))
             {
                 SelectableObject obj = hit.collider.GetComponent<SelectableObject>();
-                obj.OnHighlighted(obj.selectText);
 
-                if (currentObj != hit.collider.gameObject)
+                if ((!GameManager.Instance.player.isSubCam && !obj.ignoreRaycast) || (GameManager.Instance.player.isSubCam && !obj.ignoreRaycast_inSubCam))
                 {
-                    if (currentObj != null)
+                    obj.OnHighlighted(obj.selectText);
+
+                    if (currentObj != hit.collider.gameObject)
                     {
-                        currentObj.GetComponent<SelectableObject>().OnDisHighlighted();
+                        if (currentObj != null)
+                        {
+                            currentObj.GetComponent<SelectableObject>().OnDisHighlighted();
+                        }
+                        currentObj = hit.collider.gameObject;
                     }
-                    currentObj = hit.collider.gameObject;
                 }
             }
             else

@@ -55,6 +55,7 @@ public class UIManager : MonoBehaviour
     private Camera mainCamera;
     public Button subCamera_Back;
     public Image cameraAim;
+    public SelectableObject_Parent currentShowObject;
 
     private void Awake()
     {
@@ -234,5 +235,10 @@ public class UIManager : MonoBehaviour
         instance.subCamera_Back.gameObject.SetActive(false);
         MouseEvent.MouseLock(true);
         GameManager.Instance.player.isSubCam = false;
+
+        if (instance.currentShowObject != null)
+        {
+            instance.currentShowObject.OnParentEnable();
+        }
     }
 }

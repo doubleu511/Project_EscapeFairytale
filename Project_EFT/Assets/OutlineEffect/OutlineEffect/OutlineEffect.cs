@@ -43,7 +43,7 @@ namespace cakeslice
 
 		public static OutlineEffect Instance { get; private set; }
 
-		private readonly LinkedSet<Outline> outlines = new LinkedSet<Outline>();
+		private LinkedSet<Outline> outlines = new LinkedSet<Outline>();
 
 		[Range(1.0f, 6.0f)]
 		public float lineThickness = 1.25f;
@@ -184,7 +184,7 @@ namespace cakeslice
 			outlineCamera.AddCommandBuffer(CameraEvent.BeforeImageEffects, commandBuffer);
 		}
 
-		bool RenderTheNextFrame;
+        bool RenderTheNextFrame;
 		public void OnPreRender()
 		{
 			if (commandBuffer == null)
@@ -302,8 +302,18 @@ namespace cakeslice
 
 		private void OnEnable()
 		{
+			if(Instance)
+            {
+				outlines = Instance.outlines;
+				Instance.outlines.Clear();
+            }
 			Instance = this;
 		}
+
+		public int Test()
+        {
+			return outlines.Count;
+        }
 
 		void OnDestroy()
 		{
