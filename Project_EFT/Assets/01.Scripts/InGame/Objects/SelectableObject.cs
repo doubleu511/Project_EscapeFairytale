@@ -16,12 +16,14 @@ public class SelectableObject : MonoBehaviour
     public virtual void OnHighlighted(string text)
     {
         outline.eraseRenderer = false;
+        cakeslice.OutlineEffect.Instance?.AddOutline(outline);
         UIManager.instance.cursorBtTipText.text = text;
     }
 
     public virtual void OnDisHighlighted()
     {
         outline.eraseRenderer = true;
+        cakeslice.OutlineEffect.Instance?.RemoveOutline(outline);
         UIManager.instance.cursorBtTipText.text = "";
     }
 

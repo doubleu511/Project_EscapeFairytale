@@ -303,23 +303,6 @@ namespace cakeslice
 		private void OnEnable()
 		{
 			Instance = this;
-			Outline[] o = FindObjectsOfType<Outline>();
-			if (autoEnableOutlines)
-			{
-				foreach (Outline oL in o)
-				{
-					oL.enabled = false;
-					oL.enabled = true;
-				}
-			}
-			else
-			{
-				foreach (Outline oL in o)
-				{
-					if (!outlines.Contains(oL))
-						outlines.Add(oL);
-				}
-			}
 		}
 
 		void OnDestroy()
