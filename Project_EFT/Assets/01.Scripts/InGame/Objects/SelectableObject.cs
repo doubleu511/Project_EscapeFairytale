@@ -24,14 +24,20 @@ public class SelectableObject : MonoBehaviour
         {
             foreach (SelectableObject item in parentObj.selectableObjects)
             {
-                item.outline.eraseRenderer = false;
-                cakeslice.OutlineEffect.Instance?.AddOutline(item.outline);
+                if (item.gameObject.activeInHierarchy)
+                {
+                    item.outline.eraseRenderer = false;
+                    cakeslice.OutlineEffect.Instance?.AddOutline(item.outline);
+                }
             }
         }
         else
         {
-            outline.eraseRenderer = false;
-            cakeslice.OutlineEffect.Instance?.AddOutline(outline);
+            if (gameObject.activeInHierarchy)
+            {
+                outline.eraseRenderer = false;
+                cakeslice.OutlineEffect.Instance?.AddOutline(outline);
+            }
         }
         UIManager.instance.cursorBtTipText.text = text;
     }
@@ -42,14 +48,20 @@ public class SelectableObject : MonoBehaviour
         {
             foreach (SelectableObject item in parentObj.selectableObjects)
             {
-                item.outline.eraseRenderer = true;
-                cakeslice.OutlineEffect.Instance?.RemoveOutline(item.outline);
+                if (item.gameObject.activeInHierarchy)
+                {
+                    item.outline.eraseRenderer = true;
+                    cakeslice.OutlineEffect.Instance?.RemoveOutline(item.outline);
+                }
             }
         }
         else
         {
-            outline.eraseRenderer = true;
-            cakeslice.OutlineEffect.Instance?.RemoveOutline(outline);
+            if (gameObject.activeInHierarchy)
+            {
+                outline.eraseRenderer = true;
+                cakeslice.OutlineEffect.Instance?.RemoveOutline(outline);
+            }
         }
         UIManager.instance.cursorBtTipText.text = "";
     }

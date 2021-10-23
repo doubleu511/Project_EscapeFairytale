@@ -26,6 +26,7 @@ public class PickableObject : SelectableObject
         if(GameManager.Instance.inventoryManager.TryGetNullTab(out TabScript tab))
         {
             tab.itemId = itemId;
+            base.OnDisHighlighted();
             gameObject.SetActive(false);
             GameManager.Instance.inventoryManager.TIP_ItemGotTipAppear(GameManager.Instance.itemData.infos[itemId].itemSprite);
         }

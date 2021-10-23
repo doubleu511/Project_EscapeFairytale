@@ -28,11 +28,6 @@ public class Cinderella_Clock_minute : SelectableObject
 
     public override void OnClicked()
     {
-
-    }
-
-    private void Start()
-    {
         centerPos = UIManager.instance.subCamera.WorldToScreenPoint(transform.position);
     }
 
@@ -67,19 +62,33 @@ public class Cinderella_Clock_minute : SelectableObject
             beforePos = nowPos;
 
             // 각도 딱 나누어 떨어지게 하기.
-            int intAngle_minute = Mathf.RoundToInt(-hour_minute_dummy.localRotation.eulerAngles.y + 360);
-            int intAngle_hour = Mathf.RoundToInt(-hour_clock.localRotation.eulerAngles.y + 360);
+            int intAngle_minute = Mathf.FloorToInt(-hour_minute_dummy.localRotation.eulerAngles.y + 360);
+            float floatAngle_hour = -hour_clock.localRotation.eulerAngles.y + 360;
 
             int angleRemainder = intAngle_minute % 6;
 
             intAngle_minute = (intAngle_minute / 6) * 6 + (angleRemainder > 2 ? 6 : 0);
             if (intAngle_minute == 360) intAngle_minute = 0;
 
-            Cinderella_Clock.minute = intAngle_minute / 6;
-            Cinderella_Clock.hour = (intAngle_hour / 30 == 0) ? 12 : intAngle_hour / 30;
+            //print(intAngle_hourF + " " + intAngle_hourF % 1 + " " + intAngle_hourF % 30);
+            if (Cinderella_Clock.minute == 59)
+            {
+                if (floatAngle_hour % 30 > 29.8f) floatAngle_hour += 0.2f;
+            }
+            else if (Cinderella_Clock.minute == 0)
+            {
+                if (floatAngle_hour % 30 < 0.2f) floatAngle_hour -= 0.2f;
+            }
+            int intAngle_hour = Mathf.FloorToInt(floatAngle_hour);
 
-            Debug.Log(intAngle_hour + ":" + intAngle_minute);
-            Debug.Log(Cinderella_Clock.hour + ":" + Cinderella_Clock.minute);
+
+            if (Cinderella_Clock.minute != intAngle_minute / 6)
+            {
+                Cinderella_Clock.minute = intAngle_minute / 6;
+                //Cinderella_Clock.hour = (intAngle_hour / 30 == 0) ? 12 : intAngle_hour / 30;
+                Debug.Log(((intAngle_hour / 30 == 0) ? 12 : intAngle_hour / 30) + ":" + Cinderella_Clock.minute);
+            }
+
 
             transform.localRotation = Quaternion.Euler(90, 0, intAngle_minute);
         }
