@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1608019769184705664}
   - component: {fileID: 1608019769184705665}
   - component: {fileID: 1608019769184705726}
-  - component: {fileID: 1608019769184705727}
   - component: {fileID: 1608019769184705724}
+  - component: {fileID: 8211596958075868462}
   m_Layer: 6
   m_Name: Item0_MinuteNeedle
   m_TagString: SelectableObject
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 5522246713923526545, guid: a1c35c19c6f9262468f6f5fe82736623, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,20 +97,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1608019769184705727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1608019769184705722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  color: 0
-  eraseRenderer: 1
 --- !u!114 &1608019769184705724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,3 +114,20 @@ MonoBehaviour:
   ignoreRaycast: 0
   ignoreRaycast_inSubCam: 0
   itemId: 0
+--- !u!114 &8211596958075868462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608019769184705722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

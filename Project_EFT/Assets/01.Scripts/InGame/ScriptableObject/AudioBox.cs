@@ -12,6 +12,10 @@ public class AudioBox : ScriptableObject
     public AudioClip object_book_close;
     public AudioClip object_book_nextpage;
     public AudioClip object_book_pickup;
+    public AudioClip object_door_lock;
+    public AudioClip object_door_unlock;
+    public AudioClip object_door_open;
+    public AudioClip object_door_close;
 
     public AudioClip RedShoes_redshoes_walk1_left;
     public AudioClip RedShoes_redshoes_walk1_right;

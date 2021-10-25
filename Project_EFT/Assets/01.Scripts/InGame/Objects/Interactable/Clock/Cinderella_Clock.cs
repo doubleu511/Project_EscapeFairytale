@@ -10,7 +10,7 @@ public class Cinderella_Clock : SelectableObject_Parent
 
     public override void OnClicked()
     {
-        UIManager.ChangeToSubCamera(new Vector3(-1.471f, 2.035f, 8.705f), Quaternion.identity);
+        UIManager.ChangeToSubCamera(new Vector3(-0.401f, 2.035f, 7.12f), Quaternion.Euler(0, 336.248962f, 0));
         OnParentDisable();
         UIManager.instance.currentShowObject = this;
     }

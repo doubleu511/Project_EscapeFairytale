@@ -8,6 +8,7 @@ public class Item_SizeChange : MonoBehaviour
     public static int sizeValueRaw = 0;
     public float currentSize = 1;
     private float[] sizeScaleValues = new float[3] { 0.033f, 1f, 5f };
+    private const float defaultHeight = 1.45f;
 
     public void OnUseBig()
     {
@@ -18,6 +19,10 @@ public class Item_SizeChange : MonoBehaviour
             sizeValueRaw++;
             currentSize = sizeScaleValues[sizeValueRaw + 1];
             UIManager.Tip_SizeChange(sizeValueRaw + 1);
+
+            CharacterController cc = GameManager.Instance.player.GetComponent<CharacterController>();
+            DOTween.To(() => cc.height, value => cc.height = value, currentSize * defaultHeight, 2);
+
             GameManager.Instance.player.transform.DOScale(currentSize, 2).SetUpdate(UpdateType.Fixed);
             GameManager.Instance.inventoryManager.SetNullTab(GameManager.Instance.selectedTab.tabId);
         }
@@ -36,6 +41,10 @@ public class Item_SizeChange : MonoBehaviour
             sizeValueRaw--;
             currentSize = sizeScaleValues[sizeValueRaw + 1];
             UIManager.Tip_SizeChange(sizeValueRaw + 1);
+
+            //CharacterController cc = GameManager.Instance.player.GetComponent<CharacterController>();
+            //DOTween.To(() => cc.height, value => cc.height = value, currentSize * defaultHeight, 2);
+
             GameManager.Instance.player.transform.DOScale(currentSize, 2).SetUpdate(UpdateType.Fixed);
             GameManager.Instance.inventoryManager.SetNullTab(GameManager.Instance.selectedTab.tabId);
         }

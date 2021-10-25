@@ -50,6 +50,11 @@ public class PlayerAction : MonoBehaviour
                         currentObj = hit.collider.gameObject;
                     }
                 }
+                else
+                {
+                    obj.OnDisHighlighted();
+                    currentObj = null;
+                }
             }
             else
             {

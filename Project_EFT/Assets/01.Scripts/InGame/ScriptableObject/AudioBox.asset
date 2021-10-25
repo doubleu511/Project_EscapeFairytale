@@ -18,6 +18,10 @@ MonoBehaviour:
   object_book_close: {fileID: 8300000, guid: 8ddbdecb50963394e8b04bcc5d2d3fe5, type: 3}
   object_book_nextpage: {fileID: 8300000, guid: 2f0b7824c8f1fdc478f170cc3d45452c, type: 3}
   object_book_pickup: {fileID: 8300000, guid: ce75c33f81fa05143921923baae715f9, type: 3}
+  object_door_lock: {fileID: 8300000, guid: 79eba9c4e8b895646a9022ab854d4a43, type: 3}
+  object_door_unlock: {fileID: 8300000, guid: f87682c612781944ba3b13c72124a555, type: 3}
+  object_door_open: {fileID: 8300000, guid: 1cc2804a0905d8e469a186308722f8c1, type: 3}
+  object_door_close: {fileID: 8300000, guid: 1f4ebf7d44adc9242b279f7b362d9c1d, type: 3}
   RedShoes_redshoes_walk1_left: {fileID: 8300000, guid: 058131ebebadeeb4a8def027724f1f10, type: 3}
   RedShoes_redshoes_walk1_right: {fileID: 8300000, guid: 8da1f4db99319d84f85597bcb6a52f7a, type: 3}
   RedShoes_redshoes_walk2_left: {fileID: 8300000, guid: c3d90241b6860934c92269292b89ec87, type: 3}

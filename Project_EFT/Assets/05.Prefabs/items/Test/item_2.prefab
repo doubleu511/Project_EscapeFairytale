@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 5297122527182146626}
   - component: {fileID: 6444163448854416794}
   - component: {fileID: 5297122527182146685}
-  - component: {fileID: 5297122527182146684}
   - component: {fileID: 5297122527182146687}
+  - component: {fileID: 7140727439966074811}
   m_Layer: 6
   m_Name: item_2
   m_TagString: SelectableObject
@@ -114,20 +114,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5297122527182146684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5297122527182146686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  color: 0
-  eraseRenderer: 0
 --- !u!114 &5297122527182146687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,4 +126,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc8df983d4713ac45a82f0bc360ef700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectText: 
+  ignoreRaycast: 0
+  ignoreRaycast_inSubCam: 0
   itemId: 2
+--- !u!114 &7140727439966074811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5297122527182146686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

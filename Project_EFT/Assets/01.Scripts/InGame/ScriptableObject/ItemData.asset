@@ -16,7 +16,7 @@ MonoBehaviour:
   - itemId: 0
     itemName: "\uC791\uC740 \uB9C9\uB300\uAE30"
     itemLore: "\uC190\uAC00\uB77D \uD06C\uAE30\uB9CC\uD55C \uC791\uC740 \uB9C9\uB300\uAE30\uC774\uB2E4.\n\uC5B4\uB518\uAC00\uC5D0
-      \uB060\uC6CC \uB123\uC744 \uC218 \uC788\uC744 \uAC83 \uAC19\uB2E4."
+      \uB07C\uC6CC \uB123\uC744 \uC218 \uC788\uC744 \uAC83 \uAC19\uB2E4."
     itemSprite: {fileID: 21300000, guid: 54ba470a8167a7e468fd7d93e2339e8c, type: 3}
     itemPrefab: {fileID: 1608019769184705722, guid: f3f8f8a913db6894aaf63e7701cf52fc, type: 3}
   - itemId: 1

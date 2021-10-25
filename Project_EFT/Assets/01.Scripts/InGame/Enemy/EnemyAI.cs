@@ -82,6 +82,8 @@ public class EnemyAI : MonoBehaviour
         {
             heelSoundIndex = 0;
         }
+
+        Debug.Log(agent.isOnNavMesh);
     }
 
     IEnumerator CheckState()

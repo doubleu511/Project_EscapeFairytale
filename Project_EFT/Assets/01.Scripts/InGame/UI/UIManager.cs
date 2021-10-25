@@ -166,7 +166,11 @@ public class UIManager : MonoBehaviour
         instance.bookDetail.alpha = 0;
         instance.bookDetail.blocksRaycasts = false;
         instance.bookDetail.interactable = false;
-        GameManager.PlaySFX(GameManager.Instance.audioBox.object_book_close);
+
+        if (GameManager.Instance.player.playerState == PlayerState.OPEN_BOOK)
+        {
+            GameManager.PlaySFX(GameManager.Instance.audioBox.object_book_close);
+        }
         instance.page = 0;
     }
 
