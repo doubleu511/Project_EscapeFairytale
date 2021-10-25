@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(cakeslice.Outline))]
+[RequireComponent(typeof(Outline))]
 public class SelectableObject : MonoBehaviour
 {
     public string selectText;
     public bool ignoreRaycast = false;
     public bool ignoreRaycast_inSubCam = false;
-    cakeslice.Outline outline;
+    Outline outline;
 
     [System.NonSerialized]
     public SelectableObject_Parent parentObj = null;
 
     protected virtual void Awake()
     {
-        outline = GetComponent<cakeslice.Outline>();
+        outline = GetComponent<Outline>();
     }
 
     public virtual void OnHighlighted(string text)
@@ -26,8 +26,7 @@ public class SelectableObject : MonoBehaviour
             {
                 if (item.gameObject.activeInHierarchy)
                 {
-                    item.outline.eraseRenderer = false;
-                    cakeslice.OutlineEffect.Instance?.AddOutline(item.outline);
+                    item.outline.enabled = true;
                 }
             }
         }
@@ -35,8 +34,7 @@ public class SelectableObject : MonoBehaviour
         {
             if (gameObject.activeInHierarchy)
             {
-                outline.eraseRenderer = false;
-                cakeslice.OutlineEffect.Instance?.AddOutline(outline);
+                outline.enabled = true;
             }
         }
         UIManager.instance.cursorBtTipText.text = text;
@@ -50,8 +48,7 @@ public class SelectableObject : MonoBehaviour
             {
                 if (item.gameObject.activeInHierarchy)
                 {
-                    item.outline.eraseRenderer = true;
-                    cakeslice.OutlineEffect.Instance?.RemoveOutline(item.outline);
+                    item.outline.enabled = false;
                 }
             }
         }
@@ -59,8 +56,7 @@ public class SelectableObject : MonoBehaviour
         {
             if (gameObject.activeInHierarchy)
             {
-                outline.eraseRenderer = true;
-                cakeslice.OutlineEffect.Instance?.RemoveOutline(outline);
+                outline.enabled = false;
             }
         }
         UIManager.instance.cursorBtTipText.text = "";

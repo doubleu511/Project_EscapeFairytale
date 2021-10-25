@@ -25,14 +25,14 @@ public class NoteUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
         }
     }
 
-    private Outline outline;
+    private UnityEngine.UI.Outline outline;
 
     public Color color_anim1 = Color.red;
     public Color color_anim2 = Color.red;
 
     private void Awake()
     {
-        outline = GetComponent<Outline>();
+        outline = GetComponent<UnityEngine.UI.Outline>();
         noteImg = GetComponent<CanvasGroup>();
     }
 

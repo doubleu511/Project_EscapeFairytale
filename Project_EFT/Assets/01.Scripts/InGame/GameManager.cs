@@ -32,6 +32,11 @@ public class GameManager : MonoBehaviour
     [Header("AudioSource")]
     public AudioSource defaultSFXSource;
 
+    [Header("SelectedColorAnim")]
+    public Color color_select = Color.red;
+    public Color color_anim1 = Color.red;
+    public Color color_anim2 = Color.red;
+
     private void Awake()
     {
         if(Instance)
@@ -44,8 +49,23 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        color_select = color_anim1;
+        ColorChange(false);
+
         MouseEvent.MouseLock(false);
         UIManager.ChangeToSubCamera(Vector3.one, Quaternion.Euler(0,0,0));
+    }
+
+    private void ColorChange(bool start)
+    {
+        if (start)
+        {
+            DOTween.To(() => color_select, value => color_select = value, color_anim1, 1).OnComplete(() => ColorChange(false));
+        }
+        else
+        {
+            DOTween.To(() => color_select, value => color_select = value, color_anim2, 1).OnComplete(() => ColorChange(true));
+        }
     }
 
     public static void PlaySFX(AudioSource source, AudioClip clip, float volume = 1)
