@@ -52,6 +52,8 @@ public class EnemyAI : MonoBehaviour
         StartCoroutine(CheckState());
         StartCoroutine(DoAction());
 
+        agent.autoBraking = true;
+
         playerTr = GameManager.Instance.player.transform;
         ws = new WaitForSeconds(judgeDelay);//AI가 판단을 내리는 딜레이시간
         left_anim.SetBool("walk", true);
@@ -82,8 +84,6 @@ public class EnemyAI : MonoBehaviour
         {
             heelSoundIndex = 0;
         }
-
-        Debug.Log(agent.isOnNavMesh);
     }
 
     IEnumerator CheckState()
@@ -98,6 +98,14 @@ public class EnemyAI : MonoBehaviour
             // 여기서 아마 기절 만들듯
 
             float dist = (playerTr.position - transform.position).sqrMagnitude;
+
+            if (agent.path.corners.Length == 1)
+            {
+                if (state == EnemyState.TRACE)
+                {
+                    StopTrace();
+                }
+            }
 
             bool traceCondition1 = IsViewPlayer() && dist <= traceDist * traceDist;
             bool traceCondition2 = unconditionallyTrace;
@@ -221,7 +229,7 @@ public class EnemyAI : MonoBehaviour
             //Debug.Log(hit.collider.gameObject.name);
             isView = (hit.collider.gameObject.CompareTag("Player"));
         }
-        return isView;
+        return isView && agent.path.corners.Length == 2;
     }
 
     private bool waiting = false;
@@ -259,14 +267,21 @@ public class EnemyAI : MonoBehaviour
     }
 
     private bool unconditionallyTrace = false;
+    Coroutine traceTime;
 
     private void TraceTime(float time)
     {
         if(!alreadyChasing)
         {
             unconditionallyTrace = true;
-            StartCoroutine(TraceCoolTime(time));
+            traceTime = StartCoroutine(TraceCoolTime(time));
         }
+    }
+
+    private void StopTrace()
+    {
+        StopCoroutine(traceTime);
+        unconditionallyTrace = false;
     }
 
     IEnumerator TraceCoolTime(float time)

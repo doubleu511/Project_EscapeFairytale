@@ -54,7 +54,6 @@ public class MoveAgent : MonoBehaviour
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.autoBraking = false;
 
         agent.speed = patrolSpeed; //처음 패트롤 속도로
     }

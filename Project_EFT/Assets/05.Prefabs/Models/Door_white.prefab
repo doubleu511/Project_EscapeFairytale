@@ -560,6 +560,8 @@ MonoBehaviour:
   - {fileID: 5714553881787942135}
   isLocked: 1
   requireItemId: 0
+  isItemBroke: 0
+  parent_door: {fileID: 0}
 --- !u!114 &1203317586762949538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -742,7 +744,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7152438511198359729}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -2.0394835, y: 1.0699997, z: 6.0246325}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -750,7 +752,7 @@ Transform:
   - {fileID: 1057507797712357763}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &8845002490088803099
 GameObject:
   m_ObjectHideFlags: 0
@@ -765,7 +767,7 @@ GameObject:
   - component: {fileID: 8035540213181415481}
   - component: {fileID: 8035540213181415480}
   - component: {fileID: 8035540213181415487}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Box041
   m_TagString: Untagged
   m_Icon: {fileID: 0}
