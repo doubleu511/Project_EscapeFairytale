@@ -10,7 +10,8 @@ public class EnemyAI : MonoBehaviour
     {
         PATROL,
         TRACE,
-        ATTACK
+        ATTACK,
+        STUN
     }
     
     public EnemyState state = EnemyState.PATROL; //처음에는 패트롤 상태로 둔다.
@@ -40,6 +41,8 @@ public class EnemyAI : MonoBehaviour
     public LayerMask layerMask;
 
     public AudioSource redShoesAmbientSource;
+
+    public int stunSec = 0;
 
     void Awake()
     {
@@ -95,7 +98,12 @@ public class EnemyAI : MonoBehaviour
 
             if (GameManager.Instance.player.playerState == PlayerState.DEAD) yield break;
 
-            // 여기서 아마 기절 만들듯
+            while (stunSec > 0)
+            {
+                state = EnemyState.STUN;
+                stunSec--;
+                yield return new WaitForSeconds(1);
+            }
 
             float dist = (playerTr.position - transform.position).sqrMagnitude;
 
@@ -180,22 +188,23 @@ public class EnemyAI : MonoBehaviour
         while(true){
             yield return ws;
             if (GameManager.Instance.player.playerState == PlayerState.DEAD) yield break;
+
             switch (state){
                 case EnemyState.PATROL:
                     left_anim.SetBool("walk", true);
                     right_anim.SetBool("walk", true);
                     moveAgent.patrolling = true;
-                    //anim.SetBool(hashMove, true);
                     break;
                 case EnemyState.TRACE:
                     left_anim.SetBool("walk", true);
                     right_anim.SetBool("walk", true);
                     moveAgent.traceTarget = playerTr.position;
-                    //anim.SetBool(hashMove, true);
                     break;
                 case EnemyState.ATTACK:
                     Stop();
-                    //anim.SetBool(hashMove, false);
+                    break;
+                case EnemyState.STUN:
+                    Stop();
                     break;
             }
         }
