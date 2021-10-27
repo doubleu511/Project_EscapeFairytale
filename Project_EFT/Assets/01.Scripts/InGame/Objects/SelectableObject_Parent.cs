@@ -69,6 +69,7 @@ public class SelectableObject_Parent : SelectableObject
                 base.OnDisHighlighted();
                 GameManager.Instance.inventoryManager.SelectedItemRefresh();
                 gameObject.SetActive(false);
+                Invoke("DestroyObj", 0.5f);
                 GameManager.Instance.inventoryManager.TIP_ItemGotTipAppear(GameManager.Instance.itemData.infos[itemId].itemSprite);
             }
             else
@@ -77,5 +78,10 @@ public class SelectableObject_Parent : SelectableObject
                 GameManager.Instance.inventoryManager.TIP_FullInventory();
             }
         }
+    }
+
+    private void DestroyObj()
+    {
+        Destroy(this.gameObject);
     }
 }

@@ -221,7 +221,6 @@ public class UIManager : MonoBehaviour
         instance.subCamera.transform.rotation = rotation;
         instance.subCamera.gameObject.SetActive(true);
         instance.subCamera_Back.gameObject.SetActive(true);
-        instance.currentShowObject = null;
         MouseEvent.MouseLock(false);
         GameManager.Instance.player.isSubCam = true;
     }
@@ -244,6 +243,7 @@ public class UIManager : MonoBehaviour
         if (instance.currentShowObject != null)
         {
             instance.currentShowObject.OnParentEnable();
+            instance.currentShowObject = null;
         }
     }
 }

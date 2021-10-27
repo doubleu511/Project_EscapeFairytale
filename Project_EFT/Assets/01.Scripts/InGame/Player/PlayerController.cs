@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public float speed = 5;
     public float gravity = -9.81f;
 
+    public const int cameraDefaultFOV = 70;
+
     float yVelocity;
 
     CharacterController cc;
