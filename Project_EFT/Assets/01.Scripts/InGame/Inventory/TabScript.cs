@@ -7,9 +7,11 @@ using UnityEngine.EventSystems;
 public class TabScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IDropHandler, IEndDragHandler, IPointerClickHandler
 {
     public int itemId;
+    public int itemCount = -1;
     [System.NonSerialized] public int tabId;
 
     public Image myImg;
+    public Text myCountText;
     public DragAndDropContainer dragAndDropContainer;
 
 
@@ -31,10 +33,13 @@ public class TabScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IDropHa
         if (itemId == -1)
         {
             myImg.sprite = null;
+            itemCount = -1;
+            myCountText.text = "";
         }
         else
         {
             myImg.sprite = GameManager.Instance.itemData.infos[itemId].itemSprite;
+            myCountText.text = itemCount > 1 ? $"x{itemCount}" : "";
         }
     }
 
@@ -50,6 +55,7 @@ public class TabScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IDropHa
         dragAndDropContainer.gameObject.SetActive(true);
         // Set Data
         dragAndDropContainer.itemId = itemId;
+        dragAndDropContainer.itemCount = itemCount;
         dragAndDropContainer.image.sprite = myImg.sprite;
         dragAndDropContainer.movingTab = this;
         isDragging = true;
@@ -71,13 +77,17 @@ public class TabScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IDropHa
             {
                 // set data from dropped object
                 itemId = dragAndDropContainer.itemId;
+                itemCount = dragAndDropContainer.itemCount;
                 myImg.sprite = dragAndDropContainer.image.sprite;
+                myCountText.text = itemCount > 1 ? $"x{itemCount}" : "";
             }
             else
             {
                 // Clear Data
                 itemId = -1;
+                itemCount = -1;
                 myImg.sprite = null;
+                myCountText.text = "";
             }
         }
 
@@ -95,14 +105,18 @@ public class TabScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IDropHa
             // keep data instance for swap 
             Sprite tempSprite = myImg.sprite;
             int tempItemId = itemId;
+            int tempItemCount = itemCount;
 
             // set data from drag object on Container
             myImg.sprite = dragAndDropContainer.image.sprite;
             itemId = dragAndDropContainer.itemId;
+            itemCount = dragAndDropContainer.itemCount;
+            myCountText.text = itemCount > 1 ? $"x{itemCount}" : "";
 
             // put data from drop object to Container.  
             dragAndDropContainer.image.sprite = tempSprite;
             dragAndDropContainer.itemId = tempItemId;
+            dragAndDropContainer.itemCount = tempItemCount;
 
             if (dragAndDropContainer.movingTab == GameManager.Instance.selectedTab)
             {
@@ -118,6 +132,7 @@ public class TabScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IDropHa
         else
         {
             dragAndDropContainer.image.sprite = null;
+            dragAndDropContainer.itemCount = -1;
         }
     }
 

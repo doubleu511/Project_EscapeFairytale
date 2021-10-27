@@ -99,8 +99,17 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public bool TryGetNullTab(out TabScript tab)
+    public bool TryGetRemainingTab(int currentItemId, out TabScript tab)
     {
+        for (int i = 0; i < tabs.Length; i++)
+        {
+            if(tabs[i].itemId == currentItemId)
+            {
+                tab = tabs[i];
+                return true;
+            }
+        }
+
         for (int i = 0; i < tabs.Length; i++)
         {
             if (tabs[i].itemId == -1)
@@ -114,13 +123,18 @@ public class InventoryManager : MonoBehaviour
         return false;
     }
 
-    public void SetNullTab(int tabIndex)
+    public void DecreaseTab(int tabIndex)
     {
-        tabs[tabIndex].itemId = -1;
-        if (tabIndex == GameManager.Instance.selectedTab.tabId)
+        tabs[tabIndex].itemCount--;
+
+        if (tabs[tabIndex].itemCount <= 0)
         {
-            GameManager.Instance.selectedItemId = -1;
-            GameManager.Instance.selectedTab = null;
+            tabs[tabIndex].itemId = -1;
+            if (tabIndex == GameManager.Instance.selectedTab.tabId)
+            {
+                GameManager.Instance.selectedItemId = -1;
+                GameManager.Instance.selectedTab = null;
+            }
         }
 
         GameManager.Instance.inventoryManager.SelectedItemRefresh();

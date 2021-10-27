@@ -76,9 +76,9 @@ public class PlayerInput : MonoBehaviour
                 if (GameManager.Instance.selectedItemId != -1)
                 {
                     int itemId = GameManager.Instance.selectedItemId;
-                    GameManager.Instance.inventoryManager.SetNullTab(GameManager.Instance.selectedTab.tabId);
+                    GameManager.Instance.inventoryManager.DecreaseTab(GameManager.Instance.selectedTab.tabId);
 
-                    Rigidbody rb = Instantiate(GameManager.Instance.itemData.infos[itemId].itemPrefab, transform.position, transform.rotation).GetComponent<Rigidbody>();
+                    Rigidbody rb = Instantiate(GameManager.Instance.itemData.infos[itemId].itemPrefab, Camera.main.transform.position, transform.rotation).GetComponent<Rigidbody>();
                     rb.AddForce(Camera.main.transform.forward * 4, ForceMode.Impulse);
                 }
             }

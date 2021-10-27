@@ -18,7 +18,7 @@ public class Item_EmptyShoesBox : MonoBehaviour
             if(ai != null)
             {
                 ai.stunSec = 10;
-                GameManager.Instance.inventoryManager.SetNullTab(GameManager.Instance.selectedTab.tabId);
+                GameManager.Instance.inventoryManager.DecreaseTab(GameManager.Instance.selectedTab.tabId);
             }
         }
     }

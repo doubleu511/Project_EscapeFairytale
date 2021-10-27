@@ -6,26 +6,19 @@ public class PickableObject : SelectableObject
 {
     public int itemId;
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
-    public override void OnHighlighted(string text)
-    {
-        base.OnHighlighted(text);
-    }
-
-    public override void OnDisHighlighted()
-    {
-        base.OnDisHighlighted();
-    }
-
     public override void OnClicked()
     {
-        if(GameManager.Instance.inventoryManager.TryGetNullTab(out TabScript tab))
+        if(GameManager.Instance.inventoryManager.TryGetRemainingTab(itemId, out TabScript tab))
         {
-            tab.itemId = itemId;
+            if (tab.itemId != -1)
+            {
+                tab.itemCount++;
+            }
+            else
+            {
+                tab.itemId = itemId;
+                tab.itemCount = 1;
+            }
             base.OnDisHighlighted();
             gameObject.SetActive(false);
             GameManager.Instance.inventoryManager.TIP_ItemGotTipAppear(GameManager.Instance.itemData.infos[itemId].itemSprite);

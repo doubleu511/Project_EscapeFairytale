@@ -5,6 +5,8 @@ using UnityEngine;
 public class SelectableObject_Parent : SelectableObject
 {
     public List<SelectableObject> selectableObjects; // 부모만 설정해준다.
+    public bool pickable = false;
+    public int itemId = 0;
 
     protected virtual void Start()
     {
@@ -51,6 +53,28 @@ public class SelectableObject_Parent : SelectableObject
 
     public override void OnClicked()
     {
-
+        if (pickable)
+        {
+            if (GameManager.Instance.inventoryManager.TryGetRemainingTab(itemId, out TabScript tab))
+            {
+                if (tab.itemId != -1)
+                {
+                    tab.itemCount++;
+                }
+                else
+                {
+                    tab.itemId = itemId;
+                    tab.itemCount = 1;
+                }
+                base.OnDisHighlighted();
+                gameObject.SetActive(false);
+                GameManager.Instance.inventoryManager.TIP_ItemGotTipAppear(GameManager.Instance.itemData.infos[itemId].itemSprite);
+            }
+            else
+            {
+                // 인벤토리 꽉참
+                GameManager.Instance.inventoryManager.TIP_FullInventory();
+            }
+        }
     }
 }

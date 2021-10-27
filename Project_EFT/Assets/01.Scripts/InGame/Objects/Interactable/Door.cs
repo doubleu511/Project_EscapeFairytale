@@ -30,7 +30,7 @@ public class Door : SelectableObject_Parent
                 GameManager.PlaySFX(GameManager.Instance.audioBox.object_door_unlock);
                 if(isItemBroke)
                 {
-                    GameManager.Instance.inventoryManager.SetNullTab(GameManager.Instance.selectedTab.tabId);
+                    GameManager.Instance.inventoryManager.DecreaseTab(GameManager.Instance.selectedTab.tabId);
                 }
                 selectText = "클릭하여 문을 여닫습니다.";
             }
