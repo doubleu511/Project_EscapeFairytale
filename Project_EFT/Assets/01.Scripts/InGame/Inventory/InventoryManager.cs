@@ -15,10 +15,10 @@ public class InventoryManager : MonoBehaviour
     public Text itemLore;
     public Image itemImg;
     public Button backBtn;
-    public Button into3DBtn;
 
     [Space(10)]
     public Image selectedImg;
+    public Text selectedItemCount;
     public TabScript[] tabs;
 
     [System.NonSerialized]
@@ -91,6 +91,7 @@ public class InventoryManager : MonoBehaviour
         if (GameManager.Instance.selectedItemId != -1)
         {
             selectedImg.sprite = GameManager.Instance.itemData.infos[GameManager.Instance.selectedItemId].itemSprite;
+            selectedItemCount.text = GameManager.Instance.selectedTab.itemCount > 1 ? $"x{GameManager.Instance.selectedTab.itemCount}" : "";
         }
         else
         {

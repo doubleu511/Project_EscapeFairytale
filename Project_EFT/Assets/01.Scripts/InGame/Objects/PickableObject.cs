@@ -20,6 +20,7 @@ public class PickableObject : SelectableObject
                 tab.itemCount = 1;
             }
             base.OnDisHighlighted();
+            GameManager.Instance.inventoryManager.SelectedItemRefresh();
             gameObject.SetActive(false);
             GameManager.Instance.inventoryManager.TIP_ItemGotTipAppear(GameManager.Instance.itemData.infos[itemId].itemSprite);
         }
