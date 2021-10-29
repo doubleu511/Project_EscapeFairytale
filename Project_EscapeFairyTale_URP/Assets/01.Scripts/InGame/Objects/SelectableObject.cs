@@ -8,6 +8,7 @@ public class SelectableObject : MonoBehaviour
     public string selectText;
     public bool ignoreRaycast = false;
     public bool ignoreRaycast_inSubCam = false;
+    public bool highlightedIndependent = false;
     Outline outline;
 
     [System.NonSerialized]
@@ -20,7 +21,7 @@ public class SelectableObject : MonoBehaviour
 
     public virtual void OnHighlighted(string text)
     {
-        if (parentObj != null)
+        if (parentObj != null && !highlightedIndependent)
         {
             foreach (SelectableObject item in parentObj.selectableObjects)
             {
@@ -42,7 +43,7 @@ public class SelectableObject : MonoBehaviour
 
     public virtual void OnDisHighlighted()
     {
-        if (parentObj != null)
+        if (parentObj != null && !highlightedIndependent)
         {
             foreach (SelectableObject item in parentObj.selectableObjects)
             {

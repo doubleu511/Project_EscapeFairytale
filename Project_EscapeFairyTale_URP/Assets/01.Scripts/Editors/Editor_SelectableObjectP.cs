@@ -28,6 +28,15 @@ public class Editor_SelectableObjectP : Editor
             _editor.itemId = EditorGUILayout.IntField(new GUIContent("Item Id", "주울 때 아이템 아이디"), _editor.itemId);
             //float의 경우 FloatField를 쓴다. 인자는 bool 위치에 float을 쓰는 것 외엔 동일
         }
+        else
+        {
+            _editor.isSubCameraMove = EditorGUILayout.Toggle(new GUIContent("서브 카메라 이동", "체크되면 클릭되었을때 포지션, 로테이션 값으로 서브 카메라 전환"), _editor.isSubCameraMove);
+            if(_editor.isSubCameraMove)
+            {
+                _editor.movePos = EditorGUILayout.Vector3Field(new GUIContent("이동 포지션", "서브 카메라가 이동할 포지션"), _editor.movePos);
+                _editor.moveRot = EditorGUILayout.Vector3Field(new GUIContent("회전값", "서브 카메라가 회전할 값(Euler)"), _editor.moveRot);
+            }
+        }
 
         if (GUI.changed)    //변경이 있을 시 적용된다. 이 코드가 없으면 인스펙터 창에서 변화는 있지만 적용은 되지 않는다.
             EditorUtility.SetDirty(target);

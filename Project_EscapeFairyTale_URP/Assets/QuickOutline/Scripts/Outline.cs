@@ -32,7 +32,7 @@ public class Outline : MonoBehaviour {
   [SerializeField]
   private Mode outlineMode;
 
-  [SerializeField, Range(5f, 10f)]
+  [SerializeField, Range(0f, 10f)]
   private float outlineWidth = 5f;
 
   [Header("Optional")]

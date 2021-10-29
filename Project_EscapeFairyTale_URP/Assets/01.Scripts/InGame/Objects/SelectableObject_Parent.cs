@@ -8,6 +8,10 @@ public class SelectableObject_Parent : SelectableObject
     public bool pickable = false;
     public int itemId = 0;
 
+    [HideInInspector] public bool isSubCameraMove;
+    [HideInInspector] public Vector3 movePos;
+    [HideInInspector] public Vector3 moveRot;
+
     protected virtual void Start()
     {
         if (selectableObjects.Count > 0)
@@ -77,6 +81,10 @@ public class SelectableObject_Parent : SelectableObject
                 // 인벤토리 꽉참
                 GameManager.Instance.inventoryManager.TIP_FullInventory();
             }
+        }
+        else if (isSubCameraMove)
+        {
+            UIManager.ChangeToSubCamera(movePos, Quaternion.Euler(moveRot.x, moveRot.y, moveRot.z));
         }
     }
 
