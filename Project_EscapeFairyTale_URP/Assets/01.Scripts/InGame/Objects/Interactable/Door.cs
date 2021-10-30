@@ -5,6 +5,8 @@ using DG.Tweening;
 
 public class Door : SelectableObject_Parent
 {
+    public AudioSource audioSource;
+
     public bool isLocked = true;
     [Tooltip("isLocked가 true일때만 작성한다. 잠금을 해제할때 필요한 아이템 아이디")]
     public int requireItemId = 0;
@@ -27,7 +29,7 @@ public class Door : SelectableObject_Parent
             if(GameManager.Instance.selectedItemId == requireItemId)
             {
                 isLocked = false;
-                GameManager.PlaySFX(GameManager.Instance.audioBox.object_door_unlock);
+                GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_unlock);
                 if(isItemBroke)
                 {
                     GameManager.Instance.inventoryManager.DecreaseTab(GameManager.Instance.selectedTab.tabId);
@@ -36,7 +38,7 @@ public class Door : SelectableObject_Parent
             }
             else
             {
-                GameManager.PlaySFX(GameManager.Instance.audioBox.object_door_lock);
+                GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_lock);
             }
         }
         else
@@ -46,17 +48,17 @@ public class Door : SelectableObject_Parent
                 case -1:
                     DoorMove(1);
                     currentDir = 0;
-                    GameManager.PlaySFX(GameManager.Instance.audioBox.object_door_close);
+                    GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_close);
                     break;
                 case 0:
                     DoorMove(1);
                     currentDir = 1;
-                    GameManager.PlaySFX(GameManager.Instance.audioBox.object_door_open);
+                    GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_open);
                     break;
                 case 1:
                     DoorMove(-1);
                     currentDir = 0;
-                    GameManager.PlaySFX(GameManager.Instance.audioBox.object_door_close);
+                    GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_close);
                     break;
             }
         }

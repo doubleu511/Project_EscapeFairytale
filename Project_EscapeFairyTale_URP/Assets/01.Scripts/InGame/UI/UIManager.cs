@@ -32,6 +32,7 @@ public class UIManager : MonoBehaviour
     public CanvasGroup letterCanvasGroup;
     public Image letterImg;
     public Text letterTxt;
+    public Button letterExitBtn;
 
     [Header("Book")]
     public CanvasGroup bookDefault;
@@ -90,6 +91,12 @@ public class UIManager : MonoBehaviour
             bookPageCloseBtn.onClick.AddListener(BookDetailClose);
         }
 
+        // 편지 UI 버튼 이벤트
+        letterExitBtn.onClick.AddListener(() =>
+        {
+            LetterUIClose();
+        });
+
         mainCamera = Camera.main;
         subCamera_Back.onClick.AddListener(ChangeToMainCamera);
     }
@@ -132,16 +139,30 @@ public class UIManager : MonoBehaviour
 
     public static void LetterUI(Sprite letter)
     {
+        MouseEvent.MouseLock(false);
         instance.letterCanvasGroup.alpha = 1;
+        instance.letterCanvasGroup.interactable = true;
+        instance.letterCanvasGroup.blocksRaycasts = true;
         instance.letterImg.sprite = letter;
         instance.letterTxt.text = "";
     }
 
     public static void LetterUI(Sprite letterImg, string letterTxt)
     {
+        MouseEvent.MouseLock(false);
         instance.letterCanvasGroup.alpha = 1;
+        instance.letterCanvasGroup.interactable = true;
+        instance.letterCanvasGroup.blocksRaycasts = true;
         instance.letterImg.sprite = letterImg;
         instance.letterTxt.text = letterTxt;
+    }
+
+    public static void LetterUIClose()
+    {
+        MouseEvent.MouseLock(true);
+        instance.letterCanvasGroup.alpha = 0;
+        instance.letterCanvasGroup.interactable = false;
+        instance.letterCanvasGroup.blocksRaycasts = false;
     }
 
     public static void BookDefaultUI(bool show)

@@ -12,7 +12,7 @@ public class Letter : SelectableObject
     public override void OnDisHighlighted()
     {
         base.OnDisHighlighted();
-        UIManager.instance.letterCanvasGroup.alpha = 0;
+        UIManager.LetterUIClose();
     }
 
     public override void OnClicked()
