@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (GameManager.Instance.player.playerState == PlayerState.DEAD) return;
+        if (Cursor.lockState == CursorLockMode.None) return;
 
         if (!cc.isGrounded)
         {
