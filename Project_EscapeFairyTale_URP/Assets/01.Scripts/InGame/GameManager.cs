@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
 
-        //DataLoad();
+        DataLoad();
     }
 
     void Start()
@@ -64,14 +64,15 @@ public class GameManager : MonoBehaviour
     void DataSave()
     {
         // 이거 말고도, 플레이어 인벤토리와 플레이어 위치를 저장해야한다.
-        string a = JsonUtility.ToJson(new Serialization<string, int>(saveDic));
-        print(a);
+        string json = JsonUtility.ToJson(new Serialization<string, int>(saveDic));
+        SecurityPlayerPrefs.SetString("object-save", json);
     }
 
     [ContextMenu("Load")]
     void DataLoad()
     {
-        string b = "{\"keys\":[\"pickable_milk5\",\"pickable_milk0\",\"pickable_milk3\",\"pickable_milk1\",\"pickable_milk2\",\"pickable_milk4\",\"pickable_cupcake0\",\"\",\"pickable_cupcake5\",\"pickable_book3\",\"pickable_cupcake3\",\"pickable_cupcake1\",\"pickable_book5\",\"pickable_cupcake4\",\"pickable_book2\",\"pickable_book0\",\"pickable_book1\",\"pickable_cupcake2\",\"pickable_book4\"],\"values\":[1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0]}";
+        string b = SecurityPlayerPrefs.GetString("object-save", "{}");
+
         saveDic = JsonUtility.FromJson<Serialization<string, int>>(b).ToDictionary();
     }
 
