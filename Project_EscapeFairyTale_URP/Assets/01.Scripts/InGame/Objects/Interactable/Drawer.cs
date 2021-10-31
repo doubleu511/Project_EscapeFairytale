@@ -78,5 +78,6 @@ public class Drawer : SelectableObject_Parent
     {
         isLocked = false;
         selectText = unlockTxt;
+        GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_unlock);
     }
 }

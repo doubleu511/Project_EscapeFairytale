@@ -7,6 +7,7 @@ public class Counter : MonoBehaviour
 {
     [SerializeField] protected int maxIndex;
     [HideInInspector] public int index = 0;
+    [HideInInspector] public Module parentModule;
     public Text countText;
 
     public virtual void Add()
@@ -14,6 +15,7 @@ public class Counter : MonoBehaviour
         if (++index > maxIndex) index = 0;
 
         if (countText != null) countText.text = index.ToString();
+        parentModule.AnswerCheck();
     }
 
     public virtual void Remove()
@@ -21,10 +23,11 @@ public class Counter : MonoBehaviour
         if (--index < 0) index = maxIndex;
 
         if (countText != null) countText.text = index.ToString();
+        parentModule.AnswerCheck();
     }
 
     public virtual void Trigger(int buttonId)
     {
-
+        parentModule.AnswerCheck();
     }
 }

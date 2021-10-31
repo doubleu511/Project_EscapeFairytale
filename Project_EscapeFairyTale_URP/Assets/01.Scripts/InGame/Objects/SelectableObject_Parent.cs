@@ -5,8 +5,6 @@ using UnityEngine;
 public class SelectableObject_Parent : SelectableObject
 {
     public List<SelectableObject> selectableObjects; // 부모만 설정해준다.
-    public bool pickable = false;
-    public int itemId = 0;
 
     [HideInInspector] public bool isSubCameraMove;
     [HideInInspector] public Vector3 movePos;
@@ -55,41 +53,24 @@ public class SelectableObject_Parent : SelectableObject
         }
     }
 
-    public override void OnClicked()
+    /// <summary>
+    /// 로직 또는 퍼즐이 끝났을때, 퍼즐 parent를 비활성화 시키기 위함입니다.
+    /// </summary>
+    public void IgnoreCamRayCast()
     {
-        if (pickable)
+        GetComponent<Collider>().enabled = false;
+        foreach(SelectableObject item in selectableObjects)
         {
-            if (GameManager.Instance.inventoryManager.TryGetRemainingTab(itemId, out TabScript tab))
-            {
-                if (tab.itemId != -1)
-                {
-                    tab.itemCount++;
-                }
-                else
-                {
-                    tab.itemId = itemId;
-                    tab.itemCount = 1;
-                }
-                base.OnDisHighlighted();
-                GameManager.Instance.inventoryManager.SelectedItemRefresh();
-                gameObject.SetActive(false);
-                Invoke("DestroyObj", 0.5f);
-                GameManager.Instance.inventoryManager.TIP_ItemGotTipAppear(GameManager.Instance.itemData.infos[itemId].itemSprite);
-            }
-            else
-            {
-                // 인벤토리 꽉참
-                GameManager.Instance.inventoryManager.TIP_FullInventory();
-            }
-        }
-        else if (isSubCameraMove)
-        {
-            UIManager.ChangeToSubCamera(movePos, Quaternion.Euler(moveRot.x, moveRot.y, moveRot.z));
+            item.GetComponent<Collider>().enabled = false;
         }
     }
 
-    private void DestroyObj()
+    public override void OnClicked()
     {
-        Destroy(this.gameObject);
+        if (isSubCameraMove)
+        {
+            UIManager.ChangeToSubCamera(movePos, Quaternion.Euler(moveRot.x, moveRot.y, moveRot.z));
+            UIManager.instance.currentShowObject = this;
+        }
     }
 }

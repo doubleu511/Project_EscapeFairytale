@@ -66,14 +66,22 @@ public class GameManager : MonoBehaviour
         // 이거 말고도, 플레이어 인벤토리와 플레이어 위치를 저장해야한다.
         string json = JsonUtility.ToJson(new Serialization<string, int>(saveDic));
         SecurityPlayerPrefs.SetString("object-save", json);
+        print("Save Complete");
     }
 
     [ContextMenu("Load")]
     void DataLoad()
     {
-        string b = SecurityPlayerPrefs.GetString("object-save", "{}");
+        string json = SecurityPlayerPrefs.GetString("object-save", "{}");
+        saveDic = JsonUtility.FromJson<Serialization<string, int>>(json).ToDictionary();
+        print("Load Complete");
+    }
 
-        saveDic = JsonUtility.FromJson<Serialization<string, int>>(b).ToDictionary();
+    [ContextMenu("Reset")]
+    void DataReset()
+    {
+        SecurityPlayerPrefs.SetString("object-save", "{}");
+        print("Reset Complete");
     }
 
     private void ColorChange(bool start)
