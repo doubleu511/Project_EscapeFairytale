@@ -114,7 +114,10 @@ MonoBehaviour:
     \uC218 \uC788\uC2B5\uB2C8\uB2E4."
   ignoreRaycast: 0
   ignoreRaycast_inSubCam: 1
+  highlightedIndependent: 0
   itemId: 2
+  saveKey: pickable_cupcake
+  eventFlow: 1
 --- !u!114 &8625648583303138172
 MonoBehaviour:
   m_ObjectHideFlags: 0

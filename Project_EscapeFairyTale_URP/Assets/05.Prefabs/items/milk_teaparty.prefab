@@ -116,6 +116,7 @@ MonoBehaviour:
     \uC218 \uC788\uC2B5\uB2C8\uB2E4."
   ignoreRaycast: 0
   ignoreRaycast_inSubCam: 0
+  highlightedIndependent: 0
 --- !u!1 &3538681523394009364
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,7 +127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4201925197698368430}
   - component: {fileID: 4457021880161690690}
-  - component: {fileID: 4457021880161690689}
+  - component: {fileID: 1065613393775178404}
   - component: {fileID: 4457021880161690688}
   - component: {fileID: 5663741907731505592}
   m_Layer: 6
@@ -166,7 +167,7 @@ CapsuleCollider:
   m_Height: 0.19
   m_Direction: 2
   m_Center: {x: -0.0000000020019542, y: 0, z: -0.01}
---- !u!114 &4457021880161690689
+--- !u!114 &1065613393775178404
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -175,18 +176,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 3538681523394009364}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b05621b9736e984499126ddd6384c893, type: 3}
+  m_Script: {fileID: 11500000, guid: dc8df983d4713ac45a82f0bc360ef700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   selectText: "\uD074\uB9AD\uD558\uC5EC \uC544\uC774\uD15C\uC744 \uD68D\uB4DD\uD560
     \uC218 \uC788\uC2B5\uB2C8\uB2E4."
   ignoreRaycast: 0
-  ignoreRaycast_inSubCam: 0
-  selectableObjects:
-  - {fileID: 4457021880256766703}
-  - {fileID: 4457021880849873784}
-  pickable: 1
+  ignoreRaycast_inSubCam: 1
+  highlightedIndependent: 0
   itemId: 3
+  saveKey: pickable_milk
+  eventFlow: 1
 --- !u!114 &4457021880161690688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,3 +336,4 @@ MonoBehaviour:
     \uC218 \uC788\uC2B5\uB2C8\uB2E4."
   ignoreRaycast: 0
   ignoreRaycast_inSubCam: 0
+  highlightedIndependent: 0
