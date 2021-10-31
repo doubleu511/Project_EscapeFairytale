@@ -19,11 +19,11 @@ public class RedShoes_AudioEvent : MonoBehaviour
         {
             case 0:
                 GameManager.PlaySFX(redShoesAudioSource, GameManager.Instance.audioBox.RedShoes_redshoes_walk1_left);
-                Camera.main.DOFieldOfView(Item_SizeChange.currentFOV, 0.2f).SetLoops(7, LoopType.Yoyo);
+                if(!GameManager.Instance.player.isSubCam) Camera.main.DOFieldOfView(Item_SizeChange.currentFOV, 0.2f).SetLoops(7, LoopType.Yoyo);
                 break;
             case 1:
                 GameManager.PlaySFX(redShoesAudioSource, GameManager.Instance.audioBox.RedShoes_redshoes_walk2_left);
-                Camera.main.DOFieldOfView(Item_SizeChange.currentFOV * 0.92f, 0.2f).SetLoops(2, LoopType.Yoyo);
+                if (!GameManager.Instance.player.isSubCam) Camera.main.DOFieldOfView(Item_SizeChange.currentFOV * 0.92f, 0.2f).SetLoops(2, LoopType.Yoyo);
                 break;
         }
     }
@@ -35,11 +35,11 @@ public class RedShoes_AudioEvent : MonoBehaviour
         {
             case 0:
                 GameManager.PlaySFX(redShoesAudioSource, GameManager.Instance.audioBox.RedShoes_redshoes_walk1_right);
-                Camera.main.DOFieldOfView(Item_SizeChange.currentFOV, 0.2f).SetLoops(7, LoopType.Yoyo);
+                if (!GameManager.Instance.player.isSubCam) Camera.main.DOFieldOfView(Item_SizeChange.currentFOV, 0.2f).SetLoops(7, LoopType.Yoyo);
                 break;
             case 1:
                 GameManager.PlaySFX(redShoesAudioSource, GameManager.Instance.audioBox.RedShoes_redshoes_walk2_right);
-                Camera.main.DOFieldOfView(Item_SizeChange.currentFOV, 0.2f).SetLoops(2, LoopType.Yoyo);
+                if (!GameManager.Instance.player.isSubCam) Camera.main.DOFieldOfView(Item_SizeChange.currentFOV, 0.2f).SetLoops(2, LoopType.Yoyo);
                 break;
         }
     }
