@@ -19,6 +19,10 @@ public class AudioBox : ScriptableObject
     public AudioClip object_drawer_open;
     public AudioClip object_drawer_close;
     public AudioClip object_coffer_tick;
+    public AudioClip object_coffer_open;
+    public AudioClip object_coffer_wrong;
+    public AudioClip object_coffer_correct;
+    public AudioClip object_coffer_light_on;
 
     public AudioClip RedShoes_redshoes_walk1_left;
     public AudioClip RedShoes_redshoes_walk1_right;

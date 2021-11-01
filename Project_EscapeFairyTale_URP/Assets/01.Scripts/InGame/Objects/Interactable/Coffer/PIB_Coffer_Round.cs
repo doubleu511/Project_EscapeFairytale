@@ -46,7 +46,6 @@ public class PIB_Coffer_Round : SelectableObject
     public Transform round_dummy;
 
     private AudioSource tick_audioSource;
-    private AudioSource coffer_audioSource;
 
     protected override void Awake()
     {
@@ -170,6 +169,7 @@ public class PIB_Coffer_Round : SelectableObject
     void ColorSelect(PIB_Coffer_Color color)
     {
         input[index] = color;
+        GameManager.PlaySFX(handle.coffer_audioSource, GameManager.Instance.audioBox.object_coffer_light_on);
         highlightTips[index].DOColor(highlightColor[(int)color], 1).OnComplete(() =>
         {
             if(index == 4)
@@ -186,6 +186,8 @@ public class PIB_Coffer_Round : SelectableObject
         {
             if (input[i] != answer[i])
             {
+                GameManager.PlaySFX(handle.coffer_audioSource, GameManager.Instance.audioBox.object_coffer_wrong);
+
                 Sequence seq = DOTween.Sequence();
                 foreach (Image item in highlightTips)
                 {
@@ -205,6 +207,7 @@ public class PIB_Coffer_Round : SelectableObject
             }
         }
 
+        GameManager.PlaySFX(handle.coffer_audioSource, GameManager.Instance.audioBox.object_coffer_correct);
         foreach (Image item in highlightTips)
         {
             item.DOColor(new Color(0.5f, 1, 0), 0.5f).OnComplete(() =>

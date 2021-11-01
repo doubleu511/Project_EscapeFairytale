@@ -25,6 +25,10 @@ MonoBehaviour:
   object_drawer_open: {fileID: 8300000, guid: 9401b559888858c4d997be807f480d24, type: 3}
   object_drawer_close: {fileID: 8300000, guid: c60d8eba68d6a87409265a9d769a30f0, type: 3}
   object_coffer_tick: {fileID: 8300000, guid: bfbc79a88ad4d3d4981ef306ff7513e9, type: 3}
+  object_coffer_open: {fileID: 8300000, guid: b76fce30cba1cfe44851254767b34a36, type: 3}
+  object_coffer_wrong: {fileID: 8300000, guid: 93a9e8c3b1daae64d9e48f37c0bc330c, type: 3}
+  object_coffer_correct: {fileID: 8300000, guid: 4ddfb422e7223cb40904178e0058e902, type: 3}
+  object_coffer_light_on: {fileID: 8300000, guid: 18b065f7f1c9e9d48841489f1d402e6d, type: 3}
   RedShoes_redshoes_walk1_left: {fileID: 8300000, guid: 058131ebebadeeb4a8def027724f1f10, type: 3}
   RedShoes_redshoes_walk1_right: {fileID: 8300000, guid: 8da1f4db99319d84f85597bcb6a52f7a, type: 3}
   RedShoes_redshoes_walk2_left: {fileID: 8300000, guid: c3d90241b6860934c92269292b89ec87, type: 3}
