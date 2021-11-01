@@ -45,6 +45,15 @@ public class PIB_Coffer_Round : SelectableObject
 
     public Transform round_dummy;
 
+    private AudioSource tick_audioSource;
+    private AudioSource coffer_audioSource;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        tick_audioSource = GetComponent<AudioSource>();
+    }
+
     public override void OnHighlighted(string text)
     {
         base.OnHighlighted(text);
@@ -103,6 +112,11 @@ public class PIB_Coffer_Round : SelectableObject
 
             if (beforeAngle != intAngle)
             {
+                if (!tick_audioSource.isPlaying)
+                {
+                    GameManager.PlaySFX(tick_audioSource, GameManager.Instance.audioBox.object_coffer_tick);
+                }
+
                 switch (intAngle)
                 {
                     case 360:
@@ -145,7 +159,6 @@ public class PIB_Coffer_Round : SelectableObject
             {
                 if (index < 4)
                 {
-                    print("aasdasd");
                     ColorSelect(currentColor);
                 }
             }
