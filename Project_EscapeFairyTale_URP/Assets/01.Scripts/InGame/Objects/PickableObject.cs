@@ -31,6 +31,14 @@ public class PickableObject : SelectableObject, ISaveAble
         }
     }
 
+    public void Drop()
+    {
+        _eventFlow = 1;
+        TempSave();
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.AddForce(Camera.main.transform.forward * 4, ForceMode.Impulse);
+    }
+
     public void TempSave()
     {
         if (saveKey != "")
@@ -42,8 +50,7 @@ public class PickableObject : SelectableObject, ISaveAble
     public void Load()
     {
         eventFlow = GameManager.saveDic[saveKey];
-
-        if(eventFlow == 0)
+        if (eventFlow == 0)
         {
             gameObject.SetActive(false);
             Invoke("DestroyObj", 0.5f);

@@ -37,10 +37,10 @@ MonoBehaviour:
     itemSprite: {fileID: 3492676253985515005, guid: dbc4b42acd7b199428008c3376c46a71, type: 3}
     itemPrefab: {fileID: 3538681523394009364, guid: c446e184860629c409f037d7786986f2, type: 3}
   - itemId: 4
-    itemName: "\uCD98\uC2DD\uC774"
-    itemLore: "\uC59C \uB610 \uBB50\uC57C"
+    itemName: "\uD558\uD2B8"
+    itemLore: "\uC598 \uBB50\uC784?"
     itemSprite: {fileID: 21300000, guid: 0c59d6948dc26e747984046246361a31, type: 3}
-    itemPrefab: {fileID: 5297122527182146686, guid: aad592b5934fcb5419192b88e58be15b, type: 3}
+    itemPrefab: {fileID: 7472634975567867322, guid: cfa5a049f2955c941856e62934bf5893, type: 3}
   - itemId: 5
     itemName: "\uB77C\uC774\uC5B82"
     itemLore: "\uC59C \uB610 \uBB50\uC57C!"
