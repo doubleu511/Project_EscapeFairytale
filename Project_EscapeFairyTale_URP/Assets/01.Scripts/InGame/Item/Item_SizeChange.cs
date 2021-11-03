@@ -10,6 +10,7 @@ public class Item_SizeChange : MonoBehaviour
     private float[] sizeScaleValues = new float[3] { 0.033f, 1f, 5f };
     public static int currentFOV = 70;
     private int[] FOVValues = new int[3] { 50, 70, 70 };
+    private float[] stepOffsets = new float[3] { 0.05f, 0.25f, 0.25f };
 
     public void OnUseBig()
     {
@@ -20,6 +21,7 @@ public class Item_SizeChange : MonoBehaviour
             sizeValueRaw++;
             currentSize = sizeScaleValues[sizeValueRaw + 1];
             currentFOV = FOVValues[sizeValueRaw + 1];
+            GameManager.Instance.player.GetComponent<CharacterController>().stepOffset = stepOffsets[sizeValueRaw + 1];
             UIManager.Tip_SizeChange(sizeValueRaw + 1);
 
             GameManager.Instance.player.transform.DOScale(currentSize, 2).SetUpdate(UpdateType.Fixed);
@@ -41,6 +43,7 @@ public class Item_SizeChange : MonoBehaviour
             sizeValueRaw--;
             currentSize = sizeScaleValues[sizeValueRaw + 1];
             currentFOV = FOVValues[sizeValueRaw + 1];
+            GameManager.Instance.player.GetComponent<CharacterController>().stepOffset = stepOffsets[sizeValueRaw + 1];
             UIManager.Tip_SizeChange(sizeValueRaw + 1);
 
             GameManager.Instance.player.transform.DOScale(currentSize, 2).SetUpdate(UpdateType.Fixed);
