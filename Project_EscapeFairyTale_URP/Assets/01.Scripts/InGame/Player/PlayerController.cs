@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public bool isSubCam = false;
     public PlayerState playerState = PlayerState.NORMAL;
     public float speed = 5;
+    public float jumpSpeed = 5;
     public float gravity = -9.81f;
 
     public const int cameraDefaultFOV = 70;
@@ -39,7 +40,10 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            yVelocity = 0;
+            if (yVelocity < 0)
+            {
+                yVelocity = 0;
+            }
         }
 
         //--- 이동 ----
@@ -51,8 +55,19 @@ public class PlayerController : MonoBehaviour
 
         dir = transform.TransformDirection(dir);
         dir.Normalize();
-        dir.y = yVelocity;
 
+
+        //--- 점프 ----
+
+        bool jump = Input.GetKeyDown(KeyCode.Space) && Item_SizeChange.sizeValueRaw == -1;
+
+        if(jump)
+        {
+            Debug.Log("점프");
+            yVelocity = jumpSpeed;
+        }
+
+        dir.y = yVelocity;
         cc.Move(dir * speed * ScaleToSpeed() * Time.deltaTime);
     }
 

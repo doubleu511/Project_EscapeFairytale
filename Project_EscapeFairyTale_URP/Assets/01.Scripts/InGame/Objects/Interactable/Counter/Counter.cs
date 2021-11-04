@@ -30,4 +30,9 @@ public class Counter : MonoBehaviour
     {
         parentModule.AnswerCheck();
     }
+
+    public void Refresh()
+    {
+        if (countText != null) countText.text = index.ToString();
+    }
 }

@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
         Instance.defaultSFXSource.PlayOneShot(clip, volume);
     }
 
-    [ContextMenu("saveTest")]
+    [ContextMenu("DataLog")]
     public void SaveLog()
     {
         string a = JsonUtility.ToJson(new Serialization<string, int>(saveDic));

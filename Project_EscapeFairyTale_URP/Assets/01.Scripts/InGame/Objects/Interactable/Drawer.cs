@@ -45,7 +45,7 @@ public class Drawer : SelectableObject_Parent
             {
                 if (GameManager.Instance.selectedItemId == requireItemId)
                 {
-                    Unlock();
+                    Unlock(true);
                     if (isItemBroke)
                     {
                         GameManager.Instance.inventoryManager.DecreaseTab(GameManager.Instance.selectedTab.tabId);
@@ -74,10 +74,11 @@ public class Drawer : SelectableObject_Parent
         }
     }
 
-    public void Unlock()
+    public void Unlock(bool soundPlay)
     {
         isLocked = false;
         selectText = unlockTxt;
-        GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_unlock);
+
+        if(soundPlay) GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_unlock);
     }
 }

@@ -62,6 +62,8 @@ public class UIManager : MonoBehaviour
     {
         if(!instance)
         instance = this;
+
+        mainCamera = Camera.main;
     }
 
     private void Start()
@@ -96,8 +98,6 @@ public class UIManager : MonoBehaviour
         {
             LetterUIClose();
         });
-
-        mainCamera = Camera.main;
         subCamera_Back.onClick.AddListener(ChangeToMainCamera);
     }
 
