@@ -11,6 +11,7 @@ public class Item_SizeChange : MonoBehaviour
     public static int currentFOV = 70;
     private int[] FOVValues = new int[3] { 50, 70, 70 };
     private float[] stepOffsets = new float[3] { 0.05f, 0.25f, 0.25f };
+    public static float[] dropItemSizeScale = new float[3] { 0.4f, 1f, 5f };
 
     public void OnUseBig()
     {

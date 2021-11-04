@@ -31,12 +31,14 @@ public class PickableObject : SelectableObject, ISaveAble
         }
     }
 
-    public void Drop()
+    public GameObject Drop()
     {
         _eventFlow = 1;
         TempSave();
         Rigidbody rb = GetComponent<Rigidbody>();
-        rb.AddForce(Camera.main.transform.forward * 4, ForceMode.Impulse);
+        rb.AddForce(Camera.main.transform.forward * 2 * transform.localScale.x, ForceMode.Impulse);
+
+        return this.gameObject;
     }
 
     public void TempSave()

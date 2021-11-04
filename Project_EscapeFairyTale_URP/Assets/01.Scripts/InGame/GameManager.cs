@@ -66,6 +66,13 @@ public class GameManager : MonoBehaviour
         // 이거 말고도, 플레이어 인벤토리와 플레이어 위치를 저장해야한다.
         string json = JsonUtility.ToJson(new Serialization<string, int>(saveDic));
         SecurityPlayerPrefs.SetString("object-save", json);
+        SecurityPlayerPrefs.SetString("playerPos-save", $"{player.transform.position.x} {player.transform.position.y} {player.transform.position.z}");
+        SecurityPlayerPrefs.SetString("playerInventory-save",
+            $"{inventoryManager.tabs[0].itemId} {inventoryManager.tabs[1].itemId} {inventoryManager.tabs[2].itemId}" +
+            $" {inventoryManager.tabs[3].itemId} {inventoryManager.tabs[4].itemId} {inventoryManager.tabs[5].itemId}");
+        SecurityPlayerPrefs.SetString("playerInventoryCount-save",
+            $"{inventoryManager.tabs[0].itemCount} {inventoryManager.tabs[1].itemCount} {inventoryManager.tabs[2].itemCount}" +
+            $" {inventoryManager.tabs[3].itemCount} {inventoryManager.tabs[4].itemCount} {inventoryManager.tabs[5].itemCount}");
         print("Save Complete");
     }
 
@@ -74,6 +81,25 @@ public class GameManager : MonoBehaviour
     {
         string json = SecurityPlayerPrefs.GetString("object-save", "{}");
         saveDic = JsonUtility.FromJson<Serialization<string, int>>(json).ToDictionary();
+
+        string playerPos = SecurityPlayerPrefs.GetString("playerPos-save", "1.27 0.102 4.44");
+        string[] poses = playerPos.Split(' ');
+        player.transform.position = new Vector3(float.Parse(poses[0]), float.Parse(poses[1]), float.Parse(poses[2]));
+
+        string playerItem = SecurityPlayerPrefs.GetString("playerInventory-save", "-1 -1 -1 -1 -1 -1");
+        string[] items = playerItem.Split(' ');
+        for(int i = 0;i<items.Length;i++)
+        {
+            inventoryManager.tabs[i].itemId = int.Parse(items[i]);
+        }
+
+        string playerItemCount = SecurityPlayerPrefs.GetString("playerInventoryCount-save", "-1 -1 -1 -1 -1 -1");
+        string[] itemCounts = playerItemCount.Split(' ');
+        for (int i = 0; i < items.Length; i++)
+        {
+            inventoryManager.tabs[i].itemCount = int.Parse(itemCounts[i]);
+        }
+
         print("Load Complete");
     }
 
@@ -81,6 +107,9 @@ public class GameManager : MonoBehaviour
     void DataReset()
     {
         SecurityPlayerPrefs.SetString("object-save", "{}");
+        SecurityPlayerPrefs.SetString("playerPos-save", "1.27 0.102 4.44");
+        SecurityPlayerPrefs.SetString("playerInventory-save", "-1 -1 -1 -1 -1 -1");
+        SecurityPlayerPrefs.SetString("playerInventoryCount-save", "-1 -1 -1 -1 -1 -1");
         print("Reset Complete");
     }
 
