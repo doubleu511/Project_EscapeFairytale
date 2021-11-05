@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     public Color color_anim1 = Color.red;
     public Color color_anim2 = Color.red;
 
-    public static Dictionary<string, int> saveDic = new Dictionary<string, int>();
+    public static Dictionary<string, string> saveDic = new Dictionary<string, string>();
 
     private void Awake()
     {
@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
     void DataSave()
     {
         // 이거 말고도, 플레이어 인벤토리와 플레이어 위치를 저장해야한다.
-        string json = JsonUtility.ToJson(new Serialization<string, int>(saveDic));
+        string json = JsonUtility.ToJson(new Serialization<string, string>(saveDic));
         SecurityPlayerPrefs.SetString("object-save", json);
         SecurityPlayerPrefs.SetString("playerPos-save", $"{player.transform.position.x} {player.transform.position.y} {player.transform.position.z}");
         SecurityPlayerPrefs.SetString("playerInventory-save",
@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
     void DataLoad()
     {
         string json = SecurityPlayerPrefs.GetString("object-save", "{}");
-        saveDic = JsonUtility.FromJson<Serialization<string, int>>(json).ToDictionary();
+        saveDic = JsonUtility.FromJson<Serialization<string, string>>(json).ToDictionary();
 
         string playerPos = SecurityPlayerPrefs.GetString("playerPos-save", "1.27 0.102 4.44");
         string[] poses = playerPos.Split(' ');
@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
     [ContextMenu("DataLog")]
     public void SaveLog()
     {
-        string a = JsonUtility.ToJson(new Serialization<string, int>(saveDic));
+        string a = JsonUtility.ToJson(new Serialization<string, string>(saveDic));
         print(a);
     }
 }

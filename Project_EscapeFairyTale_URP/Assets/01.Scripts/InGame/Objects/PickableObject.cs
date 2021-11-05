@@ -6,10 +6,15 @@ public class PickableObject : SelectableObject, ISaveAble
 {
     public int itemId;
 
+    [HideInInspector]
+    public ItemPlacer itemPlacer;
+    [HideInInspector]
+    public int itemPlaceIndex;
+
     [Header("Save")]
     public string saveKey;
-    private int _eventFlow = 1;
-    public int eventFlow { get { return _eventFlow; }
+    private string _eventFlow = "true";
+    public string eventFlow { get { return _eventFlow; }
         set {
             if (_eventFlow != value)
             {
@@ -17,23 +22,26 @@ public class PickableObject : SelectableObject, ISaveAble
                 TempSave();
             }
         }
-    } // 1이면 오브젝트가 켜진것, 0이면 꺼진것 
+    } // true이면 오브젝트가 켜진것, false이면 꺼진것 
 
     protected void Start()
     {
-        if(!GameManager.saveDic.ContainsKey(saveKey))
+        if (saveKey != "")
         {
-            GameManager.saveDic.Add(saveKey, eventFlow);
-        }
-        else
-        {
-            Load();
+            if (!GameManager.saveDic.ContainsKey(saveKey))
+            {
+                GameManager.saveDic.Add(saveKey, eventFlow);
+            }
+            else
+            {
+                Load();
+            }
         }
     }
 
     public GameObject Drop()
     {
-        _eventFlow = 1;
+        _eventFlow = "true";
         TempSave();
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.AddForce(Camera.main.transform.forward * 2 * transform.localScale.x, ForceMode.Impulse);
@@ -52,7 +60,7 @@ public class PickableObject : SelectableObject, ISaveAble
     public void Load()
     {
         eventFlow = GameManager.saveDic[saveKey];
-        if (eventFlow == 0)
+        if (!bool.Parse(eventFlow))
         {
             gameObject.SetActive(false);
             Invoke("DestroyObj", 0.5f);
@@ -74,7 +82,11 @@ public class PickableObject : SelectableObject, ISaveAble
             }
             base.OnDisHighlighted();
             GameManager.Instance.inventoryManager.SelectedItemRefresh();
-            eventFlow = 0;
+            eventFlow = "false";
+            if (itemPlacer != null)
+            {
+                itemPlacer.placeAbles[itemPlaceIndex] = true;
+            }
             gameObject.SetActive(false);
             Invoke("DestroyObj", 0.5f);
             GameManager.Instance.inventoryManager.TIP_ItemGotTipAppear(GameManager.Instance.itemData.infos[itemId].itemSprite);

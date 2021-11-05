@@ -30,7 +30,7 @@ public class NumberMatchModule : Module
             if (numbers[i].index != answers[i]) return;
         }
 
-        eventFlow = 1;
+        eventFlow = "unlock";
         correctEvent.Invoke();
         isTrigger = true;
     }
@@ -38,7 +38,7 @@ public class NumberMatchModule : Module
     public override void Load()
     {
         eventFlow = GameManager.saveDic[saveKey];
-        if (eventFlow == 1)
+        if (eventFlow.Equals("unlock"))
         {
             loadEvent.Invoke();
 

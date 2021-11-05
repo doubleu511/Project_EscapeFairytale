@@ -155,6 +155,11 @@ public class TabScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IDropHa
                 GameManager.Instance.selectedItemId = itemId;
                 GameManager.Instance.inventoryManager.tabClickCount = 0;
                 GameManager.Instance.selectedTab = this;
+
+                if (PlayerAction.currentObj != null)
+                {
+                    PlayerAction.currentObj.GetComponent<SelectableObject>().OnHighlighted(PlayerAction.currentObj.GetComponent<SelectableObject>().selectText);
+                }
             }
             GameManager.Instance.inventoryManager.SelectedItemRefresh();
 

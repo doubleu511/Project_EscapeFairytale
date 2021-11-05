@@ -38,14 +38,13 @@ public class PlayerAction : MonoBehaviour
 
                 if ((!GameManager.Instance.player.isSubCam && !obj.ignoreRaycast) || (GameManager.Instance.player.isSubCam && !obj.ignoreRaycast_inSubCam))
                 {
-                    obj.OnHighlighted(obj.selectText);
-
-                    if (currentObj != hit.collider.gameObject)
+                    if (currentObj != obj.gameObject)
                     {
                         if (currentObj != null)
                         {
                             currentObj.GetComponent<SelectableObject>().OnDisHighlighted();
                         }
+                        obj.OnHighlighted(obj.selectText);
                         currentObj = hit.collider.gameObject;
                     }
                 }

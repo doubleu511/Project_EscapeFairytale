@@ -6,8 +6,8 @@ public class Module : MonoBehaviour, ISaveAble
 {
     [Header("Save")]
     public string saveKey;
-    private int _eventFlow = 0;
-    public int eventFlow
+    private string _eventFlow = "lock";
+    public string eventFlow
     {
         get { return _eventFlow; }
         set
