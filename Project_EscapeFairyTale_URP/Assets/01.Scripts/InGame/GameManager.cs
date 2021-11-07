@@ -82,7 +82,8 @@ public class GameManager : MonoBehaviour
         string json = SecurityPlayerPrefs.GetString("object-save", "{}");
         saveDic = JsonUtility.FromJson<Serialization<string, string>>(json).ToDictionary();
 
-        string playerPos = SecurityPlayerPrefs.GetString("playerPos-save", "1.27 0.102 4.44");
+        Vector3 playerVec = GameObject.Find("Player").transform.position;
+        string playerPos = SecurityPlayerPrefs.GetString("playerPos-save", $"{playerVec.x} {playerVec.y} {playerVec.z}");
         string[] poses = playerPos.Split(' ');
         player.transform.position = new Vector3(float.Parse(poses[0]), float.Parse(poses[1]), float.Parse(poses[2]));
 
@@ -107,7 +108,8 @@ public class GameManager : MonoBehaviour
     void DataReset()
     {
         SecurityPlayerPrefs.SetString("object-save", "{}");
-        SecurityPlayerPrefs.SetString("playerPos-save", "1.27 0.102 4.44");
+        Vector3 playerVec = GameObject.Find("Player").transform.position;
+        SecurityPlayerPrefs.SetString("playerPos-save", $"{playerVec.x} {playerVec.y} {playerVec.z}");
         SecurityPlayerPrefs.SetString("playerInventory-save", "-1 -1 -1 -1 -1 -1");
         SecurityPlayerPrefs.SetString("playerInventoryCount-save", "-1 -1 -1 -1 -1 -1");
         print("Reset Complete");
