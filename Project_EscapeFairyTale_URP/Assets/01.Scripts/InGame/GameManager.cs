@@ -55,9 +55,6 @@ public class GameManager : MonoBehaviour
     {
         color_select = color_anim1;
         ColorChange(false);
-
-        MouseEvent.MouseLock(false);
-        UIManager.ChangeToSubCamera(Vector3.one, Quaternion.Euler(0,0,0));
     }
 
     [ContextMenu("Save")]
