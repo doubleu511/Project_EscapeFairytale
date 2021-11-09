@@ -5,4 +5,6 @@ using UnityEngine;
 public class SpriteBox : ScriptableObject
 {
     public Sprite Reason_Shoes;
+    [Header("MainMenu-Game")]
+    public Sprite NewGame;
 }

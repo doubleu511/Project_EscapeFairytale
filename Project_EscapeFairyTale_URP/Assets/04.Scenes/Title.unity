@@ -10561,6 +10561,7 @@ GameObject:
   - component: {fileID: 516688391}
   - component: {fileID: 516688392}
   - component: {fileID: 516688393}
+  - component: {fileID: 516688394}
   m_Layer: 5
   m_Name: GameStartPanel
   m_TagString: Untagged
@@ -10624,6 +10625,23 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &516688394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516688390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5a2e6e8012587949808b2ad209fb73c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenShot: {fileID: 1793835617}
+  dateTimeText: {fileID: 2036496208}
+  spriteBox: {fileID: 11400000, guid: 87b442a22d7480941b08a4494e38df35, type: 2}
+  newGameButton: {fileID: 584387529}
+  loadGameButton: {fileID: 1927634953}
 --- !u!1001 &522411349
 PrefabInstance:
   m_ObjectHideFlags: 0

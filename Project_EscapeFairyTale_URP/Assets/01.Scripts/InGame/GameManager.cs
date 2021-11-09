@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
             $" {inventoryManager.tabs[3].itemCount} {inventoryManager.tabs[4].itemCount} {inventoryManager.tabs[5].itemCount}");
         print("Save Complete");
         SecurityPlayerPrefs.SetBool("saved-file-exists", true);
+        SecurityPlayerPrefs.SetString("saved-dateTime", DateTime.Now.ToString());
     }
 
     [ContextMenu("Load")]
@@ -111,7 +112,14 @@ public class GameManager : MonoBehaviour
         SecurityPlayerPrefs.SetString("playerInventory-save", "-1 -1 -1 -1 -1 -1");
         SecurityPlayerPrefs.SetString("playerInventoryCount-save", "-1 -1 -1 -1 -1 -1");
         SecurityPlayerPrefs.SetBool("saved-file-exists", false);
+        SecurityPlayerPrefs.SetString("saved-dateTime", "");
         print("Reset Complete");
+    }
+
+    [ContextMenu("ScreenShot")]
+    void ScreenShot()
+    {
+        Screenshot.TakeScreenshot_();
     }
 
     private void ColorChange(bool start)
