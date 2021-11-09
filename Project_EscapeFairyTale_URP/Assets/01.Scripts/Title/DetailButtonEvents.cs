@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DetailButtonEvents : MonoBehaviour
+public class DetailButtonEvents : MonoBehaviour, IPointerEnterHandler
 {
     private Button myBtn;
 
@@ -18,14 +19,25 @@ public class DetailButtonEvents : MonoBehaviour
 
     void Start()
     {
-        myBtn.onClick.AddListener(() =>
+        if (detail != null)
         {
-            detailTitleText.text = title;
-            foreach(GameObject item in TitleManager.Instance.moreDetailPanels)
+            myBtn.onClick.AddListener(() =>
             {
-                item.SetActive(false);
-            }
-            detail.SetActive(true);
-        }); 
+                detailTitleText.text = title;
+                foreach (GameObject item in TitleManager.Instance.moreDetailPanels)
+                {
+                    if (item.activeInHierarchy)
+                    {
+                        item.SetActive(false);
+                    }
+                }
+                detail.SetActive(true);
+            });
+        }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        TitleManager.PlaySFX(TitleManager.Instance.audioBox.ui_tapSound);
     }
 }

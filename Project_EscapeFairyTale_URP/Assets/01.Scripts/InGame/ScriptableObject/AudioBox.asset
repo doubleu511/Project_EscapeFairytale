@@ -33,3 +33,7 @@ MonoBehaviour:
   RedShoes_redshoes_walk1_right: {fileID: 8300000, guid: 8da1f4db99319d84f85597bcb6a52f7a, type: 3}
   RedShoes_redshoes_walk2_left: {fileID: 8300000, guid: c3d90241b6860934c92269292b89ec87, type: 3}
   RedShoes_redshoes_walk2_right: {fileID: 8300000, guid: 7204d3bd4be0beb4899e53206522cdbf, type: 3}
+  ui_menu_select: {fileID: 8300000, guid: 5200a2e5276d8c44588750b52aa23c60, type: 3}
+  ui_game_start: {fileID: 8300000, guid: 52392a54bb6b0ab4e95bf9ececeacfa0, type: 3}
+  ui_module_clear: {fileID: 8300000, guid: 0549bb35761b8764e971fe19277ebbc4, type: 3}
+  ui_tapSound: {fileID: 8300000, guid: 06dd52295d5c6334ca26dac34870c8dd, type: 3}

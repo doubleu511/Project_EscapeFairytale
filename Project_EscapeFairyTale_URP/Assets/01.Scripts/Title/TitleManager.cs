@@ -15,6 +15,10 @@ public class TitleManager : MonoBehaviour
     public GameObject[] moreDetailPanels;
     public VolumeProfile urpSettings;
 
+    [Header("AudioSource")]
+    public AudioSource defaultSFXSource;
+    public AudioBox audioBox;
+
     private bool isOpened = false;
     private Tween urpVignetteTween;
     private Tween urpVignetteTween2;
@@ -31,21 +35,21 @@ public class TitleManager : MonoBehaviour
     {
         if(isOpened)
         {
-            detailPanel.DOFade(0, 0.25f).OnComplete(() =>
+            detailPanel.DOFade(0, 1f).OnComplete(() =>
             {
                 MainTab(index);
-                detailPanel.DOFade(1, 0.4f);
+                detailPanel.DOFade(1, 0.5f);
             });
         }
         else
         {
             MainTab(index);
-            detailPanel.DOFade(1, 0.4f);
+            detailPanel.DOFade(1, 0.5f);
         }
 
         isOpened = true;
         URPVignetteTween(new Color(37f / 255, 13f / 255, 12f / 255), 0.2f, 3);
-        // »ç¿îµå
+        PlaySFX(audioBox.ui_menu_select, 0.5f);
     }
 
     public void MainTab(int index)
@@ -84,5 +88,10 @@ public class TitleManager : MonoBehaviour
              {
                  urpVignetteTween2 = DOTween.To(() => vignette.color.value, value => vignette.color.value = value, Color.black, outro);
              });
+    }
+
+    public static void PlaySFX(AudioClip clip, float volume = 1)
+    {
+        Instance.defaultSFXSource.PlayOneShot(clip, volume);
     }
 }

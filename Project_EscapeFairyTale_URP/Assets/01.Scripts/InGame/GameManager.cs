@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
             $"{inventoryManager.tabs[0].itemCount} {inventoryManager.tabs[1].itemCount} {inventoryManager.tabs[2].itemCount}" +
             $" {inventoryManager.tabs[3].itemCount} {inventoryManager.tabs[4].itemCount} {inventoryManager.tabs[5].itemCount}");
         print("Save Complete");
+        SecurityPlayerPrefs.SetBool("saved-file-exists", true);
     }
 
     [ContextMenu("Load")]
@@ -109,6 +110,7 @@ public class GameManager : MonoBehaviour
         SecurityPlayerPrefs.SetString("playerPos-save", $"{playerVec.x} {playerVec.y} {playerVec.z}");
         SecurityPlayerPrefs.SetString("playerInventory-save", "-1 -1 -1 -1 -1 -1");
         SecurityPlayerPrefs.SetString("playerInventoryCount-save", "-1 -1 -1 -1 -1 -1");
+        SecurityPlayerPrefs.SetBool("saved-file-exists", false);
         print("Reset Complete");
     }
 

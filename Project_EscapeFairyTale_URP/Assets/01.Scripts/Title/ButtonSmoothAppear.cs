@@ -27,6 +27,7 @@ public class ButtonSmoothAppear : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        TitleManager.PlaySFX(TitleManager.Instance.audioBox.ui_tapSound);
         myImg.DOColor(gotoColor, duration);
     }
 
