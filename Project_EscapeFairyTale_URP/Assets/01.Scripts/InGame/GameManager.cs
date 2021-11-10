@@ -5,12 +5,16 @@ using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Events;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
      public bool isGameOver = false;
+
+
+    public readonly static Vector3 playerDefaultPos = new Vector3(-5.71f, 0.14f, 5.8f);
 
     [Header("Management")]
     public InventoryManager inventoryManager;
@@ -58,7 +62,7 @@ public class GameManager : MonoBehaviour
     }
 
     [ContextMenu("Save")]
-    void DataSave()
+    public void DataSave()
     {
         // 이거 말고도, 플레이어 인벤토리와 플레이어 위치를 저장해야한다.
         string json = JsonUtility.ToJson(new Serialization<string, string>(saveDic));
@@ -70,13 +74,14 @@ public class GameManager : MonoBehaviour
         SecurityPlayerPrefs.SetString("playerInventoryCount-save",
             $"{inventoryManager.tabs[0].itemCount} {inventoryManager.tabs[1].itemCount} {inventoryManager.tabs[2].itemCount}" +
             $" {inventoryManager.tabs[3].itemCount} {inventoryManager.tabs[4].itemCount} {inventoryManager.tabs[5].itemCount}");
-        print("Save Complete");
         SecurityPlayerPrefs.SetBool("saved-file-exists", true);
         SecurityPlayerPrefs.SetString("saved-dateTime", DateTime.Now.ToString());
+        Screenshot.TakeScreenshot();
+        print("Save Complete");
     }
 
     [ContextMenu("Load")]
-    void DataLoad()
+    public void DataLoad()
     {
         string json = SecurityPlayerPrefs.GetString("object-save", "{}");
         saveDic = JsonUtility.FromJson<Serialization<string, string>>(json).ToDictionary();
@@ -104,22 +109,39 @@ public class GameManager : MonoBehaviour
     }
 
     [ContextMenu("Reset")]
-    void DataReset()
+    public void debug_Reset()
+    {
+        DataReset();
+    }
+
+    public static void DataReset()
     {
         SecurityPlayerPrefs.SetString("object-save", "{}");
-        Vector3 playerVec = GameObject.Find("Player").transform.position;
+
+        GameObject _player = GameObject.Find("Player");
+        if(_player)
+        {
+            Vector3 playerVec = _player.transform.position;
         SecurityPlayerPrefs.SetString("playerPos-save", $"{playerVec.x} {playerVec.y} {playerVec.z}");
+        }
+        else
+        {
+            SecurityPlayerPrefs.SetString("playerPos-save", $"{playerDefaultPos.x} {playerDefaultPos.y} {playerDefaultPos.z}");
+        }
+
         SecurityPlayerPrefs.SetString("playerInventory-save", "-1 -1 -1 -1 -1 -1");
         SecurityPlayerPrefs.SetString("playerInventoryCount-save", "-1 -1 -1 -1 -1 -1");
         SecurityPlayerPrefs.SetBool("saved-file-exists", false);
+
+        string path = Application.dataPath;
+        path = Path.Combine(path, "../sc/saved.png");
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+        }
+
         SecurityPlayerPrefs.SetString("saved-dateTime", "");
         print("Reset Complete");
-    }
-
-    [ContextMenu("ScreenShot")]
-    void ScreenShot()
-    {
-        Screenshot.TakeScreenshot_();
     }
 
     private void ColorChange(bool start)

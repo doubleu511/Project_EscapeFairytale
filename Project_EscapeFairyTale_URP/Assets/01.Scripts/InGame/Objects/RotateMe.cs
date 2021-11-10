@@ -4,23 +4,35 @@ using UnityEngine;
 
 public class RotateMe : MonoBehaviour
 {
+    public bool isMainTitleCamera;
+
     [SerializeField] private Vector3 rotate;
     private bool isTurn = false;
 
     private void Start()
     {
-        StartCoroutine(Turn());
+        if (isMainTitleCamera)
+        {
+            StartCoroutine(Turn());
+        }
     }
 
     void Update()
     {
-        if (!isTurn)
+        if (isMainTitleCamera)
         {
-            transform.Rotate(new Vector3(rotate.x, rotate.y, 0) * Time.deltaTime);
+            if (!isTurn)
+            {
+                transform.Rotate(new Vector3(rotate.x, rotate.y, 0) * Time.deltaTime);
+            }
+            else
+            {
+                transform.Rotate(new Vector3(-rotate.x, rotate.y, 0) * Time.deltaTime);
+            }
         }
         else
         {
-            transform.Rotate(new Vector3(-rotate.x, rotate.y, 0) * Time.deltaTime);
+            transform.Rotate(rotate * Time.deltaTime);
         }
     }
 
