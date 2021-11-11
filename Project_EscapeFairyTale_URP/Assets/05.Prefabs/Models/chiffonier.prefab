@@ -340,7 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5012638, g: 0.5402956, b: 0.5943396, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -695,6 +695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -1027,7 +1028,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b1ae35907fe3dd346816dd30ce446e66, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b541beb77e9b0a54c9bf5c342b60f6a1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1290,7 +1291,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b541beb77e9b0a54c9bf5c342b60f6a1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b1ae35907fe3dd346816dd30ce446e66, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1403,6 +1404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -1425,7 +1427,7 @@ MonoBehaviour:
   - {fileID: 438429043}
   - {fileID: 409981133}
   - {fileID: 1444339200}
-  answers: 00000000050000000100000001000000
+  answers: 06000000020000000500000000000000
   correctEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1526,8 +1528,8 @@ MonoBehaviour:
   - {fileID: 2837962417995599327}
   - {fileID: 2966472611727687760}
   isSubCameraMove: 1
-  movePos: {x: 6.1974, y: 0.4515, z: 2.23}
-  moveRot: {x: 0, y: 180, z: 0}
+  movePos: {x: -5.324, y: 0.605, z: 9.1986}
+  moveRot: {x: 0, y: 0, z: 0}
 --- !u!65 &540037831
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1559,6 +1561,8 @@ MonoBehaviour:
   ignoreRaycast_inSubCam: 1
   highlightedIndependent: 0
   itemId: 2
+  itemPlacer: {fileID: 0}
+  itemPlaceIndex: 0
   saveKey: pickable_cupcake1
 --- !u!114 &540037833
 MonoBehaviour:
@@ -1573,6 +1577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -1828,6 +1833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
@@ -2011,6 +2017,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -2226,6 +2233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -2439,6 +2447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -2539,6 +2548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -2561,7 +2571,7 @@ MonoBehaviour:
   - {fileID: 3076004509438240293}
   - {fileID: 8413827196042393117}
   - {fileID: 5162451386525542855}
-  answers: 09000000070000000600000008000000
+  answers: 09000000060000000800000007000000
   correctEvent:
     m_PersistentCalls:
       m_Calls:
@@ -2662,8 +2672,8 @@ MonoBehaviour:
   - {fileID: 8474220281635852563}
   - {fileID: 4615283147589897930}
   isSubCameraMove: 1
-  movePos: {x: 6.1974, y: 0.22, z: 2.167}
-  moveRot: {x: 0, y: 180, z: 0}
+  movePos: {x: -5.324, y: 0.37, z: 9.1986}
+  moveRot: {x: 0, y: 0, z: 0}
 --- !u!1 &5287788910173505104
 GameObject:
   m_ObjectHideFlags: 0
@@ -2935,6 +2945,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -3163,6 +3174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -3836,6 +3848,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -3973,6 +3986,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
@@ -4479,6 +4493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -4626,6 +4641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -4763,6 +4779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []

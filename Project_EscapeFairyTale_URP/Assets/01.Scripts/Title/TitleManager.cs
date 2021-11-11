@@ -33,8 +33,13 @@ public class TitleManager : MonoBehaviour
 
     public void MainButtonEvent(int index)
     {
+        PlaySFX(audioBox.ui_menu_select, 0.5f);
+
         if(isOpened)
         {
+            if (mainPanels[index].activeInHierarchy) return;
+
+            detailPanel.DOKill();
             detailPanel.DOFade(0, 1f).OnComplete(() =>
             {
                 MainTab(index);
@@ -44,12 +49,12 @@ public class TitleManager : MonoBehaviour
         else
         {
             MainTab(index);
+            detailPanel.DOKill();
             detailPanel.DOFade(1, 0.5f);
         }
 
         isOpened = true;
         URPVignetteTween(new Color(37f / 255, 13f / 255, 12f / 255), 0.2f, 3);
-        PlaySFX(audioBox.ui_menu_select, 0.5f);
     }
 
     public void MainTab(int index)

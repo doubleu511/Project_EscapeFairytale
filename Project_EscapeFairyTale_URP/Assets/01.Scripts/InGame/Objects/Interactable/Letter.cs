@@ -5,6 +5,7 @@ using UnityEngine;
 public class Letter : SelectableObject
 {
     public Sprite letterSprite;
+    public Font letterFont;
 
     [TextArea(5, 20)]
     public string letterTxt;
@@ -23,7 +24,7 @@ public class Letter : SelectableObject
         }
         else
         {
-            UIManager.LetterUI(letterSprite, letterTxt);
+            UIManager.LetterUI(letterSprite, letterTxt, letterFont);
         }
     }
 }

@@ -63,34 +63,57 @@ public class Cinderella_Clock_minute : SelectableObject
 
             // 각도 딱 나누어 떨어지게 하기.
             int intAngle_minute = Mathf.FloorToInt(-hour_minute_dummy.localRotation.eulerAngles.y + 360);
-            float floatAngle_hour = -hour_clock.localRotation.eulerAngles.y + 360;
+            int intAngle_hour = Mathf.FloorToInt(-hour_clock.localRotation.eulerAngles.y + 360);
 
             int angleRemainder = intAngle_minute % 6;
 
             intAngle_minute = (intAngle_minute / 6) * 6 + (angleRemainder > 2 ? 6 : 0);
             if (intAngle_minute == 360) intAngle_minute = 0;
 
-            //print(intAngle_hourF + " " + intAngle_hourF % 1 + " " + intAngle_hourF % 30);
-            if (Cinderella_Clock.minute == 59)
-            {
-                if (floatAngle_hour % 30 > 29.8f) floatAngle_hour += 0.2f;
-            }
-            else if (Cinderella_Clock.minute == 0)
-            {
-                if (floatAngle_hour % 30 < 0.2f) floatAngle_hour -= 0.2f;
-            }
-            int intAngle_hour = Mathf.FloorToInt(floatAngle_hour);
-
-
             if (Cinderella_Clock.minute != intAngle_minute / 6)
             {
                 Cinderella_Clock.minute = intAngle_minute / 6;
-                //Cinderella_Clock.hour = (intAngle_hour / 30 == 0) ? 12 : intAngle_hour / 30;
+                Cinderella_Clock.hour = (intAngle_hour / 30 == 0) ? 12 : intAngle_hour / 30;
                 Debug.Log(((intAngle_hour / 30 == 0) ? 12 : intAngle_hour / 30) + ":" + Cinderella_Clock.minute);
             }
 
 
             transform.localRotation = Quaternion.Euler(90, 0, intAngle_minute);
         }
+    }
+
+    public void SetClockValue(int hour, int minute)
+    {
+        StartCoroutine(SetClock(hour, minute));
+    }
+
+    IEnumerator SetClock(int hour, int minute)
+    {
+        ignoreRaycast_inSubCam = true;
+
+        while (true)
+        {
+            yield return null;
+            transform.localRotation *= Quaternion.Euler(0, 0, -2f);
+            hour_clock.localRotation *= Quaternion.Euler(0, 0, -2f / 12);
+
+            int intAngle_minute = Mathf.FloorToInt(-transform.localRotation.eulerAngles.y + 360);
+            int intAngle_hour = Mathf.RoundToInt(-hour_clock.localRotation.eulerAngles.y + 360);
+
+            if (intAngle_minute == 360) intAngle_minute = 0;
+
+            int current_minute = intAngle_minute / 6;
+            int current_hour = (intAngle_hour / 30 == 0) ? 12 : intAngle_hour / 30;
+
+            if(current_hour == hour && current_minute == minute)
+            {
+                break;
+            }
+        }
+
+        Cinderella_Clock.hour = hour;
+        Cinderella_Clock.minute = minute;
+        hour_minute_dummy.localRotation = transform.localRotation;
+        ignoreRaycast_inSubCam = false;
     }
 }

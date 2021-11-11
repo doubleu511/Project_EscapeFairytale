@@ -11,10 +11,12 @@ public class PlayerController : MonoBehaviour
     public float speed = 5;
     public float jumpSpeed = 5;
     public float gravity = -9.81f;
+    public LayerMask _fieldLayer;
 
     public const int cameraDefaultFOV = 70;
 
     float yVelocity;
+    float airTime;
 
     CharacterController cc;
 
@@ -34,7 +36,7 @@ public class PlayerController : MonoBehaviour
         if (GameManager.Instance.player.playerState == PlayerState.DEAD) return;
         if (Cursor.lockState == CursorLockMode.None) return;
 
-        if (!cc.isGrounded)
+        if (!IsCheckGrounded())
         {
             yVelocity += gravity * Time.deltaTime;
         }
@@ -42,6 +44,11 @@ public class PlayerController : MonoBehaviour
         {
             if (yVelocity < 0)
             {
+                if(yVelocity < -3)
+                {
+                    GameManager.PlaySFX(GameManager.Instance.audioBox.player_fall);
+                }
+
                 yVelocity = 0;
             }
         }
@@ -59,7 +66,7 @@ public class PlayerController : MonoBehaviour
 
         //--- มกวม ----
 
-        bool jump = Input.GetKeyDown(KeyCode.Space) && Item_SizeChange.sizeValueRaw == -1;
+        bool jump = Input.GetKeyDown(KeyCode.Space) && Item_SizeChange.sizeValueRaw == -1 && IsCheckGrounded();
 
         if(jump)
         {
@@ -69,6 +76,16 @@ public class PlayerController : MonoBehaviour
 
         dir.y = yVelocity;
         cc.Move(dir * speed * ScaleToSpeed() * Time.deltaTime);
+    }
+
+    public bool IsCheckGrounded()
+    {
+        if (cc.isGrounded) return true;
+
+        var ray = new Ray(this.transform.position, Vector3.down);
+        var maxDistance = 0.01f;
+        Debug.DrawRay(transform.position, Vector3.down * maxDistance, Color.red);
+        return Physics.Raycast(ray, maxDistance, _fieldLayer);
     }
 
     float ScaleToSpeed()

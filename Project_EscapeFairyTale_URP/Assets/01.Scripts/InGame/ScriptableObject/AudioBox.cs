@@ -33,4 +33,8 @@ public class AudioBox : ScriptableObject
     public AudioClip ui_game_start;
     public AudioClip ui_module_clear;
     public AudioClip ui_tapSound;
+
+    public AudioClip player_leftWalk;
+    public AudioClip player_rightWalk;
+    public AudioClip player_fall;
 }

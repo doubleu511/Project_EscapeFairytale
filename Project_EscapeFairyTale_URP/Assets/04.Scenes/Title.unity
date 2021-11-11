@@ -759,6 +759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -996,6 +997,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -1775,7 +1777,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: bcded5f1b78754e43aca63c3d03f8399, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4742,7 +4744,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: bcded5f1b78754e43aca63c3d03f8399, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7015,9 +7017,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: d5fad6c9802cba9498f5f2f68796f533, type: 3}
-    m_FontSize: 34
-    m_FontStyle: 0
+    m_Font: {fileID: 12800000, guid: f10bd7709f77f1145aff0296aa08a2dd, type: 3}
+    m_FontSize: 43
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 90
@@ -7208,6 +7210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -8486,7 +8489,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: bcded5f1b78754e43aca63c3d03f8399, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9737,6 +9740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -15766,6 +15770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -15933,6 +15938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -20981,6 +20987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -27462,6 +27469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -27634,7 +27642,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: bcded5f1b78754e43aca63c3d03f8399, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -29297,9 +29305,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: d5fad6c9802cba9498f5f2f68796f533, type: 3}
-    m_FontSize: 34
-    m_FontStyle: 0
+    m_Font: {fileID: 12800000, guid: f10bd7709f77f1145aff0296aa08a2dd, type: 3}
+    m_FontSize: 43
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 90
@@ -29603,9 +29611,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: d5fad6c9802cba9498f5f2f68796f533, type: 3}
-    m_FontSize: 34
-    m_FontStyle: 0
+    m_Font: {fileID: 12800000, guid: f10bd7709f77f1145aff0296aa08a2dd, type: 3}
+    m_FontSize: 43
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 90
@@ -32730,6 +32738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -34713,7 +34722,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: d5fad6c9802cba9498f5f2f68796f533, type: 3}
+    m_Font: {fileID: 12800000, guid: f10bd7709f77f1145aff0296aa08a2dd, type: 3}
     m_FontSize: 98
     m_FontStyle: 1
     m_BestFit: 0
@@ -35544,7 +35553,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 100, y: 100}
-  m_SizeDelta: {x: 500, y: 300}
+  m_SizeDelta: {x: 369.8495, y: 300}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &1657010921
 CanvasRenderer:
@@ -38560,9 +38569,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: d5fad6c9802cba9498f5f2f68796f533, type: 3}
-    m_FontSize: 34
-    m_FontStyle: 0
+    m_Font: {fileID: 12800000, guid: f10bd7709f77f1145aff0296aa08a2dd, type: 3}
+    m_FontSize: 43
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 90
@@ -45983,6 +45992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -46659,6 +46669,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -49537,6 +49548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -49855,6 +49867,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []

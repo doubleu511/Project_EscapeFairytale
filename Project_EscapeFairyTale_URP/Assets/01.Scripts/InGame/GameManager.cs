@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     public AudioSource defaultSFXSource;
 
     [Header("SelectedColorAnim")]
+    public Color clock_color_select;
+
     public Color color_select = Color.red;
     public Color color_anim1 = Color.red;
     public Color color_anim2 = Color.red;

@@ -56,7 +56,7 @@ public class UIManager : MonoBehaviour
     private Camera mainCamera;
     public Button subCamera_Back;
     public Image cameraAim;
-    public SelectableObject_Parent currentShowObject;
+    public SelectableObject currentShowObject;
 
     private void Awake()
     {
@@ -147,7 +147,7 @@ public class UIManager : MonoBehaviour
         instance.letterTxt.text = "";
     }
 
-    public static void LetterUI(Sprite letterImg, string letterTxt)
+    public static void LetterUI(Sprite letterImg, string letterTxt, Font letterFont)
     {
         MouseEvent.MouseLock(false);
         instance.letterCanvasGroup.alpha = 1;
@@ -155,6 +155,7 @@ public class UIManager : MonoBehaviour
         instance.letterCanvasGroup.blocksRaycasts = true;
         instance.letterImg.sprite = letterImg;
         instance.letterTxt.text = letterTxt;
+        instance.letterTxt.font = letterFont;
     }
 
     public static void LetterUIClose()
@@ -263,7 +264,6 @@ public class UIManager : MonoBehaviour
 
         if (instance.currentShowObject != null)
         {
-            instance.currentShowObject.OnParentEnable();
             instance.currentShowObject = null;
         }
     }

@@ -6,6 +6,7 @@ using DG.Tweening;
 public class BGMSoundPlayer : MonoBehaviour
 {
     private AudioSource audioSource;
+    public float maxVolume = 1;
 
     private void Awake()
     {
@@ -16,7 +17,7 @@ public class BGMSoundPlayer : MonoBehaviour
     {
         audioSource.DOKill();
         audioSource.Play();
-        audioSource.DOFade(1, 2);
+        audioSource.DOFade(maxVolume, 2);
     }
 
     private void OnTriggerExit(Collider other)

@@ -37,3 +37,6 @@ MonoBehaviour:
   ui_game_start: {fileID: 8300000, guid: 52392a54bb6b0ab4e95bf9ececeacfa0, type: 3}
   ui_module_clear: {fileID: 8300000, guid: 0549bb35761b8764e971fe19277ebbc4, type: 3}
   ui_tapSound: {fileID: 8300000, guid: 06dd52295d5c6334ca26dac34870c8dd, type: 3}
+  player_leftWalk: {fileID: 8300000, guid: 3f29e7701ee774e4e85a4d27a4193aab, type: 3}
+  player_rightWalk: {fileID: 8300000, guid: cb87094d1f559324a8068c95e413d3b8, type: 3}
+  player_fall: {fileID: 8300000, guid: 309eb5628edcfb740b1421de3a274080, type: 3}

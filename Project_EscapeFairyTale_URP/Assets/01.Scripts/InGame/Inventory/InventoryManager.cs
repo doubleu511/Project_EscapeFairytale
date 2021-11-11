@@ -90,12 +90,13 @@ public class InventoryManager : MonoBehaviour
     {
         if (GameManager.Instance.selectedItemId != -1)
         {
+            selectedImg.enabled = true;
             selectedImg.sprite = GameManager.Instance.itemData.infos[GameManager.Instance.selectedItemId].itemSprite;
             selectedItemCount.text = GameManager.Instance.selectedTab.itemCount > 1 ? $"x{GameManager.Instance.selectedTab.itemCount}" : "";
         }
         else
         {
-            selectedImg.sprite = null;
+            selectedImg.enabled = false;
             GameManager.Instance.selectedItemUI.SetActive(false);
         }
     }

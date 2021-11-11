@@ -27,7 +27,10 @@ public class SelectableObject : MonoBehaviour
             {
                 if (item.gameObject.activeInHierarchy)
                 {
-                    item.outline.enabled = true;
+                    if (item.outline.colorType == Outline.HighLightColor.Default)
+                    {
+                        item.outline.enabled = true;
+                    }
                 }
             }
         }
@@ -35,7 +38,10 @@ public class SelectableObject : MonoBehaviour
         {
             if (gameObject.activeInHierarchy)
             {
-                outline.enabled = true;
+                if (outline.colorType == Outline.HighLightColor.Default)
+                {
+                    outline.enabled = true;
+                }
             }
         }
         UIManager.instance.cursorBtTipText.text = text;
@@ -49,7 +55,10 @@ public class SelectableObject : MonoBehaviour
             {
                 if (item.gameObject.activeInHierarchy)
                 {
-                    item.outline.enabled = false;
+                    if (item.outline.colorType == Outline.HighLightColor.Default)
+                    {
+                        item.outline.enabled = false;
+                    }
                 }
             }
         }
@@ -57,7 +66,10 @@ public class SelectableObject : MonoBehaviour
         {
             if (gameObject.activeInHierarchy)
             {
-                outline.enabled = false;
+                if (outline.colorType == Outline.HighLightColor.Default)
+                {
+                    outline.enabled = false;
+                }
             }
         }
         UIManager.instance.cursorBtTipText.text = "";
