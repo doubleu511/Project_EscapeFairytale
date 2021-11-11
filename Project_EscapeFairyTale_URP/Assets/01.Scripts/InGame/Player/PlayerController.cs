@@ -34,7 +34,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if (GameManager.Instance.player.playerState == PlayerState.DEAD) return;
-        if (Cursor.lockState == CursorLockMode.None) return;
 
         if (!IsCheckGrounded())
         {
@@ -53,25 +52,29 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        //--- 이동 ----
-
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
-
-        Vector3 dir = Vector3.right * h + Vector3.forward * v;
-
-        dir = transform.TransformDirection(dir);
-        dir.Normalize();
-
-
-        //--- 점프 ----
-
-        bool jump = Input.GetKeyDown(KeyCode.Space) && Item_SizeChange.sizeValueRaw == -1 && IsCheckGrounded();
-
-        if(jump)
+        Vector3 dir = Vector3.zero;
+        if (Cursor.lockState != CursorLockMode.None)
         {
-            Debug.Log("점프");
-            yVelocity = jumpSpeed;
+            //--- 이동 ----
+
+            float h = Input.GetAxisRaw("Horizontal");
+            float v = Input.GetAxisRaw("Vertical");
+
+            dir = Vector3.right * h + Vector3.forward * v;
+
+            dir = transform.TransformDirection(dir);
+            dir.Normalize();
+
+
+            //--- 점프 ----
+
+            bool jump = Input.GetKeyDown(KeyCode.Space) && Item_SizeChange.sizeValueRaw == -1 && IsCheckGrounded();
+
+            if (jump)
+            {
+                Debug.Log("점프");
+                yVelocity = jumpSpeed;
+            }
         }
 
         dir.y = yVelocity;

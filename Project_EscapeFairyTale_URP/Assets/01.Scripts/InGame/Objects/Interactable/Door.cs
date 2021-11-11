@@ -32,7 +32,7 @@ public class Door : SelectableObject_Parent
             if(GameManager.Instance.selectedItemId == requireItemId)
             {
                 isLocked = false;
-                GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_unlock);
+                GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_unlock, SoundType.SFX);
                 if(isItemBroke)
                 {
                     GameManager.Instance.inventoryManager.DecreaseTab(GameManager.Instance.selectedTab.tabId);
@@ -41,7 +41,7 @@ public class Door : SelectableObject_Parent
             }
             else
             {
-                GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_lock);
+                GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_lock, SoundType.SFX);
             }
         }
         else
@@ -51,20 +51,20 @@ public class Door : SelectableObject_Parent
                 case -1:
                     DoorMove(1);
                     currentDir = 0;
-                    GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_close);
+                    GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_close, SoundType.SFX);
                     break;
                 case 0:
                     DoorMove(1);
                     currentDir = 1;
                     if (sound_itHasLock)
-                        GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_open);
+                        GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_open, SoundType.SFX);
                     else
-                        GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_close);
+                        GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_close, SoundType.SFX);
                     break;
                 case 1:
                     DoorMove(-1);
                     currentDir = 0;
-                    GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_close);
+                    GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_close, SoundType.SFX);
                     break;
             }
         }

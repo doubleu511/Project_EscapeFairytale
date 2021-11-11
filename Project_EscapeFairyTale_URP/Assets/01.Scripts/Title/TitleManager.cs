@@ -22,6 +22,15 @@ public class TitleManager : MonoBehaviour
     private bool isOpened = false;
     private Tween urpVignetteTween;
     private Tween urpVignetteTween2;
+    private AudioSource[] allSource;
+
+    [Header("Option")]
+    public Dropdown graphics_WindowMode;
+    public Dropdown graphics_Resolution;
+    public Slider sounds_bgmSlider;
+    public Slider sounds_sfxSlider;
+    public Text sounds_bgmText;
+    public Text sounds_sfxText;
 
     private void Awake()
     {
@@ -29,6 +38,32 @@ public class TitleManager : MonoBehaviour
         {
             Instance = this;
         }
+
+        allSource = FindObjectsOfType<AudioSource>();
+    }
+
+    private void Start()
+    {
+        // 설정 드롭다운
+        graphics_WindowMode.onValueChanged.AddListener(value => SettingManager.ScreenMode(value));
+        graphics_Resolution.onValueChanged.AddListener(value => SettingManager.Resolution(value));
+        sounds_bgmSlider.onValueChanged.AddListener(value => SettingManager.BGMVolume(value));
+        sounds_bgmSlider.onValueChanged.AddListener(value => sounds_bgmText.text = Mathf.RoundToInt(value * 100).ToString());
+        sounds_sfxSlider.onValueChanged.AddListener(value => SettingManager.SFXVolume(value));
+        sounds_sfxSlider.onValueChanged.AddListener(value => sounds_sfxText.text = Mathf.RoundToInt(value * 100).ToString());
+
+        int fullScreenValue = SecurityPlayerPrefs.GetInt(SettingManager.FULL_SCREEN, 0);
+        int resolutionValue = SecurityPlayerPrefs.GetInt(SettingManager.RESOLUTION, 0);
+        float bgmValue = SecurityPlayerPrefs.GetFloat(SettingManager.BGMVOLUME, 1);
+        float sfxValue = SecurityPlayerPrefs.GetFloat(SettingManager.SFXVOLUME, 1);
+
+        graphics_WindowMode.value = fullScreenValue;
+        graphics_Resolution.value = resolutionValue;
+        sounds_bgmSlider.value = bgmValue;
+        sounds_sfxSlider.value = sfxValue;
+
+        SettingManager.bgmVolume = bgmValue;
+        SettingManager.sfxVolume = sfxValue;
     }
 
     public void MainButtonEvent(int index)
@@ -44,13 +79,19 @@ public class TitleManager : MonoBehaviour
             {
                 MainTab(index);
                 detailPanel.DOFade(1, 0.5f);
+                detailPanel.interactable = true;
+                detailPanel.blocksRaycasts = true;
             });
+            detailPanel.interactable = false;
+            detailPanel.blocksRaycasts = false;
         }
         else
         {
             MainTab(index);
             detailPanel.DOKill();
             detailPanel.DOFade(1, 0.5f);
+            detailPanel.interactable = true;
+            detailPanel.blocksRaycasts = true;
         }
 
         isOpened = true;
@@ -97,6 +138,35 @@ public class TitleManager : MonoBehaviour
 
     public static void PlaySFX(AudioClip clip, float volume = 1)
     {
-        Instance.defaultSFXSource.PlayOneShot(clip, volume);
+        Instance.defaultSFXSource.PlayOneShot(clip, volume * SettingManager.sfxVolume);
+    }
+
+    public static void PlaySFX(AudioSource source, AudioClip clip, SoundType type, float volume = 1)
+    {
+        if (type == SoundType.BGM)
+        {
+            source.clip = clip;
+            source.volume = volume * SettingManager.bgmVolume;
+            source.Play();
+        }
+        else
+        {
+            source.PlayOneShot(clip, volume * SettingManager.sfxVolume);
+        }
+    }
+
+    public void SoundSourceInit()
+    {
+        foreach (AudioSource item in allSource)
+        {
+            if (item.outputAudioMixerGroup != null)
+            {
+                if (item.outputAudioMixerGroup.name == "BGM")
+                {
+                    item.DOComplete();
+                    item.volume = SettingManager.bgmVolume;
+                }
+            }
+        }
     }
 }

@@ -7,10 +7,14 @@ public class RotateMe : MonoBehaviour
     public bool isMainTitleCamera;
 
     [SerializeField] private Vector3 rotate;
+    [SerializeField] private int zScale = 1;
+    private Vector3 defaultRotate;
     private bool isTurn = false;
 
     private void Start()
     {
+        defaultRotate = transform.eulerAngles;
+
         if (isMainTitleCamera)
         {
             StartCoroutine(Turn());
@@ -32,7 +36,12 @@ public class RotateMe : MonoBehaviour
         }
         else
         {
-            transform.Rotate(rotate * Time.deltaTime);
+            transform.Rotate(new Vector3(rotate.x, rotate.y, rotate.z) * Time.deltaTime, Space.Self);
+        }
+
+        if(zScale == 0)
+        {
+            transform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, defaultRotate.z);
         }
     }
 

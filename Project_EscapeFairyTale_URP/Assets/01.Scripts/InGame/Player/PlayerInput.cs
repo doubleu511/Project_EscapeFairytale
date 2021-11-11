@@ -42,8 +42,16 @@ public class PlayerInput : MonoBehaviour
                 UIManager.BookDefaultUI(false);
                 UIManager.BookDetailClose();
 
-                if(!GameManager.Instance.player.isSubCam)
+                if (!GameManager.Instance.player.isSubCam)
                     MouseEvent.MouseLock(true);
+            }
+            else if (GameManager.Instance.player.playerState == PlayerState.NORMAL)
+            {
+                UIManager.PauseUI(true);
+            }
+            else if (GameManager.Instance.player.playerState == PlayerState.PAUSED)
+            {
+                UIManager.PauseUI(false);
             }
         }
 

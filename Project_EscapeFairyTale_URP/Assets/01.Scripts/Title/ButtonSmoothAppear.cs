@@ -27,13 +27,20 @@ public class ButtonSmoothAppear : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        TitleManager.PlaySFX(TitleManager.Instance.audioBox.ui_tapSound);
-        myImg.DOColor(gotoColor, duration);
+        if (TitleManager.Instance)
+        {
+            TitleManager.PlaySFX(TitleManager.Instance.audioBox.ui_tapSound);
+        }
+        else if(GameManager.Instance)
+        {
+            GameManager.PlaySFX(GameManager.Instance.audioBox.ui_tapSound);
+        }
+        myImg.DOColor(gotoColor, duration).SetUpdate(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        myImg.DOColor(defaultColor, duration);
+        myImg.DOColor(defaultColor, duration).SetUpdate(true);
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -41,7 +48,7 @@ public class ButtonSmoothAppear : MonoBehaviour, IPointerEnterHandler, IPointerE
         if (isClickable)
         {
             myImg.DOKill();
-            myImg.DOColor(gotoClickColor, duration);
+            myImg.DOColor(gotoClickColor, duration).SetUpdate(true);
         }
     }
 }

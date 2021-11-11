@@ -11,13 +11,16 @@ public class BGMSoundPlayer : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        audioSource.mute = true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        audioSource.volume = 0;
+        audioSource.mute = false;
         audioSource.DOKill();
         audioSource.Play();
-        audioSource.DOFade(maxVolume, 2);
+        audioSource.DOFade(maxVolume * SettingManager.bgmVolume, 2);
     }
 
     private void OnTriggerExit(Collider other)

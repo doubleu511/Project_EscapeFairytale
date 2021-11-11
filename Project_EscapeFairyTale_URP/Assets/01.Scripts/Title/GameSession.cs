@@ -80,8 +80,8 @@ public class GameSession : MonoBehaviour
 
         gameStartButton.onClick.AddListener(() =>
         {
-            newGameButton.onClick = null;
-            loadGameButton.onClick = null;
+            newGameButton.onClick.RemoveAllListeners();
+            loadGameButton.onClick.RemoveAllListeners();
             TitleManager.PlaySFX(TitleManager.Instance.audioBox.ui_game_start, 1f);
 
             if(isNewGame)

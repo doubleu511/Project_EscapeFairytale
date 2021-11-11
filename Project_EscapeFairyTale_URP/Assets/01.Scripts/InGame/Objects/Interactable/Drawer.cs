@@ -55,14 +55,14 @@ public class Drawer : SelectableObject_Parent
 
             if (isOpen)
             {
-                GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_drawer_close);
+                GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_drawer_close, SoundType.SFX);
                 transform.DOLocalMove(defaultPos, 1);
                 isOpen = false;
                 itemBlockCollider.enabled = true;
             }
             else
             {
-                GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_drawer_open);
+                GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_drawer_open, SoundType.SFX);
                 transform.DOLocalMove(openPos, 1);
                 isOpen = true;
                 itemBlockCollider.enabled = false;
@@ -70,7 +70,7 @@ public class Drawer : SelectableObject_Parent
         }
         else
         {
-            GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_lock);
+            GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_lock, SoundType.SFX);
         }
     }
 
@@ -79,6 +79,6 @@ public class Drawer : SelectableObject_Parent
         isLocked = false;
         selectText = unlockTxt;
 
-        if(soundPlay) GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_unlock);
+        if(soundPlay) GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_unlock, SoundType.SFX);
     }
 }

@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+
 
 [CustomEditor(typeof(SelectableObject_Parent))]
 public class Editor_SelectableObjectP : Editor
@@ -45,3 +47,4 @@ public class Editor_SelectableObjectP : Editor
         //툴팁의 경우 원래 스크립트의 있는 것을 가져온다.
     }
 }
+#endif

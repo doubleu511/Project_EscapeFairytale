@@ -113,7 +113,7 @@ public class PIB_Coffer_Round : SelectableObject
             {
                 if (!tick_audioSource.isPlaying)
                 {
-                    GameManager.PlaySFX(tick_audioSource, GameManager.Instance.audioBox.object_coffer_tick);
+                    GameManager.PlaySFX(tick_audioSource, GameManager.Instance.audioBox.object_coffer_tick, SoundType.SFX);
                 }
 
                 switch (intAngle)
@@ -169,7 +169,7 @@ public class PIB_Coffer_Round : SelectableObject
     void ColorSelect(PIB_Coffer_Color color)
     {
         input[index] = color;
-        GameManager.PlaySFX(handle.coffer_audioSource, GameManager.Instance.audioBox.object_coffer_light_on);
+        GameManager.PlaySFX(handle.coffer_audioSource, GameManager.Instance.audioBox.object_coffer_light_on, SoundType.SFX);
         highlightTips[index].DOColor(highlightColor[(int)color], 1).OnComplete(() =>
         {
             if(index == 4)
@@ -186,7 +186,7 @@ public class PIB_Coffer_Round : SelectableObject
         {
             if (input[i] != answer[i])
             {
-                GameManager.PlaySFX(handle.coffer_audioSource, GameManager.Instance.audioBox.object_coffer_wrong);
+                GameManager.PlaySFX(handle.coffer_audioSource, GameManager.Instance.audioBox.object_coffer_wrong, SoundType.SFX);
 
                 Sequence seq = DOTween.Sequence();
                 foreach (Image item in highlightTips)
@@ -207,7 +207,7 @@ public class PIB_Coffer_Round : SelectableObject
             }
         }
 
-        GameManager.PlaySFX(handle.coffer_audioSource, GameManager.Instance.audioBox.object_coffer_correct);
+        GameManager.PlaySFX(handle.coffer_audioSource, GameManager.Instance.audioBox.object_coffer_correct, SoundType.SFX);
         foreach (Image item in highlightTips)
         {
             item.DOColor(new Color(0.5f, 1, 0), 0.5f).OnComplete(() =>

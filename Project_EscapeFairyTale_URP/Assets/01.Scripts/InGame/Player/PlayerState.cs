@@ -4,4 +4,5 @@ public enum PlayerState
     DEAD,
     OPEN_INVENTORY,
     OPEN_BOOK,
+    PAUSED
 }

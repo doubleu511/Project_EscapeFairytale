@@ -34,10 +34,24 @@ public class DetailButtonEvents : MonoBehaviour, IPointerEnterHandler
                 detail.SetActive(true);
             });
         }
+        else
+        {
+            myBtn.onClick.AddListener(() =>
+            {
+                detailTitleText.text = title;
+            });
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        TitleManager.PlaySFX(TitleManager.Instance.audioBox.ui_tapSound);
+        if (TitleManager.Instance)
+        {
+            TitleManager.PlaySFX(TitleManager.Instance.audioBox.ui_tapSound);
+        }
+        else if (GameManager.Instance)
+        {
+            GameManager.PlaySFX(GameManager.Instance.audioBox.ui_tapSound);
+        }
     }
 }

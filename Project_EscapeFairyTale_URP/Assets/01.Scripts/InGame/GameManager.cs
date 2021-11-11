@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     [Header("AudioSource")]
     public AudioSource defaultSFXSource;
+    private AudioSource[] allSource;
 
     [Header("SelectedColorAnim")]
     public Color clock_color_select;
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
+        allSource = FindObjectsOfType<AudioSource>();
 
         DataLoad();
     }
@@ -158,14 +160,38 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public static void PlaySFX(AudioSource source, AudioClip clip, float volume = 1)
-    {
-        source.PlayOneShot(clip, volume);
-    }
-
     public static void PlaySFX(AudioClip clip, float volume = 1)
     {
-        Instance.defaultSFXSource.PlayOneShot(clip, volume);
+        Instance.defaultSFXSource.PlayOneShot(clip, volume * SettingManager.sfxVolume);
+    }
+
+    public static void PlaySFX(AudioSource source, AudioClip clip, SoundType type, float volume = 1)
+    {
+        if (type == SoundType.BGM)
+        {
+            source.clip = clip;
+            source.volume = volume * SettingManager.bgmVolume;
+            source.Play();
+        }
+        else
+        {
+            source.PlayOneShot(clip, volume * SettingManager.sfxVolume);
+        }
+    }
+
+    public void SoundSourceInit()
+    {
+        foreach(AudioSource item in allSource)
+        {
+            if (item.outputAudioMixerGroup != null)
+            {
+                if (item.outputAudioMixerGroup.name == "BGM")
+                {
+                    item.DOComplete();
+                    item.volume = SettingManager.bgmVolume;
+                }
+            }
+        }
     }
 
     [ContextMenu("DataLog")]

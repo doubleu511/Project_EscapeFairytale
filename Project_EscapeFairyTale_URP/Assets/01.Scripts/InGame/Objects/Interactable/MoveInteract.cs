@@ -36,14 +36,14 @@ public class MoveInteract : SelectableObject_Parent
     {
         if (isOpen)
         {
-            if(SFX_Back != null) GameManager.PlaySFX(audioSource, SFX_Back);
+            if(SFX_Back != null) GameManager.PlaySFX(audioSource, SFX_Back, SoundType.SFX);
             transform.DOLocalMove(defaultPos, 1);
             transform.DOLocalRotateQuaternion(defaultRotate, 1);
             isOpen = false;
         }
         else
         {
-            if (SFX_Open != null) GameManager.PlaySFX(audioSource, SFX_Open);
+            if (SFX_Open != null) GameManager.PlaySFX(audioSource, SFX_Open, SoundType.SFX);
             transform.DOLocalMove(openPos, 1);
             transform.DOLocalRotateQuaternion(openRotate, 1);
             isOpen = true;

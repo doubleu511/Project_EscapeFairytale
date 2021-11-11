@@ -259,6 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -560,15 +561,15 @@ MonoBehaviour:
   - {fileID: 326504982435453581}
   - {fileID: 18414055374842277}
   - {fileID: 5714553881787942135}
-  pickable: 0
-  itemId: 0
   isSubCameraMove: 0
   movePos: {x: 0, y: 0, z: 0}
   moveRot: {x: 0, y: 0, z: 0}
   audioSource: {fileID: 5734461373723276357}
+  sound_itHasLock: 1
   isLocked: 1
   requireItemId: 0
   isItemBroke: 0
+  openDir: 0
   parent_door: {fileID: 0}
 --- !u!114 &1203317586762949538
 MonoBehaviour:
@@ -583,6 +584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -697,6 +699,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -883,8 +886,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000004, y: 1.7104747, z: 0.04000016}
-  m_Center: {x: 0.49999943, y: 0.19476277, z: -0.00000017948466}
+  m_Size: {x: 1.0000004, y: 1.9981866, z: 0.04000016}
+  m_Center: {x: 0.49999946, y: 0.050906867, z: -0.00000017623769}
 --- !u!1 &9190589962378198797
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,7 +930,7 @@ AudioSource:
   m_GameObject: {fileID: 9190589962378198797}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 6301324118863691326, guid: 12ca7622b430f9f45a0843aa2d528ada, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -58,6 +59,29 @@ public class UIManager : MonoBehaviour
     public Image cameraAim;
     public SelectableObject currentShowObject;
 
+    [Header("PausePanel")]
+    public CanvasGroup pausePanel;
+    public RectTransform menuPanel;
+    public Button menu_exitBtn;
+
+    [Space(20)]
+    public CanvasGroup confirmBG;
+    public RectTransform confirmPanel;
+    public Text question;
+    public Text leftBtnText;
+    public Text rightBtnText;
+    public Button leftBtn;
+    public Button rightBtn;
+
+    [Space(20)]
+    public GameObject[] optionDetailPanel;
+    public Dropdown graphics_WindowMode;
+    public Dropdown graphics_Resolution;
+    public Slider sounds_bgmSlider;
+    public Slider sounds_sfxSlider;
+    public Text sounds_bgmText;
+    public Text sounds_sfxText;
+
     private void Awake()
     {
         if(!instance)
@@ -99,6 +123,40 @@ public class UIManager : MonoBehaviour
             LetterUIClose();
         });
         subCamera_Back.onClick.AddListener(ChangeToMainCamera);
+
+        // 게임 종료 버튼
+        menu_exitBtn.onClick.AddListener(() =>
+        {
+            ConfirmUI("정말로 게임을 종료하시겠습니까?", "예", "아니오", () =>
+            {
+            #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false; //play모드를 false로.
+            #else
+                    Application.Quit();
+            #endif
+            });
+        });
+
+        // 설정 드롭다운
+        graphics_WindowMode.onValueChanged.AddListener(value => SettingManager.ScreenMode(value));
+        graphics_Resolution.onValueChanged.AddListener(value => SettingManager.Resolution(value));
+        sounds_bgmSlider.onValueChanged.AddListener(value => SettingManager.BGMVolume(value));
+        sounds_bgmSlider.onValueChanged.AddListener(value => sounds_bgmText.text = Mathf.RoundToInt(value * 100).ToString());
+        sounds_sfxSlider.onValueChanged.AddListener(value => SettingManager.SFXVolume(value));
+        sounds_sfxSlider.onValueChanged.AddListener(value => sounds_sfxText.text = Mathf.RoundToInt(value * 100).ToString());
+
+        int fullScreenValue = SecurityPlayerPrefs.GetInt(SettingManager.FULL_SCREEN, 0);
+        int resolutionValue = SecurityPlayerPrefs.GetInt(SettingManager.RESOLUTION, 0);
+        float bgmValue = SecurityPlayerPrefs.GetFloat(SettingManager.BGMVOLUME, 1);
+        float sfxValue = SecurityPlayerPrefs.GetFloat(SettingManager.SFXVOLUME, 1);
+
+        graphics_WindowMode.value = fullScreenValue;
+        graphics_Resolution.value = resolutionValue;
+        sounds_bgmSlider.value = bgmValue;
+        sounds_sfxSlider.value = sfxValue;
+
+        SettingManager.bgmVolume = bgmValue;
+        SettingManager.sfxVolume = sfxValue;
     }
 
     public static void Tip_RBAppear(Sprite sprite, string text, float appearTime, float waitTime, float disappearTime)
@@ -137,6 +195,8 @@ public class UIManager : MonoBehaviour
         });
     }
 
+    #region LetterUI
+
     public static void LetterUI(Sprite letter)
     {
         MouseEvent.MouseLock(false);
@@ -165,6 +225,10 @@ public class UIManager : MonoBehaviour
         instance.letterCanvasGroup.interactable = false;
         instance.letterCanvasGroup.blocksRaycasts = false;
     }
+
+    #endregion
+
+    #region BookUI
 
     public static void BookDefaultUI(bool show)
     {
@@ -234,6 +298,9 @@ public class UIManager : MonoBehaviour
 
         bookPageLeft.sprite = bookSprites[page * 2];
     }
+    #endregion
+
+    #region CameraMove
 
     public static void ChangeToSubCamera(Vector3 pos, Quaternion rotation)
     {
@@ -267,4 +334,101 @@ public class UIManager : MonoBehaviour
             instance.currentShowObject = null;
         }
     }
+
+    #endregion
+
+    #region PauseMenu
+
+    public static void PauseUI(bool value)
+    {
+        GameManager.Instance.player.playerState = value ? PlayerState.PAUSED : PlayerState.NORMAL;
+        MouseEvent.MouseLock(!value);
+
+        Time.timeScale = value ? 0 : 1;
+        instance.pausePanel.interactable = value;
+        instance.pausePanel.blocksRaycasts = value;
+        instance.pausePanel.DOComplete();
+        instance.menuPanel.DOComplete();
+
+        if (value)
+        {
+            instance.pausePanel.DOFade(1, 0.5f).SetUpdate(true);
+            instance.menuPanel.DOSizeDelta(new Vector2(510, 0), 0.5f).OnStart(() =>
+            {
+                instance.menuPanel.sizeDelta = new Vector2(0, instance.menuPanel.sizeDelta.y);
+            }).SetRelative().SetUpdate(true);
+        }
+        else
+        {
+            instance.pausePanel.DOFade(0, 0.75f).SetUpdate(true);
+            instance.menuPanel.DOSizeDelta(new Vector2(-510, 0), 0.5f).OnStart(() =>
+            {
+                instance.menuPanel.sizeDelta = new Vector2(510, instance.menuPanel.sizeDelta.y);
+            }).SetRelative().SetUpdate(true);
+        }
+    }
+
+    public static void ConfirmUI(string qustion, string leftBtnAnswer, string rightBtnAnswer, Action leftBtnAction, Action rightBtnAction = null)
+    {
+        ConfirmPanelAppear(true);
+        instance.question.text = qustion;
+        instance.leftBtnText.text = leftBtnAnswer;
+        instance.rightBtnText.text = rightBtnAnswer;
+
+        if (leftBtnAction != null)
+        {
+            instance.leftBtn.onClick.RemoveAllListeners();
+            instance.leftBtn.onClick.AddListener(() =>
+            {
+                leftBtnAction();
+            });
+        }
+
+        instance.rightBtn.onClick.RemoveAllListeners();
+        instance.rightBtn.onClick.AddListener(() =>
+        {
+            ConfirmPanelAppear(false);
+        });
+        if(rightBtnAction != null)
+        {
+            instance.rightBtn.onClick.AddListener(() => rightBtnAction());
+        }
+    }
+
+    public static void ConfirmPanelAppear(bool value)
+    {
+        instance.confirmBG.interactable = value;
+        instance.confirmBG.blocksRaycasts = value;
+        RectTransform rect = instance.confirmPanel;
+        instance.confirmBG.DOComplete();
+        rect.DOComplete();
+
+        if (value)
+        {
+            instance.confirmBG.DOFade(1, 0.3f).SetUpdate(true);
+            rect.DOSizeDelta(new Vector2(0, 500), 0.75f).OnStart(() =>
+            {
+                rect.sizeDelta = new Vector2(rect.sizeDelta.x, 0);
+            }).SetRelative(true).SetUpdate(true);
+        }
+        else
+        {
+            instance.confirmBG.DOFade(0, 0.3f).SetUpdate(true);
+            rect.DOSizeDelta(new Vector2(0, -500), 0.75f).OnStart(() =>
+            {
+                rect.sizeDelta = new Vector2(rect.sizeDelta.x, 500);
+            }).SetRelative(true).SetUpdate(true);
+        }
+    }
+
+    public static void OptionDetailPanel(int index)
+    {
+        for(int i = 0; i<instance.optionDetailPanel.Length;i++)
+        {
+            instance.optionDetailPanel[i].gameObject.SetActive(false);
+        }
+        instance.optionDetailPanel[index].gameObject.SetActive(true);
+    }
+
+    #endregion
 }

@@ -22,7 +22,7 @@ public class PIB_Coffer_Handle : SelectableObject
         {
             clearEvent.Invoke();
             coffer_Door.DOLocalRotate(new Vector3(0, 0, 130), 2);
-            GameManager.PlaySFX(coffer_audioSource, GameManager.Instance.audioBox.object_coffer_open);
+            GameManager.PlaySFX(coffer_audioSource, GameManager.Instance.audioBox.object_coffer_open, SoundType.SFX);
         }
     }
 }
