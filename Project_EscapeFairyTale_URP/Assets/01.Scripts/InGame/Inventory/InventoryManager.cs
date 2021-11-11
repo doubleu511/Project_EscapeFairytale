@@ -41,13 +41,13 @@ public class InventoryManager : MonoBehaviour
             {
                 group.blocksRaycasts = false;
                 group.interactable = false;
-            });
+            }).SetUpdate(true);
         }
         else
         {
             group.blocksRaycasts = true;
             group.interactable = true;
-            group.DOFade(1, time);
+            group.DOFade(1, time).SetUpdate(true);
         }
     }
 

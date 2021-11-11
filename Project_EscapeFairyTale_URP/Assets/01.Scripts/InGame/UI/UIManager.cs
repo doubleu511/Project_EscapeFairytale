@@ -74,6 +74,7 @@ public class UIManager : MonoBehaviour
     public Button rightBtn;
 
     [Space(20)]
+    public CanvasGroup optionPanel;
     public GameObject[] optionDetailPanel;
     public Dropdown graphics_WindowMode;
     public Dropdown graphics_Resolution;
@@ -365,6 +366,7 @@ public class UIManager : MonoBehaviour
             {
                 instance.menuPanel.sizeDelta = new Vector2(510, instance.menuPanel.sizeDelta.y);
             }).SetRelative().SetUpdate(true);
+            OptionPanel(false);
         }
     }
 
@@ -419,6 +421,13 @@ public class UIManager : MonoBehaviour
                 rect.sizeDelta = new Vector2(rect.sizeDelta.x, 500);
             }).SetRelative(true).SetUpdate(true);
         }
+    }
+
+    public static void OptionPanel(bool value)
+    {
+        instance.optionPanel.DOFade(value ? 1 : 0, 0.5f).SetUpdate(true);
+        instance.optionPanel.interactable = value;
+        instance.optionPanel.blocksRaycasts = value;
     }
 
     public static void OptionDetailPanel(int index)

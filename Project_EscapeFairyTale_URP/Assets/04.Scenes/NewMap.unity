@@ -489,17 +489,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TitleManager, Assembly-CSharp
-        m_MethodName: MainButtonEvent
-        m_Mode: 3
+      - m_Target: {fileID: 93640636}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OptionPanel
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &15117275
 MonoBehaviour:
@@ -2020,6 +2020,7 @@ MonoBehaviour:
   rightBtnText: {fileID: 1849085494}
   leftBtn: {fileID: 1997502053}
   rightBtn: {fileID: 829664369}
+  optionPanel: {fileID: 1100446985}
   optionDetailPanel:
   - {fileID: 463219289}
   - {fileID: 313729744}
@@ -14686,7 +14687,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 0.40392157}
+    m_NormalColor: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 0.6666667}
     m_HighlightedColor: {r: 0.16037738, g: 0.1579566, b: 0.1579566, a: 0.78039217}
     m_PressedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 0.78039217}
     m_SelectedColor: {r: 0.32156864, g: 0.32156864, b: 0.32156864, a: 0.78039217}
@@ -16829,7 +16830,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 0.40392157}
+    m_NormalColor: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 0.6666667}
     m_HighlightedColor: {r: 0.16037738, g: 0.1579566, b: 0.1579566, a: 0.78039217}
     m_PressedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 0.78039217}
     m_SelectedColor: {r: 0.32156864, g: 0.32156864, b: 0.32156864, a: 0.78039217}
@@ -36026,6 +36027,7 @@ GameObject:
   - component: {fileID: 1100446982}
   - component: {fileID: 1100446984}
   - component: {fileID: 1100446983}
+  - component: {fileID: 1100446985}
   m_Layer: 5
   m_Name: OptionPanel
   m_TagString: Untagged
@@ -36089,6 +36091,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1100446981}
   m_CullTransparentMesh: 1
+--- !u!225 &1100446985
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100446981}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &1102812438
 GameObject:
   m_ObjectHideFlags: 0
