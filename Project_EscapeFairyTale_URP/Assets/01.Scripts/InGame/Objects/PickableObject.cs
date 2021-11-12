@@ -90,6 +90,26 @@ public class PickableObject : SelectableObject, ISaveAble
             gameObject.SetActive(false);
             Invoke("DestroyObj", 0.5f);
             GameManager.Instance.inventoryManager.TIP_ItemGotTipAppear(GameManager.Instance.itemData.infos[itemId].itemSprite);
+
+            if(GameManager.Instance.isTutorial)
+            {
+                if(!GameManager.Instance.isEatenItem)
+                {
+                    GameManager.Instance.isEatenItem = true;
+                    UIManager.TutorialPanel("획득한 아이템은 \"E\" 키로 인벤토리를 열어 확인할 수 있습니다.");
+                }
+
+                if (!GameManager.Instance.isUsedItem)
+                {
+                    if (GameManager.Instance.inventoryManager.TryMuffinAndMilkRemain())
+                    {
+                        GameManager.Instance.isUsedItem = true;
+                        UIManager.TutorialPanel("일부 아이템은 \"F\"키를 눌러서 상호작용이 가능합니다.");
+                        UIManager.TutorialPanel("<size=65>인벤토리를 열어서 아이템을 클릭하여 선택하고, 특정 상황에서 F키를 눌러 사용할 수 있습니다.</size>");
+                    }
+                }
+            }
+
         }
         else
         {

@@ -11,10 +11,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-     public bool isGameOver = false;
+    public bool isGameOver = false;
 
 
-    public readonly static Vector3 playerDefaultPos = new Vector3(-5.71f, 0.14f, 5.8f);
+    public readonly static Vector3 playerDefaultPos = new Vector3(-6.443f, 0.14f, 5.8f);
 
     [Header("Management")]
     public InventoryManager inventoryManager;
@@ -46,9 +46,15 @@ public class GameManager : MonoBehaviour
 
     public static Dictionary<string, string> saveDic = new Dictionary<string, string>();
 
+    [HideInInspector] public bool isTutorial = false;
+    //TutorialBoolean
+    [HideInInspector] public bool isEatenItem = false;
+    [HideInInspector] public bool isUsedItem = false;
+    [HideInInspector] public bool isSmalled = false;
+
     private void Awake()
     {
-        if(Instance)
+        if (Instance)
         {
             Debug.LogError("다수의 게임매니저 실행중");
         }
@@ -90,14 +96,13 @@ public class GameManager : MonoBehaviour
         string json = SecurityPlayerPrefs.GetString("object-save", "{}");
         saveDic = JsonUtility.FromJson<Serialization<string, string>>(json).ToDictionary();
 
-        Vector3 playerVec = GameObject.Find("Player").transform.position;
-        string playerPos = SecurityPlayerPrefs.GetString("playerPos-save", $"{playerVec.x} {playerVec.y} {playerVec.z}");
+        string playerPos = SecurityPlayerPrefs.GetString("playerPos-save", $"{playerDefaultPos.x} {playerDefaultPos.y} {playerDefaultPos.z}");
         string[] poses = playerPos.Split(' ');
         player.transform.position = new Vector3(float.Parse(poses[0]), float.Parse(poses[1]), float.Parse(poses[2]));
 
         string playerItem = SecurityPlayerPrefs.GetString("playerInventory-save", "-1 -1 -1 -1 -1 -1");
         string[] items = playerItem.Split(' ');
-        for(int i = 0;i<items.Length;i++)
+        for (int i = 0; i < items.Length; i++)
         {
             inventoryManager.tabs[i].itemId = int.Parse(items[i]);
         }
@@ -107,6 +112,19 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < items.Length; i++)
         {
             inventoryManager.tabs[i].itemCount = int.Parse(itemCounts[i]);
+        }
+
+        bool fileExists = SecurityPlayerPrefs.GetBool("saved-file-exists", false);
+        if (!fileExists)
+        {
+            // 튜토리얼
+            player.GetComponent<Animator>().Play("Player_Wakeup");
+            player.playerState = PlayerState.WAKING_UP;
+            isTutorial = true;
+        }
+        else
+        {
+            UIManager.InGameAppear(true);
         }
 
         print("Load Complete");
@@ -122,16 +140,7 @@ public class GameManager : MonoBehaviour
     {
         SecurityPlayerPrefs.SetString("object-save", "{}");
 
-        GameObject _player = GameObject.Find("Player");
-        if(_player)
-        {
-            Vector3 playerVec = _player.transform.position;
-        SecurityPlayerPrefs.SetString("playerPos-save", $"{playerVec.x} {playerVec.y} {playerVec.z}");
-        }
-        else
-        {
-            SecurityPlayerPrefs.SetString("playerPos-save", $"{playerDefaultPos.x} {playerDefaultPos.y} {playerDefaultPos.z}");
-        }
+        SecurityPlayerPrefs.SetString("playerPos-save", $"{playerDefaultPos.x} {playerDefaultPos.y} {playerDefaultPos.z}");
 
         SecurityPlayerPrefs.SetString("playerInventory-save", "-1 -1 -1 -1 -1 -1");
         SecurityPlayerPrefs.SetString("playerInventoryCount-save", "-1 -1 -1 -1 -1 -1");
@@ -143,6 +152,7 @@ public class GameManager : MonoBehaviour
         {
             File.Delete(path);
         }
+
 
         SecurityPlayerPrefs.SetString("saved-dateTime", "");
         print("Reset Complete");
@@ -181,7 +191,7 @@ public class GameManager : MonoBehaviour
 
     public void SoundSourceInit()
     {
-        foreach(AudioSource item in allSource)
+        foreach (AudioSource item in allSource)
         {
             if (item.outputAudioMixerGroup != null)
             {
@@ -199,5 +209,11 @@ public class GameManager : MonoBehaviour
     {
         string a = JsonUtility.ToJson(new Serialization<string, string>(saveDic));
         print(a);
+    }
+
+    [ContextMenu("test")]
+    public void Test()
+    {
+
     }
 }

@@ -55,5 +55,14 @@ public class Item_SizeChange : MonoBehaviour
         {
             UIManager.Tip_RBAppear(null, "먹어도 효과가 없을 것 같습니다..", 0.5f, 3, 2);
         }
+
+        if(!GameManager.Instance.isSmalled)
+        {
+            if (sizeValueRaw == -1)
+            {
+                GameManager.Instance.isSmalled = true;
+                UIManager.TutorialPanel("작아진 상태에서는 \"Space\"키를 눌러 점프할 수 있습니다.");
+            }
+        }
     }
 }

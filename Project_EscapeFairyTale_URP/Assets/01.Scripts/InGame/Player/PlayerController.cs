@@ -33,7 +33,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Instance.player.playerState == PlayerState.DEAD) return;
+        if (playerState == PlayerState.DEAD) return;
+        if (playerState == PlayerState.WAKING_UP) return;
 
         if (!IsCheckGrounded())
         {
@@ -115,5 +116,15 @@ public class PlayerController : MonoBehaviour
 
             playerAnim.SetFloat("speed", (dis.sqrMagnitude / transform.localScale.x / transform.localScale.x) * 1000); // 너무 작아서 10,000 곱해줌
         }
+    }
+
+    void Event_WakeEnd()
+    {
+        UIManager.InGameAppear(true);
+        playerState = PlayerState.NORMAL;
+        playerAnim.Play("Player_idle");
+
+        UIManager.TutorialPanel("마우스를 이용하여 카메라를 움직입니다.");
+        UIManager.TutorialPanel("W/A/S/D 를 이용하여 이동할 수 있습니다.");
     }
 }

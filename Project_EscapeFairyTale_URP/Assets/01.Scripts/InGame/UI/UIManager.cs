@@ -9,6 +9,9 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance = null;
 
+    [Header("InGame")]
+    public CanvasGroup inGameCanvasGroup;
+
     [Header("RightBottomTip")]
     [Header("Tips")]
     [Space(10)]
@@ -83,12 +86,20 @@ public class UIManager : MonoBehaviour
     public Text sounds_bgmText;
     public Text sounds_sfxText;
 
+    [Header("Tutorial")]
+    public CanvasGroup tutorialPanel;
+    public Text tutorialPanelText;
+    public CanvasGroup tutorialTip;
+    private Queue<string> tutorialQueue = new Queue<string>();
+    [HideInInspector] public bool isTutorialPanelAppear = false;
+
     private void Awake()
     {
-        if(!instance)
-        instance = this;
+        if (!instance)
+            instance = this;
 
         mainCamera = Camera.main;
+        inGameCanvasGroup.alpha = 0;
     }
 
     private void Start()
@@ -130,11 +141,11 @@ public class UIManager : MonoBehaviour
         {
             ConfirmUI("정말로 게임을 종료하시겠습니까?", "예", "아니오", () =>
             {
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false; //play모드를 false로.
-            #else
+#else
                     Application.Quit();
-            #endif
+#endif
             });
         });
 
@@ -158,6 +169,23 @@ public class UIManager : MonoBehaviour
 
         SettingManager.bgmVolume = bgmValue;
         SettingManager.sfxVolume = sfxValue;
+
+        // 튜토리얼
+        tutorialTip.DOFade(0, 1).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+    }
+
+    public static void InGameAppear(bool value)
+    {
+        if (value)
+        {
+            MouseEvent.MouseLock(true);
+            instance.inGameCanvasGroup.DOFade(1, 0.5f);
+        }
+        else
+        {
+            MouseEvent.MouseLock(false);
+            instance.inGameCanvasGroup.DOFade(0, 0.5f);
+        }
     }
 
     public static void Tip_RBAppear(Sprite sprite, string text, float appearTime, float waitTime, float disappearTime)
@@ -391,7 +419,7 @@ public class UIManager : MonoBehaviour
         {
             ConfirmPanelAppear(false);
         });
-        if(rightBtnAction != null)
+        if (rightBtnAction != null)
         {
             instance.rightBtn.onClick.AddListener(() => rightBtnAction());
         }
@@ -432,11 +460,52 @@ public class UIManager : MonoBehaviour
 
     public static void OptionDetailPanel(int index)
     {
-        for(int i = 0; i<instance.optionDetailPanel.Length;i++)
+        for (int i = 0; i < instance.optionDetailPanel.Length; i++)
         {
             instance.optionDetailPanel[i].gameObject.SetActive(false);
         }
         instance.optionDetailPanel[index].gameObject.SetActive(true);
+    }
+
+    #endregion
+
+    #region Tutorial
+
+    public static void TutorialPanel(string text)
+    {
+        if (text.Equals(""))
+        {
+            print("테스트");
+            if (instance.tutorialQueue.Count > 0)
+            {
+                instance.isTutorialPanelAppear = false;
+                instance.tutorialPanel.DOKill();
+                instance.tutorialPanel.DOFade(0, 1).OnComplete(() =>
+                {
+                    TutorialPanel(instance.tutorialQueue.Dequeue());
+                });
+
+                return;
+            }
+
+            instance.isTutorialPanelAppear = false;
+            instance.tutorialPanel.DOKill();
+            instance.tutorialPanel.DOFade(0, 1);
+        }
+        else
+        {
+            if (instance.isTutorialPanelAppear)
+            {
+                instance.tutorialQueue.Enqueue(text);
+            }
+            else
+            {
+                instance.isTutorialPanelAppear = true;
+                instance.tutorialPanelText.text = text;
+                instance.tutorialPanel.DOKill();
+                instance.tutorialPanel.DOFade(1, 1);
+            }
+        }
     }
 
     #endregion

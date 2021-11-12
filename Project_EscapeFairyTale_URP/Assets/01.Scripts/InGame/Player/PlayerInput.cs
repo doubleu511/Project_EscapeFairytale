@@ -12,6 +12,7 @@ public class PlayerInput : MonoBehaviour
     void InputInGame()
     {
         if (GameManager.Instance.player.playerState == PlayerState.DEAD) return;
+        if (GameManager.Instance.player.playerState == PlayerState.WAKING_UP) return;
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -112,6 +113,14 @@ public class PlayerInput : MonoBehaviour
                     UIManager.BookDefaultUI(false);
                     UIManager.BookDetailClose();
                 }
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            if(UIManager.instance.isTutorialPanelAppear)
+            {
+                UIManager.TutorialPanel("");
             }
         }
     }

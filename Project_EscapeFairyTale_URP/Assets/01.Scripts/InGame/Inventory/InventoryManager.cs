@@ -125,6 +125,33 @@ public class InventoryManager : MonoBehaviour
         return false;
     }
 
+    public bool TryMuffinAndMilkRemain()
+    {
+        int MUFFIN_ID = 2;
+        int MILK_ID = 3;
+
+        bool isMuffin = false;
+        bool isMilk = false;
+
+        for (int i = 0; i < tabs.Length; i++)
+        {
+            if (tabs[i].itemId == MUFFIN_ID)
+            {
+                isMuffin = true;
+            }
+        }
+
+        for (int i = 0; i < tabs.Length; i++)
+        {
+            if (tabs[i].itemId == MILK_ID)
+            {
+                isMilk = true;
+            }
+        }
+
+        return isMuffin && isMilk;
+    }
+
     public void DecreaseTab(int tabIndex)
     {
         tabs[tabIndex].itemCount--;
