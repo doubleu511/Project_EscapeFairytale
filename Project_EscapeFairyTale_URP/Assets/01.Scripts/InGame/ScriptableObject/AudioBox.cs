@@ -28,6 +28,7 @@ public class AudioBox : ScriptableObject
     public AudioClip RedShoes_redshoes_walk1_right;
     public AudioClip RedShoes_redshoes_walk2_left;
     public AudioClip RedShoes_redshoes_walk2_right;
+    public AudioClip RedShoes_redshoes_struggle;
 
     public AudioClip ui_menu_select;
     public AudioClip ui_game_start;
@@ -37,4 +38,6 @@ public class AudioBox : ScriptableObject
     public AudioClip player_leftWalk;
     public AudioClip player_rightWalk;
     public AudioClip player_fall;
+    public AudioClip player_eatMuffin;
+    public AudioClip player_eatMilk;
 }

@@ -18,7 +18,7 @@ public enum PIB_Coffer_Color
     NULL
 }
 
-public class PIB_Coffer_Round : SelectableObject
+public class PIB_Coffer_Round : SelectableObject, ISaveAble
 {
     private bool isHighlighted = false; // true면 마우스가 분침에 간거다.
     private bool dragStart = false;
@@ -47,10 +47,41 @@ public class PIB_Coffer_Round : SelectableObject
 
     private AudioSource tick_audioSource;
 
+    [Header("Save")]
+    public string saveKey;
+    private string _eventFlow = "lock";
+    public string eventFlow
+    {
+        get { return _eventFlow; }
+        set
+        {
+            if (_eventFlow != value)
+            {
+                _eventFlow = value;
+                TempSave();
+            }
+        }
+    } // 1이면 언락, 0이면 락
+
     protected override void Awake()
     {
         base.Awake();
         tick_audioSource = GetComponent<AudioSource>();
+    }
+
+    private void Start()
+    {
+        if (!saveKey.Equals(""))
+        {
+            if (!GameManager.saveDic.ContainsKey(saveKey))
+            {
+                GameManager.saveDic.Add(saveKey, eventFlow);
+            }
+            else
+            {
+                Load();
+            }
+        }
     }
 
     public override void OnHighlighted(string text)
@@ -212,8 +243,31 @@ public class PIB_Coffer_Round : SelectableObject
         {
             item.DOColor(new Color(0.5f, 1, 0), 0.5f).OnComplete(() =>
             {
-                handle.UnLock();
+                eventFlow = "unlock";
+                handle.UnLock(false);
             });
+        }
+    }
+
+    public void TempSave()
+    {
+        if (saveKey != "")
+        {
+            GameManager.saveDic[saveKey] = eventFlow;
+        }
+    }
+
+    public void Load()
+    {
+        eventFlow = GameManager.saveDic[saveKey];
+        if (eventFlow.Equals("unlock"))
+        {
+            for (int i = 0; i < highlightTips.Length; i++)
+            {
+                highlightTips[i].color = new Color(0.5f, 1, 0);
+            }
+
+            handle.UnLock(true);
         }
     }
 }

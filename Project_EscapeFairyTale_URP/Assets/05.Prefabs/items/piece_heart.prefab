@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
+  colorType: 0
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -119,7 +120,9 @@ MonoBehaviour:
   ignoreRaycast_inSubCam: 1
   highlightedIndependent: 0
   itemId: 4
-  saveKey: piece_heart
+  itemPlacer: {fileID: 0}
+  itemPlaceIndex: 0
+  saveKey: pickable_piece_heart
 --- !u!54 &-8902443300230221348
 Rigidbody:
   m_ObjectHideFlags: 0

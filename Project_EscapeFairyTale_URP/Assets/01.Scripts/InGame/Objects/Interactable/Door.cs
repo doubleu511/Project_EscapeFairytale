@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class Door : SelectableObject_Parent
+public class Door : SelectableObject_Parent, ISaveAble
 {
     public AudioSource audioSource;
     public bool sound_itHasLock = true;
@@ -14,15 +14,43 @@ public class Door : SelectableObject_Parent
     public bool isItemBroke = false;
 
     public int openDir;
+    private bool isOpen = false;
 
-    private int currentDir = 0;
+    Transform parent_door = null;
+    public Door friendDoor = null;
 
-    public Transform parent_door = null;
+    [Header("Save")]
+    public string saveKey;
+    private string _eventFlow = "lock";
+    public string eventFlow
+    {
+        get { return _eventFlow; }
+        set
+        {
+            if (_eventFlow != value)
+            {
+                _eventFlow = value;
+                TempSave();
+            }
+        }
+    } // 1이면 언락, 0이면 락
 
     protected override void Start()
     {
         base.Start();
         parent_door = transform.parent;
+
+        if (!saveKey.Equals(""))
+        {
+            if (!GameManager.saveDic.ContainsKey(saveKey))
+            {
+                GameManager.saveDic.Add(saveKey, eventFlow);
+            }
+            else
+            {
+                Load();
+            }
+        }
     }
 
     public override void OnClicked()
@@ -38,6 +66,13 @@ public class Door : SelectableObject_Parent
                     GameManager.Instance.inventoryManager.DecreaseTab(GameManager.Instance.selectedTab.tabId);
                 }
                 selectText = "클릭하여 문을 여닫습니다.";
+                eventFlow = "unlock";
+
+                if(friendDoor != null)
+                {
+                    friendDoor.isLocked = false;
+                    friendDoor.selectText = "클릭하여 문을 여닫습니다.";
+                }
             }
             else
             {
@@ -46,36 +81,69 @@ public class Door : SelectableObject_Parent
         }
         else
         {
-            switch(currentDir)
+            if(isOpen)
             {
-                case -1:
-                    DoorMove(1);
-                    currentDir = 0;
+                DoorMove(false);
+                if (sound_itHasLock)
+                {
+                    GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_open, SoundType.SFX);
+                }
+                else
+                {
                     GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_close, SoundType.SFX);
-                    break;
-                case 0:
-                    DoorMove(1);
-                    currentDir = 1;
-                    if (sound_itHasLock)
-                        GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_open, SoundType.SFX);
-                    else
-                        GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_close, SoundType.SFX);
-                    break;
-                case 1:
-                    DoorMove(-1);
-                    currentDir = 0;
-                    GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_close, SoundType.SFX);
-                    break;
+                }
+                isOpen = false;
+                if(friendDoor != null)
+                {
+                    friendDoor.isOpen = false;
+                }
+            }
+            else
+            {
+                DoorMove(true);
+                GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_open, SoundType.SFX);
+                isOpen = true;
+                if (friendDoor != null)
+                {
+                    friendDoor.isOpen = true;
+                }
             }
         }
     }
 
-    private void DoorMove(int dir)
+    private void DoorMove(bool open)
     {
         ignoreRaycast = true;
-        parent_door.DOLocalRotate(new Vector3(0, 0, openDir * dir), 1.5f).SetRelative().OnComplete(() =>
+        parent_door.DOLocalRotate(new Vector3(0, 0, open ? openDir : 0), 1.5f).OnComplete(() =>
         {
             ignoreRaycast = false;
         });
+
+        if (friendDoor != null)
+        {
+            friendDoor.ignoreRaycast = true;
+            friendDoor.parent_door.DOLocalRotate(new Vector3(0, 0, open ? friendDoor.openDir : 0), 1.5f).OnComplete(() =>
+            {
+                friendDoor.ignoreRaycast = false;
+            });
+        }
+    }
+
+    public void TempSave()
+    {
+        if (saveKey != "")
+        {
+            GameManager.saveDic[saveKey] = eventFlow;
+        }
+    }
+
+    public void Load()
+    {
+        eventFlow = GameManager.saveDic[saveKey];
+        if (eventFlow.Equals("unlock"))
+        {
+            isLocked = false;
+            selectText = "클릭하여 문을 여닫습니다.";
+        }
     }
 }

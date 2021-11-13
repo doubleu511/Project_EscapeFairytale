@@ -8,8 +8,14 @@ public class PlayerController : MonoBehaviour
 
     public bool isSubCam = false;
     public PlayerState playerState = PlayerState.NORMAL;
-    public float speed = 5;
-    public float jumpSpeed = 5;
+    public float defaultSpeed = 3;
+
+    [HideInInspector]
+    public float currentSpeed = 3;
+    public float defaultJumpSpeed = 5;
+
+    [HideInInspector]
+    public float currentJumpSpeed = 5;
     public float gravity = -9.81f;
     public LayerMask _fieldLayer;
 
@@ -27,6 +33,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        currentSpeed = defaultSpeed;
+        currentJumpSpeed = defaultJumpSpeed;
         cc = GetComponent<CharacterController>();
         StartCoroutine(SpeedCheck());
     }
@@ -73,13 +81,12 @@ public class PlayerController : MonoBehaviour
 
             if (jump)
             {
-                Debug.Log("มกวม");
-                yVelocity = jumpSpeed;
+                yVelocity = currentJumpSpeed;
             }
         }
 
         dir.y = yVelocity;
-        cc.Move(dir * speed * ScaleToSpeed() * Time.deltaTime);
+        cc.Move(dir * currentSpeed * ScaleToSpeed() * Time.deltaTime);
     }
 
     public bool IsCheckGrounded()

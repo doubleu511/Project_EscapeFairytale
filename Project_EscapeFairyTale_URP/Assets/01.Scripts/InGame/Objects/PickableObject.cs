@@ -26,7 +26,7 @@ public class PickableObject : SelectableObject, ISaveAble
 
     protected void Start()
     {
-        if (saveKey != "")
+        if (!saveKey.Equals(""))
         {
             if (!GameManager.saveDic.ContainsKey(saveKey))
             {
@@ -44,7 +44,7 @@ public class PickableObject : SelectableObject, ISaveAble
         _eventFlow = "true";
         TempSave();
         Rigidbody rb = GetComponent<Rigidbody>();
-        rb.AddForce(Camera.main.transform.forward * 2 * transform.localScale.x, ForceMode.Impulse);
+        rb.AddForce(Camera.main.transform.forward * 2 * GameManager.Instance.player.transform.localScale.x, ForceMode.Impulse);
 
         return this.gameObject;
     }

@@ -6,6 +6,8 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Events;
 using System.IO;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +22,7 @@ public class GameManager : MonoBehaviour
     public InventoryManager inventoryManager;
     public SpriteBox spriteBox;
     public AudioBox audioBox;
+    public VolumeProfile urpSettings;
 
     [Header("Player")]
     public PlayerController player;
@@ -85,6 +88,7 @@ public class GameManager : MonoBehaviour
             $"{inventoryManager.tabs[0].itemCount} {inventoryManager.tabs[1].itemCount} {inventoryManager.tabs[2].itemCount}" +
             $" {inventoryManager.tabs[3].itemCount} {inventoryManager.tabs[4].itemCount} {inventoryManager.tabs[5].itemCount}");
         SecurityPlayerPrefs.SetBool("saved-file-exists", true);
+        SecurityPlayerPrefs.SetInt("playerSize-save", Item_SizeChange.sizeValueRaw);
         SecurityPlayerPrefs.SetString("saved-dateTime", DateTime.Now.ToString());
         Screenshot.TakeScreenshot();
         print("Save Complete");
@@ -118,6 +122,10 @@ public class GameManager : MonoBehaviour
         if (!fileExists)
         {
             // Æ©Åä¸®¾ó
+            urpSettings.TryGet<Vignette>(out Vignette vignette);
+            vignette.intensity.value = 1;
+            DOTween.To(() => vignette.intensity.value, value => vignette.intensity.value = value, 0.272f, 2).SetDelay(1);
+
             player.GetComponent<Animator>().Play("Player_Wakeup");
             player.playerState = PlayerState.WAKING_UP;
             isTutorial = true;
@@ -126,6 +134,9 @@ public class GameManager : MonoBehaviour
         {
             UIManager.InGameAppear(true);
         }
+
+        int playerSize = SecurityPlayerPrefs.GetInt("playerSize-save", 0);
+        Item_SizeChange.SetSizeInstant(playerSize);
 
         print("Load Complete");
     }
@@ -155,6 +166,7 @@ public class GameManager : MonoBehaviour
 
 
         SecurityPlayerPrefs.SetString("saved-dateTime", "");
+        SecurityPlayerPrefs.SetInt("playerSize-save", 0);
         print("Reset Complete");
     }
 
@@ -209,11 +221,5 @@ public class GameManager : MonoBehaviour
     {
         string a = JsonUtility.ToJson(new Serialization<string, string>(saveDic));
         print(a);
-    }
-
-    [ContextMenu("test")]
-    public void Test()
-    {
-
     }
 }

@@ -34,13 +34,16 @@ public class ItemPlacer : SelectableObject, ISaveAble
 
     private void Start()
     {
-        if (!GameManager.saveDic.ContainsKey(saveKey))
+        if (!saveKey.Equals(""))
         {
-            GameManager.saveDic.Add(saveKey, eventFlow);
-        }
-        else
-        {
-            Load();
+            if (!GameManager.saveDic.ContainsKey(saveKey))
+            {
+                GameManager.saveDic.Add(saveKey, eventFlow);
+            }
+            else
+            {
+                Load();
+            }
         }
     }
 

@@ -18,17 +18,20 @@ public class Module : MonoBehaviour, ISaveAble
                 TempSave();
             }
         }
-    } // 1이면 언락, 0이면 락
+    } // unlock이면 언락, lock이면 락
 
     public virtual void Start()
     {
-        if (!GameManager.saveDic.ContainsKey(saveKey))
+        if (!saveKey.Equals(""))
         {
-            GameManager.saveDic.Add(saveKey, eventFlow);
-        }
-        else
-        {
-            Load();
+            if (!GameManager.saveDic.ContainsKey(saveKey))
+            {
+                GameManager.saveDic.Add(saveKey, eventFlow);
+            }
+            else
+            {
+                Load();
+            }
         }
     }
 

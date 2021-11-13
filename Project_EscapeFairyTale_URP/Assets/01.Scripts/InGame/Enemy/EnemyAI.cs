@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using DG.Tweening;
+using UnityEngine.Rendering.Universal;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -13,7 +14,9 @@ public class EnemyAI : MonoBehaviour
         ATTACK,
         STUN
     }
-    
+
+    private static EnemyAI instance;
+
     public EnemyState state = EnemyState.PATROL; //처음에는 패트롤 상태로 둔다.
     
     private Transform playerTr;
@@ -21,6 +24,9 @@ public class EnemyAI : MonoBehaviour
     public float attackDist = 5.0f;
     public float traceDist = 10.0f;
     public float judgeDelay = 0.3f;
+
+    public GameObject hitbox;
+    public Transform hitbox_box;
 
     public int heelSoundIndex = 0;
 
@@ -46,6 +52,7 @@ public class EnemyAI : MonoBehaviour
 
     void Awake()
     {
+        instance = this;
         moveAgent = GetComponent<MoveAgent>();
         agent = GetComponent<NavMeshAgent>();
     }
@@ -100,6 +107,11 @@ public class EnemyAI : MonoBehaviour
 
             while (stunSec > 0)
             {
+                if(state != EnemyState.STUN)
+                {
+                    GameManager.PlaySFX(GetComponent<AudioSource>(), GameManager.Instance.audioBox.RedShoes_redshoes_struggle, SoundType.SFX);
+                }
+
                 state = EnemyState.STUN;
                 stunSec--;
                 yield return new WaitForSeconds(1);
@@ -126,11 +138,7 @@ public class EnemyAI : MonoBehaviour
                     // 작은 상태면 공격
                     if(Item_SizeChange.sizeValueRaw == 0)
                     {
-                        if (GameManager.Instance.player.isSubCam) UIManager.ChangeToMainCamera();
-
-                        GameManager.Instance.player.playerState = PlayerState.DEAD;
-                        //MouseEvent.MouseLock(false);
-                        redShoesAmbientSource.volume = 0;
+                        GameOver();
                         GameManager.PlaySFX(GameManager.Instance.audioBox.ambient_dead_by_shoes);
 
                         Camera.main.transform.localRotation = Quaternion.identity;
@@ -138,21 +146,12 @@ public class EnemyAI : MonoBehaviour
                         StartCoroutine(ScreenToGameOver());
                         GameManager.Instance.player.GetComponent<Animator>().Play("Player_DeadbyShoes");
 
-                        Stop();
-                        agent.enabled = false;
-
                         transform.position = GameManager.Instance.player.transform.position;
                         transform.rotation = Quaternion.Euler(0, GameManager.Instance.player.transform.eulerAngles.y, 0);
-
-                        UIManager.ChangeToMainCamera();
-
-                        if (PlayerAction.currentObj != null)
-                        {
-                            PlayerAction.currentObj.GetComponent<SelectableObject>().OnDisHighlighted();
-                        }
                     }
                     else if (Item_SizeChange.sizeValueRaw == -1)
                     {
+                        
                         Debug.Log("공격");
                     }
                     state = EnemyState.ATTACK;
@@ -183,6 +182,28 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    public static void AttackTest()
+    {
+        if (instance.state == EnemyState.ATTACK)
+        {
+            if (Item_SizeChange.sizeValueRaw == -1)
+            {
+                float randomRange = 0.6f;
+
+                for (int i = 0; i < 2; i++)
+                {
+                    Vector3 playerFront = instance.playerTr.position + instance.playerTr.forward;
+
+                    float randomX = Random.Range(playerFront.x - randomRange, playerFront.x + randomRange);
+                    float randomZ = Random.Range(playerFront.z - randomRange, playerFront.z + randomRange);
+
+                    Vector3 random = new Vector3(randomX, instance.hitbox_box.position.y, randomZ);
+                    Instantiate(instance.hitbox, random, Quaternion.Euler(90, 0, 0), instance.hitbox_box);
+                }
+            }
+        }
+    }
+
     IEnumerator DoAction()
     {
         while(true){
@@ -210,6 +231,25 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    public static void GameOver()
+    {
+        if (GameManager.Instance.player.isSubCam) UIManager.ChangeToMainCamera();
+
+        GameManager.Instance.player.playerState = PlayerState.DEAD;
+        instance.redShoesAmbientSource.volume = 0;
+
+        if (instance.agent.enabled)
+        {
+            instance.Stop();
+        }
+        instance.agent.enabled = false;
+
+        if (PlayerAction.currentObj != null)
+        {
+            PlayerAction.currentObj.GetComponent<SelectableObject>().OnDisHighlighted();
+        }
+    }
+
     IEnumerator ScreenToGameOver()
     {
         yield return new WaitForSecondsRealtime(6.5f);
@@ -230,10 +270,10 @@ public class EnemyAI : MonoBehaviour
     {
         bool isView = false;
         RaycastHit hit;
-        Vector3 dir = (playerTr.position - transform.position);
-        dir.y = 0;
-        Debug.DrawRay(transform.position + new Vector3(0,playerTr.localScale.y,0), dir, Color.red, 1);
-        if (Physics.Raycast(transform.position + new Vector3(0, playerTr.localScale.y, 0), dir, out hit, 100, layerMask))
+        Vector3 dir = (playerTr.position - (transform.position + new Vector3(0, 0.5f, 0)));
+        //dir.y = 0;
+        Debug.DrawRay(transform.position + new Vector3(0,0.5f,0), dir, Color.red, 1);
+        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), dir, out hit, 100, layerMask))
         {
             //Debug.Log(hit.collider.gameObject.name);
             isView = (hit.collider.gameObject.CompareTag("Player"));
@@ -249,6 +289,9 @@ public class EnemyAI : MonoBehaviour
         {
             waiting = true;
             GameManager.PlaySFX(clip);
+            GameManager.Instance.urpSettings.TryGet<Vignette>(out Vignette vignette);
+            DOTween.To(() => vignette.color.value, value => vignette.color.value = value, Color.red, 1).SetLoops(2, LoopType.Yoyo);
+            DOTween.To(() => vignette.intensity.value, value => vignette.intensity.value = value, 0.5f, 0.5f).SetLoops(2, LoopType.Yoyo);
             StartCoroutine(WaitCoolTime());
         }
     }

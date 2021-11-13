@@ -8,12 +8,18 @@ public class PIB_Coffer_Handle : SelectableObject
 {
     private bool isLocked = true;
     public UnityEvent clearEvent;
+    public UnityEvent loadEvent;
     public Transform coffer_Door;
     public AudioSource coffer_audioSource;
 
-    public void UnLock()
+    public void UnLock(bool instant)
     {
         isLocked = false;
+        if(instant)
+        {
+            coffer_Door.localEulerAngles = new Vector3(0, 0, 130);
+            loadEvent.Invoke();
+        }
     }
 
     public override void OnClicked()
