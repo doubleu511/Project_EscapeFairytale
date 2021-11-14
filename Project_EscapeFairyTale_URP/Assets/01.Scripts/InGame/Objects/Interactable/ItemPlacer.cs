@@ -79,8 +79,7 @@ public class ItemPlacer : SelectableObject, ISaveAble
         {
             if(placeAbles[i])
             {
-                PickableObject obj = Instantiate(GameManager.Instance.itemData.infos[GameManager.Instance.selectedItemId].itemPrefab, placeAblePoses[i].position, transform.rotation)
-                    .GetComponent<PickableObject>().Drop().GetComponent<PickableObject>();
+                PickableObject obj = GameManager.Instance.FindDisabledObject(GameManager.Instance.selectedItemId).ObjectOn(placeAblePoses[i].position, transform.rotation).GetComponent<PickableObject>();
                 placedId[i] = GameManager.Instance.selectedItemId;
                 Destroy(obj.GetComponent<Rigidbody>());
                 placeAbles[i] = false;
@@ -127,9 +126,12 @@ public class ItemPlacer : SelectableObject, ISaveAble
 
             if(!placeAbles[i])
             {
-                PickableObject obj = Instantiate(GameManager.Instance.itemData.infos[placedId[i]].itemPrefab, placeAblePoses[i].position, transform.rotation)
-                .GetComponent<PickableObject>().Drop().GetComponent<PickableObject>();
-                Destroy(obj.GetComponent<Rigidbody>());
+                PickableObject obj = GameManager.Instance.FindDisabledObject(placedId[i]).ObjectOn(placeAblePoses[i].position, transform.rotation).GetComponent<PickableObject>();
+
+                if (obj.GetComponent<Rigidbody>() != null)
+                {
+                    Destroy(obj.GetComponent<Rigidbody>());
+                }
                 obj.itemPlacer = this;
                 obj.itemPlaceIndex = i;
             }

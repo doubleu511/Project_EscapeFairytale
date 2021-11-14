@@ -114,18 +114,18 @@ public class Door : SelectableObject_Parent, ISaveAble
     private void DoorMove(bool open)
     {
         ignoreRaycast = true;
-        parent_door.DOLocalRotate(new Vector3(0, 0, open ? openDir : 0), 1.5f).OnComplete(() =>
+        parent_door.DOLocalRotate(new Vector3(0, 0, open ? openDir : -openDir), 1.5f).OnComplete(() =>
         {
             ignoreRaycast = false;
-        });
+        }).SetRelative();
 
         if (friendDoor != null)
         {
             friendDoor.ignoreRaycast = true;
-            friendDoor.parent_door.DOLocalRotate(new Vector3(0, 0, open ? friendDoor.openDir : 0), 1.5f).OnComplete(() =>
+            friendDoor.parent_door.DOLocalRotate(new Vector3(0, 0, open ? friendDoor.openDir : -friendDoor.openDir), 1.5f).OnComplete(() =>
             {
                 friendDoor.ignoreRaycast = false;
-            });
+            }).SetRelative();
         }
     }
 

@@ -26,12 +26,17 @@ public class GameManager : MonoBehaviour
 
     [Header("Player")]
     public PlayerController player;
+    public Transform foodGenerate;
+    private List<Transform> foodGeneratePoses = new List<Transform>();
+    public int muffinCountLeft = 6;
+    public int milkCountLeft = 6;
 
     [Header("Inventory")]
     public ItemData itemData;
     public int selectedItemId;
     public TabScript selectedTab;
     public GameObject selectedItemUI;
+    public List<PickableObject> pickableObjectList = new List<PickableObject>(); // 처음부터 꺼진 애들은 미리 넣어준다.
 
     [Header("ItemEffects")]
     public UnityEvent[] itemUseCallback;
@@ -65,19 +70,27 @@ public class GameManager : MonoBehaviour
         Instance = this;
         allSource = FindObjectsOfType<AudioSource>();
 
+        PickableObject[] pickableObjects = FindObjectsOfType<PickableObject>();
+        foreach(PickableObject item in pickableObjects)
+        {
+            pickableObjectList.Add(item);
+        }
+
         DataLoad();
     }
 
     void Start()
     {
         color_select = color_anim1;
+        //foodGenerate.GetComponentsInChildren<Transform>(foodGeneratePoses);
+        //foodGeneratePoses.RemoveAt(0);
+
         ColorChange(false);
     }
 
     [ContextMenu("Save")]
     public void DataSave()
     {
-        // 이거 말고도, 플레이어 인벤토리와 플레이어 위치를 저장해야한다.
         string json = JsonUtility.ToJson(new Serialization<string, string>(saveDic));
         SecurityPlayerPrefs.SetString("object-save", json);
         SecurityPlayerPrefs.SetString("playerPos-save", $"{player.transform.position.x} {player.transform.position.y} {player.transform.position.z}");
@@ -221,5 +234,47 @@ public class GameManager : MonoBehaviour
     {
         string a = JsonUtility.ToJson(new Serialization<string, string>(saveDic));
         print(a);
+    }
+
+    public PickableObject FindDisabledObject(int itemId)
+    {
+        for(int i = 0; i<pickableObjectList.Count;i++)
+        {
+            if(pickableObjectList[i].itemId == itemId)
+            {
+                if (!pickableObjectList[i].gameObject.activeSelf)
+                {
+                    return pickableObjectList[i];
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public void CreateMuffinTest()
+    {
+        muffinCountLeft--;
+
+        if(muffinCountLeft <= 0)
+        {
+            muffinCountLeft = 1;
+            // 만든다.
+            int randomIdx = UnityEngine.Random.Range(0, foodGeneratePoses.Count);
+
+
+
+        }
+    }
+
+    public void CreateMilkTest()
+    {
+        milkCountLeft--;
+
+        if (milkCountLeft <= 0)
+        {
+            milkCountLeft = 1;
+            // 만든다.
+        }
     }
 }

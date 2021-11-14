@@ -24,12 +24,17 @@ public class PickableObject : SelectableObject, ISaveAble
         }
     } // true이면 오브젝트가 켜진것, false이면 꺼진것 
 
+    private Coroutine dropWait;
+
     protected void Start()
     {
         if (!saveKey.Equals(""))
         {
             if (!GameManager.saveDic.ContainsKey(saveKey))
             {
+                _eventFlow = $"{transform.position.x} {transform.position.y} {transform.position.z}/" +
+                    $"{transform.eulerAngles.x} {transform.eulerAngles.y} {transform.eulerAngles.z}/" +
+                    $"{transform.localScale.x} {transform.localScale.y} {transform.localScale.z}";
                 GameManager.saveDic.Add(saveKey, eventFlow);
             }
             else
@@ -39,14 +44,43 @@ public class PickableObject : SelectableObject, ISaveAble
         }
     }
 
-    public GameObject Drop()
+    public GameObject ObjectOn(Vector3 pos, Quaternion rotation)
     {
-        _eventFlow = "true";
+        this.gameObject.transform.position = pos;
+        this.gameObject.transform.rotation = rotation;
+        _eventFlow = $"{transform.position.x} {transform.position.y} {transform.position.z}/" +
+            $"{transform.eulerAngles.x} {transform.eulerAngles.y} {transform.eulerAngles.z}/" +
+            $"{transform.localScale.x} {transform.localScale.y} {transform.localScale.z}";
         TempSave();
-        Rigidbody rb = GetComponent<Rigidbody>();
-        rb.AddForce(Camera.main.transform.forward * 2 * GameManager.Instance.player.transform.localScale.x, ForceMode.Impulse);
+        gameObject.SetActive(true);
+
+        dropWait = StartCoroutine(Wait());
 
         return this.gameObject;
+    }
+
+    public void Drop()
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+
+        if (rb != null)
+        {
+            rb.AddForce(Camera.main.transform.forward * 2 * GameManager.Instance.player.transform.localScale.x, ForceMode.Impulse);
+        }
+        else
+        {
+            rb = gameObject.AddComponent<Rigidbody>();
+            rb.AddForce(Camera.main.transform.forward * 2 * GameManager.Instance.player.transform.localScale.x, ForceMode.Impulse);
+        }
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(2);
+        _eventFlow = $"{transform.position.x} {transform.position.y} {transform.position.z}/" +
+        $"{transform.eulerAngles.x} {transform.eulerAngles.y} {transform.eulerAngles.z}/" +
+        $"{transform.localScale.x} {transform.localScale.y} {transform.localScale.z}";
+        TempSave();
     }
 
     public void TempSave()
@@ -60,10 +94,24 @@ public class PickableObject : SelectableObject, ISaveAble
     public void Load()
     {
         eventFlow = GameManager.saveDic[saveKey];
-        if (!bool.Parse(eventFlow))
+        if (eventFlow.Equals("false"))
         {
+            if (dropWait != null)
+            {
+                StopCoroutine(dropWait);
+            }
             gameObject.SetActive(false);
-            Invoke("DestroyObj", 0.5f);
+        }
+        else
+        {
+            string[] transforms = _eventFlow.Split('/');
+            string[] poses = transforms[0].Split(' ');
+            string[] rotations = transforms[1].Split(' ');
+            string[] scales = transforms[2].Split(' ');
+
+            transform.position = new Vector3(float.Parse(poses[0]), float.Parse(poses[1]), float.Parse(poses[2]));
+            transform.eulerAngles = new Vector3(float.Parse(rotations[0]), float.Parse(rotations[1]), float.Parse(rotations[2]));
+            transform.localScale = new Vector3(float.Parse(scales[0]), float.Parse(scales[1]), float.Parse(scales[2]));
         }
     }
 
@@ -87,8 +135,11 @@ public class PickableObject : SelectableObject, ISaveAble
             {
                 itemPlacer.placeAbles[itemPlaceIndex] = true;
             }
+            if (dropWait != null)
+            {
+                StopCoroutine(dropWait);
+            }
             gameObject.SetActive(false);
-            Invoke("DestroyObj", 0.5f);
             GameManager.Instance.inventoryManager.TIP_ItemGotTipAppear(GameManager.Instance.itemData.infos[itemId].itemSprite);
 
             if(GameManager.Instance.isTutorial)
@@ -116,10 +167,5 @@ public class PickableObject : SelectableObject, ISaveAble
             // 인벤토리 꽉참
             GameManager.Instance.inventoryManager.TIP_FullInventory();
         }
-    }
-
-    private void DestroyObj()
-    {
-        Destroy(this.gameObject);
     }
 }

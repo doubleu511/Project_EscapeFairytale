@@ -15,5 +15,4 @@ public class ItemDataInfo
     [TextArea(5, 10)]
     public string itemLore;
     public Sprite itemSprite;
-    public GameObject itemPrefab;
 }
