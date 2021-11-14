@@ -82,8 +82,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         color_select = color_anim1;
-        //foodGenerate.GetComponentsInChildren<Transform>(foodGeneratePoses);
-        //foodGeneratePoses.RemoveAt(0);
+        foodGenerate.GetComponentsInChildren<Transform>(foodGeneratePoses);
+        foodGeneratePoses.RemoveAt(0);
 
         ColorChange(false);
     }
@@ -103,6 +103,7 @@ public class GameManager : MonoBehaviour
         SecurityPlayerPrefs.SetBool("saved-file-exists", true);
         SecurityPlayerPrefs.SetInt("playerSize-save", Item_SizeChange.sizeValueRaw);
         SecurityPlayerPrefs.SetString("saved-dateTime", DateTime.Now.ToString());
+        SecurityPlayerPrefs.SetString("saved-food-remain", $"{muffinCountLeft} {milkCountLeft}");
         Screenshot.TakeScreenshot();
         print("Save Complete");
     }
@@ -151,6 +152,11 @@ public class GameManager : MonoBehaviour
         int playerSize = SecurityPlayerPrefs.GetInt("playerSize-save", 0);
         Item_SizeChange.SetSizeInstant(playerSize);
 
+        string foodRemain = SecurityPlayerPrefs.GetString("saved-food-remain", "6 6");
+        string[] foods = foodRemain.Split(' ');
+        muffinCountLeft = int.Parse(foods[0]);
+        milkCountLeft = int.Parse(foods[1]);
+
         print("Load Complete");
     }
 
@@ -180,6 +186,7 @@ public class GameManager : MonoBehaviour
 
         SecurityPlayerPrefs.SetString("saved-dateTime", "");
         SecurityPlayerPrefs.SetInt("playerSize-save", 0);
+        SecurityPlayerPrefs.SetString("saved-food-remain", "6 6");
         print("Reset Complete");
     }
 
@@ -254,6 +261,8 @@ public class GameManager : MonoBehaviour
 
     public void CreateMuffinTest()
     {
+        const int MUFFIN_ID = 2;
+
         muffinCountLeft--;
 
         if(muffinCountLeft <= 0)
@@ -262,19 +271,49 @@ public class GameManager : MonoBehaviour
             // 만든다.
             int randomIdx = UnityEngine.Random.Range(0, foodGeneratePoses.Count);
 
+            PickableObject muffin = FindDisabledObject(MUFFIN_ID);
+            if(muffin != null)
+            {
+                float randomRangeX = 0.07f;
+                float randomRangeZ = 0.07f;
+                Vector3 pos = foodGeneratePoses[randomIdx].position;
 
+                float randomX = pos.x + UnityEngine.Random.Range(-randomRangeX, randomRangeX);
+                float randomZ = pos.z + UnityEngine.Random.Range(-randomRangeZ, randomRangeZ);
 
+                Vector3 randomPos = new Vector3(randomX, pos.y, randomZ);
+
+                muffin.ObjectOn(randomPos, foodGeneratePoses[randomIdx].rotation);
+            }
         }
     }
 
     public void CreateMilkTest()
     {
+        const int MILK_ID = 3;
+
         milkCountLeft--;
 
         if (milkCountLeft <= 0)
         {
             milkCountLeft = 1;
             // 만든다.
+            int randomIdx = UnityEngine.Random.Range(0, foodGeneratePoses.Count);
+
+            PickableObject milk = FindDisabledObject(MILK_ID);
+            if (milk != null)
+            {
+                float randomRangeX = 0.07f;
+                float randomRangeZ = 0.07f;
+                Vector3 pos = foodGeneratePoses[randomIdx].position;
+
+                float randomX = pos.x + UnityEngine.Random.Range(-randomRangeX, randomRangeX);
+                float randomZ = pos.z + UnityEngine.Random.Range(-randomRangeZ, randomRangeZ);
+
+                Vector3 randomPos = new Vector3(randomX, pos.y, randomZ);
+
+                milk.ObjectOn(randomPos, foodGeneratePoses[randomIdx].rotation);
+            }
         }
     }
 }

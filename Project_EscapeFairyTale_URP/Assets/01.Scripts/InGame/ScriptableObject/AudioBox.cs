@@ -23,6 +23,15 @@ public class AudioBox : ScriptableObject
     public AudioClip object_coffer_wrong;
     public AudioClip object_coffer_correct;
     public AudioClip object_coffer_light_on;
+    public AudioClip object_clock_bell;
+    public AudioClip object_clock_correct;
+    public AudioClip object_clock_ambient;
+    public AudioClip object_clock_powerOn;
+    public AudioClip object_clock_bomb;
+    public AudioClip object_clock_bigbell;
+    public AudioClip object_clock_glassbreak;
+    public AudioClip object_clock_assembly;
+    public AudioClip object_pillow_move;
 
     public AudioClip RedShoes_redshoes_walk1_left;
     public AudioClip RedShoes_redshoes_walk1_right;

@@ -61,6 +61,7 @@ public class UIManager : MonoBehaviour
     public Button subCamera_Back;
     public Image cameraAim;
     public SelectableObject currentShowObject;
+    public CanvasGroup aliceClock_input;
 
     [Header("PausePanel")]
     public CanvasGroup pausePanel;
@@ -506,6 +507,17 @@ public class UIManager : MonoBehaviour
                 instance.tutorialPanel.DOFade(1, 1);
             }
         }
+    }
+
+    #endregion
+
+    #region SubCamera_Events
+
+    public static void AliceClockInput(bool value)
+    {
+        instance.aliceClock_input.DOFade(value ? 1 : 0, 0.5f);
+        instance.aliceClock_input.interactable = value;
+        instance.aliceClock_input.blocksRaycasts = value;
     }
 
     #endregion

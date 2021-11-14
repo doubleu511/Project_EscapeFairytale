@@ -29,6 +29,15 @@ MonoBehaviour:
   object_coffer_wrong: {fileID: 8300000, guid: 93a9e8c3b1daae64d9e48f37c0bc330c, type: 3}
   object_coffer_correct: {fileID: 8300000, guid: 4ddfb422e7223cb40904178e0058e902, type: 3}
   object_coffer_light_on: {fileID: 8300000, guid: 18b065f7f1c9e9d48841489f1d402e6d, type: 3}
+  object_clock_bell: {fileID: 8300000, guid: cb44d0d3387b36d4e837b2a2d3ef0306, type: 3}
+  object_clock_correct: {fileID: 8300000, guid: 117f0a1d2331b44468fd992290aa5e2e, type: 3}
+  object_clock_ambient: {fileID: 8300000, guid: 61d0d5df7d92d2542a288a0cae428846, type: 3}
+  object_clock_powerOn: {fileID: 8300000, guid: 2462ff69198da9441a9add96c428042e, type: 3}
+  object_clock_bomb: {fileID: 8300000, guid: 2033cb185ac129b49b5c5944934f4f3a, type: 3}
+  object_clock_bigbell: {fileID: 8300000, guid: 0e4472301f7d0744f833ff41eab49c01, type: 3}
+  object_clock_glassbreak: {fileID: 8300000, guid: 889f58201f3586248b4a6257b42a5e83, type: 3}
+  object_clock_assembly: {fileID: 8300000, guid: e499ec5bcc3ca6c48a7d5044e3e378de, type: 3}
+  object_pillow_move: {fileID: 8300000, guid: 78fbf310c81ba8a41a16ec37bab271df, type: 3}
   RedShoes_redshoes_walk1_left: {fileID: 8300000, guid: 058131ebebadeeb4a8def027724f1f10, type: 3}
   RedShoes_redshoes_walk1_right: {fileID: 8300000, guid: 8da1f4db99319d84f85597bcb6a52f7a, type: 3}
   RedShoes_redshoes_walk2_left: {fileID: 8300000, guid: c3d90241b6860934c92269292b89ec87, type: 3}

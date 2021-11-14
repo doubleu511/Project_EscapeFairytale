@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Outline))]
 public class SelectableObject : MonoBehaviour
 {
+    [TextArea]
     public string selectText;
     public bool ignoreRaycast = false;
     public bool ignoreRaycast_inSubCam = false;

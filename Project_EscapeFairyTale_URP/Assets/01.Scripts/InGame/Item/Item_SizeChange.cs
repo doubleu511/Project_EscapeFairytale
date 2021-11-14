@@ -31,6 +31,7 @@ public class Item_SizeChange : MonoBehaviour
             GameManager.Instance.inventoryManager.DecreaseTab(GameManager.Instance.selectedTab.tabId);
 
             GameManager.PlaySFX(GameManager.Instance.audioBox.player_eatMilk);
+            GameManager.Instance.CreateMilkTest();
         }
         else
         {
@@ -52,6 +53,7 @@ public class Item_SizeChange : MonoBehaviour
 
             GameManager.Instance.player.transform.DOScale(currentSize, 2).SetUpdate(UpdateType.Fixed);
             Camera.main.DOFieldOfView(currentFOV, 2).SetUpdate(UpdateType.Fixed);
+            GameManager.Instance.CreateMuffinTest();
             GameManager.Instance.inventoryManager.DecreaseTab(GameManager.Instance.selectedTab.tabId);
 
             GameManager.PlaySFX(GameManager.Instance.audioBox.player_eatMuffin);
