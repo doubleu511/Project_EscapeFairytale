@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour
         playerState = PlayerState.NORMAL;
         playerAnim.Play("Player_idle");
 
-        UIManager.TutorialPanel("마우스를 이용하여 카메라를 움직입니다.");
+        UIManager.TutorialPanel("마우스를 이용하여 시야를 움직입니다.");
         UIManager.TutorialPanel("W/A/S/D 를 이용하여 이동할 수 있습니다.");
     }
 }
