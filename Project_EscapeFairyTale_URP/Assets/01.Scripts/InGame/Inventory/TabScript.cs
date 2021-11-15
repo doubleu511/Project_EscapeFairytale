@@ -33,6 +33,7 @@ public class TabScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IDropHa
         if (itemId == -1)
         {
             myImg.enabled = false;
+            myImg.sprite = null;
             itemCount = -1;
             myCountText.text = "";
         }
@@ -88,6 +89,7 @@ public class TabScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IDropHa
                 // Clear Data
                 itemId = -1;
                 itemCount = -1;
+                myImg.sprite = null;
                 myImg.enabled = false;
                 myCountText.text = "";
             }
@@ -110,6 +112,7 @@ public class TabScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IDropHa
             int tempItemCount = itemCount;
 
             // set data from drag object on Container
+            myImg.enabled = true;
             myImg.sprite = dragAndDropContainer.image.sprite;
             itemId = dragAndDropContainer.itemId;
             itemCount = dragAndDropContainer.itemCount;
