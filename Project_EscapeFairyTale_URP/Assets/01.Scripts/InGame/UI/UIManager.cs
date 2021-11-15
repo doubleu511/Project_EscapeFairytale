@@ -62,6 +62,14 @@ public class UIManager : MonoBehaviour
     public Image cameraAim;
     public SelectableObject currentShowObject;
     public CanvasGroup aliceClock_input;
+    public CanvasGroup pinocio_tree;
+    public Button pinocio_tree_backBtn;
+    public CanvasGroup pinocio_tree_branch;
+    public GameObject[] pinocio_tree_branches;
+    public Button pinocio_tree_branch_backBtn;
+    public CanvasGroup pinocio_tree_leaf;
+    public Text pinocio_tree_leaf_text;
+    public Button pinocio_tree_leaf_backBtn;
 
     [Header("PausePanel")]
     public CanvasGroup pausePanel;
@@ -150,6 +158,23 @@ public class UIManager : MonoBehaviour
             });
         });
 
+        pinocio_tree_backBtn.onClick.AddListener(() =>
+        {
+            CanvasGroup_DefaultShow(pinocio_tree, false, false);
+            currentShowObject = null;
+            ChangeToMainCamera();
+        });
+
+        pinocio_tree_branch_backBtn.onClick.AddListener(() =>
+        {
+            CanvasGroup_DefaultShow(pinocio_tree_branch, false);
+        });
+
+        pinocio_tree_leaf_backBtn.onClick.AddListener(() =>
+        {
+            CanvasGroup_DefaultShow(pinocio_tree_leaf, false);
+        });
+
         // 설정 드롭다운
         graphics_WindowMode.onValueChanged.AddListener(value => SettingManager.ScreenMode(value));
         graphics_Resolution.onValueChanged.AddListener(value => SettingManager.Resolution(value));
@@ -219,10 +244,32 @@ public class UIManager : MonoBehaviour
         instance.gameOverScreen.interactable = true;
         instance.gameOverScreen.blocksRaycasts = true;
         instance.gameOverScreen.alpha = 1;
-        instance.gameOverDetail.DOFade(1, 0.1f).SetDelay(3).OnComplete(() =>
-        {
+
+/*        Sequence seq = DOTween.Sequence();
+
+        seq.AppendInterval(3);
+        seq.AppendCallback(() =>
+        {*/
+            instance.gameOverDetail.alpha = 1;
             GameManager.Instance.isGameOver = true;
-        });
+        //});
+    }
+
+    public static void CanvasGroup_DefaultShow(CanvasGroup group, bool show)
+    {
+        group.DOComplete();
+        group.alpha = show ? 1 : 0;
+        group.blocksRaycasts = show;
+        group.interactable = show;
+    }
+
+    public static void CanvasGroup_DefaultShow(CanvasGroup group, bool show, bool animatedsetUpdate)
+    {
+        group.DOComplete();
+        group.DOFade(show ? 1 : 0, 0.5f).SetUpdate(animatedsetUpdate);
+
+        group.blocksRaycasts = show;
+        group.interactable = show;
     }
 
     #region LetterUI
@@ -262,16 +309,12 @@ public class UIManager : MonoBehaviour
 
     public static void BookDefaultUI(bool show)
     {
-        instance.bookDefault.DOFade(show ? 1 : 0, 0.5f);
-        instance.bookDefault.blocksRaycasts = show;
-        instance.bookDefault.interactable = show;
+        CanvasGroup_DefaultShow(instance.bookDefault, show, false);
     }
 
     public static void BookDetailUI(Sprite[] sprites, Color endPageColor)
     {
-        instance.bookDetail.alpha = 1;
-        instance.bookDetail.blocksRaycasts = true;
-        instance.bookDetail.interactable = true;
+        CanvasGroup_DefaultShow(instance.bookDetail, true);
         instance.endPageColor = endPageColor;
         instance.bookSprites = sprites;
         instance.BookDetailPage();
@@ -279,9 +322,7 @@ public class UIManager : MonoBehaviour
 
     public static void BookDetailClose()
     {
-        instance.bookDetail.alpha = 0;
-        instance.bookDetail.blocksRaycasts = false;
-        instance.bookDetail.interactable = false;
+        CanvasGroup_DefaultShow(instance.bookDetail, false);
 
         if (GameManager.Instance.player.playerState == PlayerState.OPEN_BOOK)
         {
@@ -332,14 +373,14 @@ public class UIManager : MonoBehaviour
 
     #region CameraMove
 
-    public static void ChangeToSubCamera(Vector3 pos, Quaternion rotation)
+    public static void ChangeToSubCamera(Vector3 pos, Quaternion rotation, bool backButtonAppear = true)
     {
         GetMainCam().gameObject.SetActive(false);
         instance.cameraAim.gameObject.SetActive(false);
         instance.subCamera.transform.position = pos;
         instance.subCamera.transform.rotation = rotation;
         instance.subCamera.gameObject.SetActive(true);
-        instance.subCamera_Back.gameObject.SetActive(true);
+        instance.subCamera_Back.gameObject.SetActive(backButtonAppear);
         MouseEvent.MouseLock(false);
         GameManager.Instance.player.isSubCam = true;
     }
@@ -454,9 +495,7 @@ public class UIManager : MonoBehaviour
 
     public static void OptionPanel(bool value)
     {
-        instance.optionPanel.DOFade(value ? 1 : 0, 0.5f).SetUpdate(true);
-        instance.optionPanel.interactable = value;
-        instance.optionPanel.blocksRaycasts = value;
+        CanvasGroup_DefaultShow(instance.optionPanel, value, true);
     }
 
     public static void OptionDetailPanel(int index)
@@ -515,9 +554,23 @@ public class UIManager : MonoBehaviour
 
     public static void AliceClockInput(bool value)
     {
-        instance.aliceClock_input.DOFade(value ? 1 : 0, 0.5f);
-        instance.aliceClock_input.interactable = value;
-        instance.aliceClock_input.blocksRaycasts = value;
+        CanvasGroup_DefaultShow(instance.aliceClock_input, value, false);
+    }
+
+    public static void Pinocio_Branch(int index)
+    {
+        CanvasGroup_DefaultShow(instance.pinocio_tree_branch, true, false);
+        for(int i = 0; i < instance.pinocio_tree_branches.Length; i++)
+        {
+            instance.pinocio_tree_branches[i].SetActive(false);
+        }
+        instance.pinocio_tree_branches[index].SetActive(true);
+    }
+
+    public static void Pinocio_Leaf(string text)
+    {
+        CanvasGroup_DefaultShow(instance.pinocio_tree_leaf, true, false);
+        instance.pinocio_tree_leaf_text.text = text;
     }
 
     #endregion

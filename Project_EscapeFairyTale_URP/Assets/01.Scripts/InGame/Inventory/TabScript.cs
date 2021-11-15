@@ -32,12 +32,13 @@ public class TabScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IDropHa
     {
         if (itemId == -1)
         {
-            myImg.sprite = null;
+            myImg.enabled = false;
             itemCount = -1;
             myCountText.text = "";
         }
         else
         {
+            myImg.enabled = true;
             myImg.sprite = GameManager.Instance.itemData.infos[itemId].itemSprite;
             myCountText.text = itemCount > 1 ? $"x{itemCount}" : "";
         }
@@ -46,7 +47,7 @@ public class TabScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IDropHa
     // 드래그 오브젝트에서 발생
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (myImg.sprite == null)
+        if (!myImg.enabled)
         {
             return;
         }
@@ -78,6 +79,7 @@ public class TabScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IDropHa
                 // set data from dropped object
                 itemId = dragAndDropContainer.itemId;
                 itemCount = dragAndDropContainer.itemCount;
+                myImg.enabled = true;
                 myImg.sprite = dragAndDropContainer.image.sprite;
                 myCountText.text = itemCount > 1 ? $"x{itemCount}" : "";
             }
@@ -86,7 +88,7 @@ public class TabScript : MonoBehaviour, IDragHandler, IBeginDragHandler, IDropHa
                 // Clear Data
                 itemId = -1;
                 itemCount = -1;
-                myImg.sprite = null;
+                myImg.enabled = false;
                 myCountText.text = "";
             }
         }

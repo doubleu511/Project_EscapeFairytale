@@ -20,7 +20,16 @@ public class PlayerAction : MonoBehaviour
 
         if (!GameManager.Instance.player.isSubCam)
         {
-            isHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 2 * (transform.localScale.x > 2.5f ? 5 : 1), hitAbleLayer);
+            float rayScale = 1;
+            if(transform.localScale.x > 2.5f)
+            {
+                rayScale = 5;
+            }
+            else if (transform.localScale.x < 0.5f)
+            {
+                rayScale = 0.5f;
+            }
+            isHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 2 * rayScale, hitAbleLayer);
         }
         else
         {

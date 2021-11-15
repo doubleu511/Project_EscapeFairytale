@@ -20,7 +20,7 @@ TagManager:
   - PostProcess
   - EnemyFOV
   - AreaLightAffected
-  - BGMPlayer
+  - AirCollision
   - 
   - 
   - 

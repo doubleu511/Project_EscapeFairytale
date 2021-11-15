@@ -32,6 +32,10 @@ public class AudioBox : ScriptableObject
     public AudioClip object_clock_glassbreak;
     public AudioClip object_clock_assembly;
     public AudioClip object_pillow_move;
+    public AudioClip object_tree_grow1;
+    public AudioClip object_tree_grow2;
+    public AudioClip object_tree_break;
+    public AudioClip object_pickup;
 
     public AudioClip RedShoes_redshoes_walk1_left;
     public AudioClip RedShoes_redshoes_walk1_right;

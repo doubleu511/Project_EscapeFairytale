@@ -13,7 +13,7 @@ public class Item_MinuteNeedle : MonoBehaviour
             if(clock != null)
             {
                 // 만약 맞는 시계라면 넣어야함
-                clock.OnNeedlePlace();
+                clock.OnNeedlePlace(false);
                 GameManager.Instance.inventoryManager.DecreaseTab(GameManager.Instance.selectedTab.tabId);
             }
         }

@@ -33,7 +33,7 @@ public class HitBox : MonoBehaviour
         if(isChecked.Length > 0)
         {
             EnemyAI.GameOver();
-            UIManager.GameOverUI(GameManager.Instance.spriteBox.Reason_Shoes);
+            UIManager.GameOverUI(GameManager.Instance.spriteBox.Reason_Shoes_Small);
         }
 
         GameManager.PlaySFX(GameManager.Instance.audioBox.RedShoes_redshoes_walk2_left);

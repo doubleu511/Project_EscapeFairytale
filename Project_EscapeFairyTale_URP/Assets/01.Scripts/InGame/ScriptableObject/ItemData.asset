@@ -48,3 +48,7 @@ MonoBehaviour:
     itemName: "\uACF6\uAC10"
     itemLore: "\uACF6\uAC10 \uBA39\uACE0\uC2F6\uB2E4"
     itemSprite: {fileID: 21300000, guid: 54ba470a8167a7e468fd7d93e2339e8c, type: 3}
+  - itemId: 8
+    itemName: "\uAC70\uC9D3\uB9D0 \uB098\uBB34 \uC5F4\uC1E0"
+    itemLore: "\uB098\uBB34\uC5D0\uC11C \uB098\uC628 \uC5F4\uC1E0"
+    itemSprite: {fileID: 21300000, guid: 2e4e508f7dc1cf241bf44ec3c448e49e, type: 3}

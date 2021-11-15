@@ -253,7 +253,7 @@ public class EnemyAI : MonoBehaviour
     IEnumerator ScreenToGameOver()
     {
         yield return new WaitForSecondsRealtime(6.5f);
-        UIManager.GameOverUI(GameManager.Instance.spriteBox.Reason_Shoes);
+        UIManager.GameOverUI(GameManager.Instance.spriteBox.Reason_Shoes_Big);
     }
 
     public void Stop()

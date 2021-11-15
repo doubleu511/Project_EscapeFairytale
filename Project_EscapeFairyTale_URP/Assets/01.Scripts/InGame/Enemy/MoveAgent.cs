@@ -82,7 +82,7 @@ public class MoveAgent : MonoBehaviour
     {
         if(!_patrolling) return;
 
-        if(agent.velocity.sqrMagnitude >= 0.04f && agent.remainingDistance <= 0.5f){
+        if(agent.remainingDistance <= 0.5f){
             nextIndex = (++nextIndex) % wayPoints.Count;
             MoveWayPoint();
         }

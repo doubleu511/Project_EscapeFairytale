@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 424fca7028aad7b4399b6372e6c02be7, type: 3}
   m_Name: SpriteBox
   m_EditorClassIdentifier: 
-  Reason_Shoes: {fileID: 21300000, guid: c592f847e0f14654abea2664d7a240dc, type: 3}
+  Reason_Shoes_Big: {fileID: 21300000, guid: c592f847e0f14654abea2664d7a240dc, type: 3}
+  Reason_Shoes_Small: {fileID: 21300000, guid: ee9bcad170b4af04f8707b710c2b1d16, type: 3}
+  UI_CantEat_Muffin: {fileID: 21300000, guid: bd8eb337945beb047b5032e6032494fc, type: 3}
+  UI_CantEat_Milk: {fileID: 21300000, guid: b1cddf997b0556d41abd03fdfbeb3e32, type: 3}
+  NewGame: {fileID: 21300000, guid: b824e69bce82d314fbb9f2372944cfdc, type: 3}

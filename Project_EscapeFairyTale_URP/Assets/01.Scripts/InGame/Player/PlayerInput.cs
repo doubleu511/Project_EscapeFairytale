@@ -1,6 +1,8 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -11,6 +13,15 @@ public class PlayerInput : MonoBehaviour
 
     void InputInGame()
     {
+        if (Input.GetKeyDown(KeyCode.R)) // ¿ÁΩ√¿€
+        {
+            if (GameManager.Instance.isGameOver)
+            {
+                DOTween.KillAll();
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+        }
+
         if (GameManager.Instance.player.playerState == PlayerState.DEAD) return;
         if (GameManager.Instance.player.playerState == PlayerState.WAKING_UP) return;
 

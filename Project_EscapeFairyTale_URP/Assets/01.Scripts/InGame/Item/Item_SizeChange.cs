@@ -14,11 +14,24 @@ public class Item_SizeChange : MonoBehaviour
     private static float[] stepOffsets = new float[3] { 0.05f, 0.25f, 0.25f };
     public static float[] dropItemSizeScale = new float[3] { 0.4f, 1f, 5f };
 
+    public SelectableObject pot;
+
     public void OnUseBig()
     {
-        if (GameManager.Instance.player.isSubCam) return;
+        if (GameManager.Instance.player.isSubCam)
+        {
+            if (UIManager.instance.currentShowObject == pot)
+            {
+                Pinocio_Tree.PourMilk();
+                return;
+            }
+            else
+            {
+                return;
+            }
+        }
 
-        if (sizeValueRaw < 1)
+        if (sizeValueRaw < 1 && (sizeValueRaw < 0 || BigSizeEnter.isMilkUsePossible))
         {
             sizeValueRaw++;
             currentSize = sizeScaleValues[sizeValueRaw + 1];
@@ -35,7 +48,7 @@ public class Item_SizeChange : MonoBehaviour
         }
         else
         {
-            UIManager.Tip_RBAppear(null, "먹어도 효과가 없을 것 같습니다..", 0.5f, 3, 2);
+            UIManager.Tip_RBAppear(GameManager.Instance.spriteBox.UI_CantEat_Milk, "먹어도 효과가 없을 것 같습니다..", 0.5f, 3, 2);
         }
     }
 
@@ -60,7 +73,7 @@ public class Item_SizeChange : MonoBehaviour
         }
         else
         {
-            UIManager.Tip_RBAppear(null, "먹어도 효과가 없을 것 같습니다..", 0.5f, 3, 2);
+            UIManager.Tip_RBAppear(GameManager.Instance.spriteBox.UI_CantEat_Muffin, "먹어도 효과가 없을 것 같습니다..", 0.5f, 3, 2);
         }
 
         if (GameManager.Instance.isTutorial)

@@ -38,6 +38,10 @@ MonoBehaviour:
   object_clock_glassbreak: {fileID: 8300000, guid: 889f58201f3586248b4a6257b42a5e83, type: 3}
   object_clock_assembly: {fileID: 8300000, guid: e499ec5bcc3ca6c48a7d5044e3e378de, type: 3}
   object_pillow_move: {fileID: 8300000, guid: 78fbf310c81ba8a41a16ec37bab271df, type: 3}
+  object_tree_grow1: {fileID: 8300000, guid: 214ffe9c420c4b244bee69541936197c, type: 3}
+  object_tree_grow2: {fileID: 8300000, guid: 9d65f3c4585eb1e4f8f091f92d250562, type: 3}
+  object_tree_break: {fileID: 8300000, guid: 702c9a5aad7d80043aac5b62951f4a41, type: 3}
+  object_pickup: {fileID: 8300000, guid: da5b14a7405e1d649916342ef62025c7, type: 3}
   RedShoes_redshoes_walk1_left: {fileID: 8300000, guid: 058131ebebadeeb4a8def027724f1f10, type: 3}
   RedShoes_redshoes_walk1_right: {fileID: 8300000, guid: 8da1f4db99319d84f85597bcb6a52f7a, type: 3}
   RedShoes_redshoes_walk2_left: {fileID: 8300000, guid: c3d90241b6860934c92269292b89ec87, type: 3}

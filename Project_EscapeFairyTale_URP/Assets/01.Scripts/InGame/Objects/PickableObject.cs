@@ -129,6 +129,7 @@ public class PickableObject : SelectableObject, ISaveAble
                 tab.itemCount = 1;
             }
             base.OnDisHighlighted();
+            GameManager.PlaySFX(GameManager.Instance.audioBox.object_pickup);
             GameManager.Instance.inventoryManager.SelectedItemRefresh();
             eventFlow = "false";
             if (itemPlacer != null)
