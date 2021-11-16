@@ -16,4 +16,8 @@ MonoBehaviour:
   Reason_Shoes_Small: {fileID: 21300000, guid: ee9bcad170b4af04f8707b710c2b1d16, type: 3}
   UI_CantEat_Muffin: {fileID: 21300000, guid: bd8eb337945beb047b5032e6032494fc, type: 3}
   UI_CantEat_Milk: {fileID: 21300000, guid: b1cddf997b0556d41abd03fdfbeb3e32, type: 3}
+  UI_Mouse: {fileID: 21300000, guid: 18a9edd18c3ca3e4189fbbd8ebe43800, type: 3}
+  UI_Mouse_Click: {fileID: 21300000, guid: 38203bf8e16313b4ba5b62a8dd0cb488, type: 3}
+  UI_Keyboard: {fileID: 21300000, guid: e5dfd13f348c72a48bec3b9bb53fe508, type: 3}
+  UI_Keyboard_Click: {fileID: 21300000, guid: 26c126f108840504ba35129b319eee12, type: 3}
   NewGame: {fileID: 21300000, guid: b824e69bce82d314fbb9f2372944cfdc, type: 3}

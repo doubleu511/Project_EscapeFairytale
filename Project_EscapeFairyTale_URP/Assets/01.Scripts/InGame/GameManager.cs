@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     public Color color_anim1 = Color.red;
     public Color color_anim2 = Color.red;
 
+
     public static Dictionary<string, string> saveDic = new Dictionary<string, string>();
 
     [HideInInspector] public bool isTutorial = false;
@@ -86,6 +87,19 @@ public class GameManager : MonoBehaviour
         foodGeneratePoses.RemoveAt(0);
 
         ColorChange(false);
+    }
+
+    public static void Save()
+    {
+        Instance.StartCoroutine(Instance.SaveCoroutine());
+    }
+
+    IEnumerator SaveCoroutine()
+    {
+        UIManager.CanvasGroup_DefaultShow(UIManager.instance.saveRing, true, true);
+        yield return new WaitForSeconds(1);
+        DataSave();
+        UIManager.CanvasGroup_DefaultShow(UIManager.instance.saveRing, false, true);
     }
 
     [ContextMenu("Save")]

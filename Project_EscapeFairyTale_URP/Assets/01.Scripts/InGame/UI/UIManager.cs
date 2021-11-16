@@ -19,6 +19,9 @@ public class UIManager : MonoBehaviour
     public Image tip_rb_Img;
     public Text tip_rb_Txt;
 
+    [Header("SaveTip")]
+    public CanvasGroup saveRing;
+
     [Header("CursorBottomTip")]
     public Text cursorBtTipText;
 
@@ -70,6 +73,7 @@ public class UIManager : MonoBehaviour
     public CanvasGroup pinocio_tree_leaf;
     public Text pinocio_tree_leaf_text;
     public Button pinocio_tree_leaf_backBtn;
+    public CanvasGroup rope_panel;
 
     [Header("PausePanel")]
     public CanvasGroup pausePanel;
