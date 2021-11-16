@@ -50,9 +50,9 @@ public class UIManager : MonoBehaviour
     public Color bookPageRight_BaseColor;
     public Button bookPageRightBtn;
     public Button bookPageCloseBtn;
+    public Image bookCover;
 
     private Sprite[] bookSprites;
-    private Color endPageColor;
     private int page = 0;
 
     [Header("SubCameraEvent")]
@@ -312,10 +312,10 @@ public class UIManager : MonoBehaviour
         CanvasGroup_DefaultShow(instance.bookDefault, show, false);
     }
 
-    public static void BookDetailUI(Sprite[] sprites, Color endPageColor)
+    public static void BookDetailUI(Sprite[] sprites, Color coverColor)
     {
         CanvasGroup_DefaultShow(instance.bookDetail, true);
-        instance.endPageColor = endPageColor;
+        instance.bookCover.color = coverColor;
         instance.bookSprites = sprites;
         instance.BookDetailPage();
     }
@@ -350,21 +350,21 @@ public class UIManager : MonoBehaviour
 
             if (bookSprites.Length % 2 == 0)
             {
+                bookPageRight.enabled = true;
                 bookPageRight.sprite = bookSprites[page * 2 + 1];
-                bookPageRight.color = bookPageRight_BaseColor;
             }
             else
             {
+                bookPageRight.enabled = false;
                 bookPageRight.sprite = null;
-                bookPageRight.color = endPageColor;
             }
         }
         else
         {
             bookPageRightBtn.gameObject.SetActive(true);
 
+            bookPageRight.enabled = true;
             bookPageRight.sprite = bookSprites[page * 2 + 1];
-            bookPageRight.color = bookPageRight_BaseColor;
         }
 
         bookPageLeft.sprite = bookSprites[page * 2];

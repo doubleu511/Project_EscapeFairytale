@@ -42,9 +42,15 @@ public class ItemPlacer : SelectableObject, ISaveAble
             }
             else
             {
-                Load();
+                StartCoroutine(LateStart());
             }
         }
+    }
+
+    IEnumerator LateStart()
+    {
+        yield return null;
+        Load();
     }
 
     public override void OnHighlighted(string text)
