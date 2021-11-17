@@ -519,7 +519,6 @@ public class UIManager : MonoBehaviour
     {
         if (text.Equals(""))
         {
-            print("Å×½ºÆ®");
             if (instance.tutorialQueue.Count > 0)
             {
                 instance.isTutorialPanelAppear = false;

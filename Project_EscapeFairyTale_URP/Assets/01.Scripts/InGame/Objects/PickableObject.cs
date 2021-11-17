@@ -160,6 +160,16 @@ public class PickableObject : SelectableObject, ISaveAble
                         UIManager.TutorialPanel("<size=65>인벤토리를 열어서 아이템을 클릭하여 선택하고, 특정 상황에서 F키를 눌러 사용할 수 있습니다.</size>");
                     }
                 }
+
+                if(!GameManager.Instance.isInventoryFull)
+                {
+                    if (!GameManager.Instance.inventoryManager.TryGetRemainingTab(-1, out TabScript tab2))
+                    {
+                        GameManager.Instance.isInventoryFull = true;
+                        UIManager.TutorialPanel("인벤토리가 꽉차면 더 이상 아이템을 먹을 수 없습니다.");
+                        UIManager.TutorialPanel("아이템을 선택하고 \"Q\"키를 눌러서 잠시 버려둘 수 있습니다.");
+                    }
+                }
             }
 
         }

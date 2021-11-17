@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool isEatenItem = false;
     [HideInInspector] public bool isUsedItem = false;
     [HideInInspector] public bool isSmalled = false;
+    [HideInInspector] public bool isInventoryFull = false;
 
     private void Awake()
     {
