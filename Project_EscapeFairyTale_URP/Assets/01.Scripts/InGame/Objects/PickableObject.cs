@@ -13,7 +13,7 @@ public class PickableObject : SelectableObject, ISaveAble
 
     [Header("Save")]
     public string saveKey;
-    private string _eventFlow = "true";
+    protected string _eventFlow = "true";
     public string eventFlow { get { return _eventFlow; }
         set {
             if (_eventFlow != value)
@@ -24,9 +24,9 @@ public class PickableObject : SelectableObject, ISaveAble
         }
     } // true이면 오브젝트가 켜진것, false이면 꺼진것 
 
-    private Coroutine dropWait;
+    protected Coroutine dropWait;
 
-    protected void Start()
+    protected virtual void Start()
     {
         if (!saveKey.Equals(""))
         {
@@ -83,7 +83,7 @@ public class PickableObject : SelectableObject, ISaveAble
         TempSave();
     }
 
-    public void TempSave()
+    public virtual void TempSave()
     {
         if (saveKey != "")
         {
@@ -91,7 +91,7 @@ public class PickableObject : SelectableObject, ISaveAble
         }
     }
 
-    public void Load()
+    public virtual void Load()
     {
         eventFlow = GameManager.saveDic[saveKey];
         if (eventFlow.Equals("false"))
