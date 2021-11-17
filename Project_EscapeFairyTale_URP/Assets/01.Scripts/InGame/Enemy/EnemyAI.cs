@@ -47,6 +47,7 @@ public class EnemyAI : MonoBehaviour
     public LayerMask layerMask;
 
     public AudioSource redShoesAmbientSource;
+    [HideInInspector] public AudioSource sfxSource;
 
     public int stunSec = 0;
 
@@ -55,6 +56,7 @@ public class EnemyAI : MonoBehaviour
         instance = this;
         moveAgent = GetComponent<MoveAgent>();
         agent = GetComponent<NavMeshAgent>();
+        sfxSource = GetComponent<AudioSource>();
     }
 
     void Start()

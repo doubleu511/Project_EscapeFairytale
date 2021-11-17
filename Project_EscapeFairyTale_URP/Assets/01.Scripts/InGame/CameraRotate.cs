@@ -12,7 +12,8 @@ public class CameraRotate : MonoBehaviour
     {
         if (Cursor.lockState == CursorLockMode.Locked)
         {
-            if (GameManager.Instance.player.playerState != PlayerState.DEAD)
+            if (GameManager.Instance.player.playerState != PlayerState.DEAD &&
+                GameManager.Instance.player.playerState != PlayerState.ENDING)
             {
                 //1. 마우스 입력 값을 이용한다.
                 float mx = Input.GetAxis("Mouse X"); //게임창에서 마우스를 왼쪽 오른쪽으로 이동할때 마다 (왼 -음수 : 오른 +양수)

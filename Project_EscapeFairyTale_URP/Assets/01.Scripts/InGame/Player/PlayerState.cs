@@ -5,5 +5,6 @@ public enum PlayerState
     OPEN_INVENTORY,
     OPEN_BOOK,
     PAUSED,
-    WAKING_UP
+    WAKING_UP,
+    ENDING
 }

@@ -18,6 +18,12 @@ public class Cinderella_Clock_TrueButton : SelectableObject
     public Vector3 clearPos;
     public Cinderella_Bell bell;
 
+    [Header("시계 조작 이후")]
+    public GameObject glass_segment;
+    public GameObject glass_shoes;
+    public GameObject glass_key;
+    public GameObject iron_key;
+
     private bool _isCleared = false;
     public static bool isCleared { get { return instance._isCleared; }
         set
@@ -116,7 +122,21 @@ public class Cinderella_Clock_TrueButton : SelectableObject
                 GameManager.PlaySFX(GameManager.Instance.audioBox.object_clock_glassbreak);
                 UIManager.instance.subCamera_Back.interactable = true;
                 UIManager.instance.subCamera_Back.image.DOFade(1, 1);
+                BadEnding();
             });
         }
+    }
+
+    public static void BadEnding()
+    {
+        instance.glass_segment.SetActive(false);
+        instance.iron_key.SetActive(true);
+    }
+
+    public static void HappyEnding()
+    {
+        instance.glass_segment.SetActive(false);
+        instance.glass_shoes.SetActive(true);
+        instance.glass_key.SetActive(true);
     }
 }

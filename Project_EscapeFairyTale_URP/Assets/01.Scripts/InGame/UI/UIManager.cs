@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
 
     [Header("InGame")]
     public CanvasGroup inGameCanvasGroup;
+    public CanvasGroup blackScreenCanvasGroup;
 
     [Header("RightBottomTip")]
     [Header("Tips")]
@@ -271,6 +272,15 @@ public class UIManager : MonoBehaviour
     {
         group.DOComplete();
         group.DOFade(show ? 1 : 0, 0.5f).SetUpdate(animatedsetUpdate);
+
+        group.blocksRaycasts = show;
+        group.interactable = show;
+    }
+
+    public static void CanvasGroup_DefaultShow(CanvasGroup group, bool show, bool animatedsetUpdate, float time)
+    {
+        group.DOComplete();
+        group.DOFade(show ? 1 : 0, time).SetUpdate(animatedsetUpdate);
 
         group.blocksRaycasts = show;
         group.interactable = show;

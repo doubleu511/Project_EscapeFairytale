@@ -24,6 +24,7 @@ public class PlayerInput : MonoBehaviour
 
         if (GameManager.Instance.player.playerState == PlayerState.DEAD) return;
         if (GameManager.Instance.player.playerState == PlayerState.WAKING_UP) return;
+        if (GameManager.Instance.player.playerState == PlayerState.ENDING) return;
 
         if (Input.GetKeyDown(KeyCode.E))
         {

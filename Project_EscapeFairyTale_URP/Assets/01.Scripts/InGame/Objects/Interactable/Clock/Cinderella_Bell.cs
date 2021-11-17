@@ -56,6 +56,11 @@ public class Cinderella_Bell : MonoBehaviour
                 {
                     DOTween.To(() => vignette.color.value, value => vignette.color.value = value, Color.black, 3);
                     DOTween.To(() => vignette.intensity.value, value => vignette.intensity.value = value, 1, 7);
+                    // 화면 까맣게 한후
+
+                    Cinderella_Clock_TrueButton.HappyEnding();
+                    UIManager.instance.subCamera_Back.interactable = true;
+                    UIManager.instance.subCamera_Back.image.DOFade(1, 1);
                 });
             }
             else
