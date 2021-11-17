@@ -85,12 +85,25 @@ public class ItemPlacer : SelectableObject, ISaveAble
         {
             if(placeAbles[i])
             {
+                const int MUFFIN_ID = 2;
+                const int MILK_ID = 3;
+
                 PickableObject obj = GameManager.Instance.FindDisabledObject(GameManager.Instance.selectedItemId).ObjectOn(placeAblePoses[i].position, transform.rotation).GetComponent<PickableObject>();
                 placedId[i] = GameManager.Instance.selectedItemId;
                 Destroy(obj.GetComponent<Rigidbody>());
                 placeAbles[i] = false;
                 obj.itemPlacer = this;
                 obj.itemPlaceIndex = i;
+
+                if(GameManager.Instance.selectedItemId == MUFFIN_ID)
+                {
+                    GameManager.Instance.CreateMuffinTest();
+                }
+                else if (GameManager.Instance.selectedItemId == MILK_ID)
+                {
+                    GameManager.Instance.CreateMilkTest();
+                }
+
                 TempSave();
                 GameManager.Instance.inventoryManager.DecreaseTab(GameManager.Instance.selectedTab.tabId);
                 return true;

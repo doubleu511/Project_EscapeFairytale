@@ -134,7 +134,19 @@ public class PickableObject : SelectableObject, ISaveAble
             eventFlow = "false";
             if (itemPlacer != null)
             {
+                const int MUFFIN_ID = 2;
+                const int MILK_ID = 3;
+
+                if (itemId == MUFFIN_ID)
+                {
+                    GameManager.Instance.muffinCountLeft++;
+                }
+                else if (itemId == MILK_ID)
+                {
+                    GameManager.Instance.milkCountLeft++;
+                }
                 itemPlacer.placeAbles[itemPlaceIndex] = true;
+                itemPlacer = null;
             }
             if (dropWait != null)
             {
