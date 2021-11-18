@@ -61,7 +61,8 @@ public class Door : SelectableObject_Parent, ISaveAble
             {
                 isLocked = false;
                 GameManager.PlaySFX(audioSource, GameManager.Instance.audioBox.object_door_unlock, SoundType.SFX);
-                if(isItemBroke)
+                GameManager.Save();
+                if (isItemBroke)
                 {
                     GameManager.Instance.inventoryManager.DecreaseTab(GameManager.Instance.selectedTab.tabId);
                 }

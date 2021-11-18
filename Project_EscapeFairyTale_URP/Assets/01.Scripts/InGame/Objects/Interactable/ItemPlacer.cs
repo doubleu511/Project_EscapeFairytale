@@ -88,7 +88,7 @@ public class ItemPlacer : SelectableObject, ISaveAble
                 const int MUFFIN_ID = 2;
                 const int MILK_ID = 3;
 
-                PickableObject obj = GameManager.Instance.FindDisabledObject(GameManager.Instance.selectedItemId).ObjectOn(placeAblePoses[i].position, transform.rotation).GetComponent<PickableObject>();
+                PickableObject obj = GameManager.Instance.FindDisabledObject(GameManager.Instance.selectedItemId).ObjectOn(placeAblePoses[i].position, placeAblePoses[i].rotation, placeAblePoses[i].localScale).GetComponent<PickableObject>();
                 placedId[i] = GameManager.Instance.selectedItemId;
                 Destroy(obj.GetComponent<Rigidbody>());
                 placeAbles[i] = false;
@@ -135,24 +135,29 @@ public class ItemPlacer : SelectableObject, ISaveAble
     public void Load()
     {
         eventFlow = GameManager.saveDic[saveKey];
-        string[] data = eventFlow.Split(' ');
-        for (int i = 0; i < data.Length; i++)
+
+        if (eventFlow != "")
         {
-            int id = int.Parse(data[i]);
-
-            placeAbles[i] = id == -1;
-            placedId[i] = id;
-
-            if(!placeAbles[i])
+            string[] data = eventFlow.Split(' ');
+            print(eventFlow);
+            for (int i = 0; i < data.Length; i++)
             {
-                PickableObject obj = GameManager.Instance.FindDisabledObject(placedId[i]).ObjectOn(placeAblePoses[i].position, transform.rotation).GetComponent<PickableObject>();
+                int id = int.Parse(data[i]);
 
-                if (obj.GetComponent<Rigidbody>() != null)
+                placeAbles[i] = id == -1;
+                placedId[i] = id;
+
+                if (!placeAbles[i])
                 {
-                    Destroy(obj.GetComponent<Rigidbody>());
+                    PickableObject obj = GameManager.Instance.FindDisabledObject(placedId[i]).ObjectOn(placeAblePoses[i].position, placeAblePoses[i].rotation, placeAblePoses[i].localScale).GetComponent<PickableObject>();
+
+                    if (obj.GetComponent<Rigidbody>() != null)
+                    {
+                        Destroy(obj.GetComponent<Rigidbody>());
+                    }
+                    obj.itemPlacer = this;
+                    obj.itemPlaceIndex = i;
                 }
-                obj.itemPlacer = this;
-                obj.itemPlaceIndex = i;
             }
         }
     }

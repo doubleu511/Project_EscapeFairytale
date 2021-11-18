@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using DG.Tweening;
 using UnityEngine.Rendering.Universal;
 
-public class EnemyAI : MonoBehaviour
+public class EnemyAI : MonoBehaviour, ISaveAble
 {
     public enum EnemyState
     {
@@ -51,6 +51,22 @@ public class EnemyAI : MonoBehaviour
 
     public int stunSec = 0;
 
+    [Header("Save")]
+    public string saveKey;
+    private string _eventFlow = "notexist";
+    public string eventFlow
+    {
+        get { return _eventFlow; }
+        set
+        {
+            if (_eventFlow != value)
+            {
+                _eventFlow = value;
+                TempSave();
+            }
+        }
+    } // exist이면 있는것, notexist면 없는것 
+
     void Awake()
     {
         instance = this;
@@ -61,13 +77,30 @@ public class EnemyAI : MonoBehaviour
 
     void Start()
     {
+        playerTr = GameManager.Instance.player.transform;
+        ws = new WaitForSeconds(judgeDelay);//AI가 판단을 내리는 딜레이시간
+
+        if (!saveKey.Equals(""))
+        {
+            if (!GameManager.saveDic.ContainsKey(saveKey))
+            {
+                GameManager.saveDic.Add(saveKey, eventFlow);
+                gameObject.SetActive(false);
+                return;
+            }
+            else
+            {
+                Load();
+            }
+        }
+    }
+
+    void OnEnable()
+    {
         StartCoroutine(CheckState());
         StartCoroutine(DoAction());
 
         agent.autoBraking = true;
-
-        playerTr = GameManager.Instance.player.transform;
-        ws = new WaitForSeconds(judgeDelay);//AI가 판단을 내리는 딜레이시간
         left_anim.SetBool("walk", true);
         right_anim.SetBool("walk", true);
     }
@@ -342,6 +375,38 @@ public class EnemyAI : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         unconditionallyTrace = false;
+    }
+
+    public void TempSave()
+    {
+        if (saveKey != "")
+        {
+            GameManager.saveDic[saveKey] = eventFlow;
+        }
+    }
+
+    public void Load()
+    {
+        eventFlow = GameManager.saveDic[saveKey];
+        if (eventFlow.Equals("notexist"))
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            StartCoroutine(CheckState());
+            StartCoroutine(DoAction());
+
+            agent.autoBraking = true;
+            left_anim.SetBool("walk", true);
+            right_anim.SetBool("walk", true);
+        }
+    }
+
+    public void ShoesOn()
+    {
+        gameObject.SetActive(true);
+        eventFlow = "exist";
     }
 
     #region ANIMATION_EVENTS

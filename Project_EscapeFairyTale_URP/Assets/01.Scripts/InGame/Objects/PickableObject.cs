@@ -44,10 +44,11 @@ public class PickableObject : SelectableObject, ISaveAble
         }
     }
 
-    public GameObject ObjectOn(Vector3 pos, Quaternion rotation)
+    public GameObject ObjectOn(Vector3 pos, Quaternion rotation, Vector3 localScale)
     {
         this.gameObject.transform.position = pos;
         this.gameObject.transform.rotation = rotation;
+        this.gameObject.transform.localScale = localScale;
         _eventFlow = $"{transform.position.x} {transform.position.y} {transform.position.z}/" +
             $"{transform.eulerAngles.x} {transform.eulerAngles.y} {transform.eulerAngles.z}/" +
             $"{transform.localScale.x} {transform.localScale.y} {transform.localScale.z}";

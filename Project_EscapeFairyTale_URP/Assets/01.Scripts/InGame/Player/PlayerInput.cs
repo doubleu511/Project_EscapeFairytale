@@ -99,10 +99,9 @@ public class PlayerInput : MonoBehaviour
                     int itemId = GameManager.Instance.selectedItemId;
                     GameManager.Instance.inventoryManager.DecreaseTab(GameManager.Instance.selectedTab.tabId);
 
-                    GameObject obj = GameManager.Instance.FindDisabledObject(itemId).ObjectOn(Camera.main.transform.position, transform.rotation);
-                    obj.GetComponent<PickableObject>().Drop();
                     float scale = Item_SizeChange.dropItemSizeScale[Item_SizeChange.sizeValueRaw + 1];
-                    obj.transform.localScale = new Vector3(scale, scale, scale);
+                    GameObject obj = GameManager.Instance.FindDisabledObject(itemId).ObjectOn(Camera.main.transform.position, transform.rotation, new Vector3(scale, scale, scale));
+                    obj.GetComponent<PickableObject>().Drop();
                 }
             }
         }

@@ -298,7 +298,7 @@ public class GameManager : MonoBehaviour
 
                 Vector3 randomPos = new Vector3(randomX, pos.y, randomZ);
 
-                muffin.ObjectOn(randomPos, foodGeneratePoses[randomIdx].rotation);
+                muffin.ObjectOn(randomPos, foodGeneratePoses[randomIdx].rotation, foodGeneratePoses[randomIdx].localScale);
             }
         }
     }
@@ -327,7 +327,7 @@ public class GameManager : MonoBehaviour
 
                 Vector3 randomPos = new Vector3(randomX, pos.y, randomZ);
 
-                milk.ObjectOn(randomPos, foodGeneratePoses[randomIdx].rotation);
+                milk.ObjectOn(randomPos, foodGeneratePoses[randomIdx].rotation, foodGeneratePoses[randomIdx].localScale);
             }
         }
     }
