@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class UIManager : MonoBehaviour
     [Header("InGame")]
     public CanvasGroup inGameCanvasGroup;
     public CanvasGroup blackScreenCanvasGroup;
+    public Text blackScreenEndText;
 
     [Header("RightBottomTip")]
     [Header("Tips")]
@@ -106,6 +108,41 @@ public class UIManager : MonoBehaviour
     public CanvasGroup tutorialTip;
     private Queue<string> tutorialQueue = new Queue<string>();
     [HideInInspector] public bool isTutorialPanelAppear = false;
+
+    [Header("BirdFind")]
+    public CanvasGroup birdCanvasGroup;
+    public Text birdRemainTxt;
+    private int _birdRemain = 0;
+    public int birdRemain {
+        get { return _birdRemain; }
+        set
+        {
+            _birdRemain = value;
+            birdRemainTxt.text = $"{_birdRemain} / 7";
+            if(_birdRemain == 7)
+            {
+                GameManager.Instance.player.playerState = PlayerState.ENDING;
+                CanvasGroup_DefaultShow(blackScreenCanvasGroup, true, true, 2);
+                blackScreenEndText.text = "<size=100>모든 새를 모으셨군요!\n축하드립니다.\n게임을 플레이 해주셔서 감사합니다!</size>";
+
+                DOTween.To(() => AudioListener.volume, value => AudioListener.volume = value, 0, 7);
+
+                blackScreenEndText.DOFade(1, 4).SetDelay(4).OnStart(() =>
+                {
+                    blackScreenEndText.color = new Color(1, 1, 1, 0);
+                }).OnComplete(() =>
+                {
+                    
+                    blackScreenEndText.DOFade(0, 7).SetDelay(3).OnComplete(() =>
+                    {
+                        MouseEvent.MouseLock(false);
+                        SceneManager.LoadScene("Title");
+                    });
+                });
+                //끝
+            }
+        }
+    }
 
     private void Awake()
     {

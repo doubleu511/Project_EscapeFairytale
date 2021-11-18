@@ -8,6 +8,8 @@ public class SpriteBox : ScriptableObject
     public Sprite Reason_Shoes_Small;
     public Sprite UI_CantEat_Muffin;
     public Sprite UI_CantEat_Milk;
+    public Sprite UI_WoodSegment;
+    public Sprite UI_Bird;
     public Sprite UI_Mouse;
     public Sprite UI_Mouse_Click;
     public Sprite UI_Keyboard;

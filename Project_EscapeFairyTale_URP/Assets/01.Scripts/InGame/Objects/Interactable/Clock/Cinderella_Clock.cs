@@ -10,6 +10,8 @@ public class Cinderella_Clock : SelectableObject, ISaveAble
     public Vector3 teleportPos;
     public Vector3 teleportRot;
 
+    public bool isHappyEnding = false;
+
     [Header("Save")]
     public string saveKey;
     private string _eventFlow = "nothave";

@@ -31,7 +31,7 @@ public class Item_SizeChange : MonoBehaviour
             }
         }
 
-        if (sizeValueRaw < 1 && (sizeValueRaw < 0 || BigSizeEnter.isMilkUsePossible))
+        if (sizeValueRaw < 1 && ((sizeValueRaw < 0 && !BigSizeEnter.CantEatMilkPlace) || BigSizeEnter.isMilkUsePossible))
         {
             sizeValueRaw++;
             currentSize = sizeScaleValues[sizeValueRaw + 1];

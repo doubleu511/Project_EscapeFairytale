@@ -10,6 +10,8 @@ public class TitleManager : MonoBehaviour
 {
     public static TitleManager Instance;
 
+    public Transform[] camerarandomPos;
+
     public CanvasGroup detailPanel;
     public GameObject[] mainPanels;
     public GameObject[] moreDetailPanels;
@@ -39,11 +41,14 @@ public class TitleManager : MonoBehaviour
             Instance = this;
         }
 
+        Camera.main.transform.position = camerarandomPos[Random.Range(0, camerarandomPos.Length)].transform.position;
         allSource = FindObjectsOfType<AudioSource>();
     }
 
     private void Start()
     {
+        AudioListener.volume = 1;
+
         // 설정 드롭다운
         graphics_WindowMode.onValueChanged.AddListener(value => SettingManager.ScreenMode(value));
         graphics_Resolution.onValueChanged.AddListener(value => SettingManager.Resolution(value));

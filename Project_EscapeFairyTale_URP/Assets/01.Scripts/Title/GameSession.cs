@@ -55,6 +55,7 @@ public class GameSession : MonoBehaviour
         {
             isNewGame = true;
             screenShot.sprite = spriteBox.NewGame;
+            screenShot.color = Color.white;
             dateTimeText.text = "새로운 세이브파일로 시작합니다.";
         });
 
