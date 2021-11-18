@@ -6,5 +6,6 @@ public enum PlayerState
     OPEN_BOOK,
     PAUSED,
     WAKING_UP,
-    ENDING
+    ENDING,
+    SLIPPING
 }

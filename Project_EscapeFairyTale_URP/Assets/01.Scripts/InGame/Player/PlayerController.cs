@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
         if (playerState == PlayerState.DEAD) return;
         if (playerState == PlayerState.WAKING_UP) return;
         if (playerState == PlayerState.ENDING) return;
+        if (playerState == PlayerState.SLIPPING) return;
 
         if (!IsCheckGrounded())
         {
