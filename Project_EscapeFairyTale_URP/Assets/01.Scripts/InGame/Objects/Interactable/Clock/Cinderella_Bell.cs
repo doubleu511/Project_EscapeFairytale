@@ -60,6 +60,7 @@ public class Cinderella_Bell : MonoBehaviour
                         DOTween.To(() => UIManager.instance.blackScreenCanvasGroup.alpha,
                             value => UIManager.instance.blackScreenCanvasGroup.alpha = value, 1, 2).OnComplete(() =>
                             {
+                                vignette.intensity.value = 0.272f;
                                 DOTween.To(() => UIManager.instance.blackScreenCanvasGroup.alpha,
                                 value => UIManager.instance.blackScreenCanvasGroup.alpha = value, 0, 2).OnComplete(() =>
                                 {

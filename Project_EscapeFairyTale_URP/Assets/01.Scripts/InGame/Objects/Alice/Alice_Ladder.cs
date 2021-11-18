@@ -42,6 +42,11 @@ public class Alice_Ladder : MonoBehaviour, ISaveAble
     {
         ladderLevel++;
         ladderSegments[ladderLevel - 1].SetActive(true);
+
+        if(ladderLevel == 3)
+        {
+            eventFlow = "exist";
+        }
     }
 
     public void TempSave()

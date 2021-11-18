@@ -5,8 +5,16 @@ using UnityEngine.EventSystems;
 
 public class Pinocio_Key : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    public GameObject plant;
+    public static GameObject _plant;
+
     private UnityEngine.UI.Outline[] keyOutlines;
     private bool isHighlighted = false;
+
+    private void Awake()
+    {
+        _plant = plant;
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -63,6 +71,7 @@ public class Pinocio_Key : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                     Pinocio_Tree.eventFlow = "hasnotkey";
                     GameManager.Instance.inventoryManager.TIP_ItemGotTipAppear(GameManager.Instance.itemData.infos[WOODKEY_ID].itemSprite);
                     UIManager.instance.cursorBtTipText.text = "";
+                    plant.SetActive(false);
                     gameObject.SetActive(false);
                 }
                 else

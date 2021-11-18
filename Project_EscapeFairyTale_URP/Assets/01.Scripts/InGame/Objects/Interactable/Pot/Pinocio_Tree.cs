@@ -169,6 +169,7 @@ public class Pinocio_Tree : MonoBehaviour, ISaveAble
             isKeyAppear = true;
             deco.alpha = 0;
             key.gameObject.SetActive(false);
+            Pinocio_Key._plant.SetActive(false);
             for (int i = 0; i < branches.Length; i++)
             {
                 for (int j = 0; j < branches[i].ingame_branch.leaves.Length; j++)

@@ -73,6 +73,16 @@ public class EndingDoor : MonoBehaviour
             endingBook.Add(cin_ending[1]);
         }
 
+        if (alice.GetItemCount() <= 1)
+        {
+            endingBook.Add(alice_ending[1]);
+            alice_bad = true;
+        }
+        else
+        {
+            endingBook.Add(alice_ending[0]);
+        }
+
         if (pib.GetItemCount() <= 0)
         {
             endingBook.Add(pib_ending[1]);
@@ -83,15 +93,6 @@ public class EndingDoor : MonoBehaviour
             endingBook.Add(pib_ending[0]);
         }
 
-        if (alice.GetItemCount() <= 1)
-        {
-            endingBook.Add(alice_ending[1]);
-            alice_bad = true;
-        }
-        else
-        {
-            endingBook.Add(alice_ending[0]);
-        }
         endingBook.Add(theEnd);
 
         endingBookSpr = endingBook.ToArray();

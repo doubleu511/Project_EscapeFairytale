@@ -12,7 +12,7 @@ public class Item_SizeChange : MonoBehaviour
     private static float[] sizeScaleValues = new float[3] { 0.033f, 1f, 5f };
     private static int[] FOVValues = new int[3] { 50, 70, 70 };
     private static float[] stepOffsets = new float[3] { 0.05f, 0.25f, 0.25f };
-    public static float[] dropItemSizeScale = new float[3] { 0.4f, 1f, 5f };
+    public static float[] dropItemSizeScale = new float[3] { 0.1f, 1f, 5f };
 
     public SelectableObject pot;
 

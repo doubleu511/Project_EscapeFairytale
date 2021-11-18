@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class Cinderella_Clock_TrueButton : SelectableObject
+public class Cinderella_Clock_TrueButton : SelectableObject, ISaveAble
 {
     private static Cinderella_Clock_TrueButton instance;
     public static bool cin_bad = false;
@@ -25,6 +25,22 @@ public class Cinderella_Clock_TrueButton : SelectableObject
     public GameObject glass_key;
     public GameObject iron_key;
     public Door lastDoor;
+
+    [Header("Save")]
+    public string saveKey;
+    private string _eventFlow = "noending";
+    public string eventFlow
+    {
+        get { return _eventFlow; }
+        set
+        {
+            if (_eventFlow != value)
+            {
+                _eventFlow = value;
+                TempSave();
+            }
+        }
+    } // noending, badending, happyending
 
     private bool _isCleared = false;
     public static bool isCleared { get { return instance._isCleared; }
@@ -54,6 +70,18 @@ public class Cinderella_Clock_TrueButton : SelectableObject
     {
         GetComponent<Outline>().enabled = true;
         GameManager.Instance.clock_color_select = Color.white;
+
+        if (!saveKey.Equals(""))
+        {
+            if (!GameManager.saveDic.ContainsKey(saveKey))
+            {
+                GameManager.saveDic.Add(saveKey, eventFlow);
+            }
+            else
+            {
+                Load();
+            }
+        }
     }
 
     public override void OnClicked()
@@ -65,6 +93,7 @@ public class Cinderella_Clock_TrueButton : SelectableObject
         {
             isCleared = true;
             minute.ignoreRaycast_inSubCam = true;
+            eventFlow = "happyending";
             UIManager.instance.subCamera_Back.interactable = false;
             UIManager.instance.subCamera_Back.image.DOFade(0, 1);
             GameManager.PlaySFX(GameManager.Instance.audioBox.object_clock_powerOn);
@@ -98,6 +127,7 @@ public class Cinderella_Clock_TrueButton : SelectableObject
         {
             isCleared = true;
             minute.ignoreRaycast_inSubCam = true;
+            eventFlow = "badending";
             UIManager.instance.subCamera_Back.interactable = false;
             UIManager.instance.subCamera_Back.image.DOFade(0, 1);
             GameManager.PlaySFX(GameManager.Instance.audioBox.object_clock_powerOn);
@@ -115,6 +145,7 @@ public class Cinderella_Clock_TrueButton : SelectableObject
             {
                 clockCircle_outline.outlineWidth = 30;
                 clearParticle.Play();
+                BadEnding();
                 GameManager.PlaySFX(GameManager.Instance.audioBox.object_clock_bigbell);
             });
             seq.Join(DOTween.To(() => clockCircle_outline.outlineWidth,
@@ -124,7 +155,6 @@ public class Cinderella_Clock_TrueButton : SelectableObject
                 GameManager.PlaySFX(GameManager.Instance.audioBox.object_clock_glassbreak);
                 UIManager.instance.subCamera_Back.interactable = true;
                 UIManager.instance.subCamera_Back.image.DOFade(1, 1);
-                BadEnding();
             });
         }
     }
@@ -144,5 +174,30 @@ public class Cinderella_Clock_TrueButton : SelectableObject
         instance.glass_key.SetActive(true);
         instance.lastDoor.requireItemId = 10;
         cin_bad = false;
+    }
+
+    public void TempSave()
+    {
+        if (saveKey != "")
+        {
+            GameManager.saveDic[saveKey] = eventFlow;
+        }
+    }
+
+    public void Load()
+    {
+        eventFlow = GameManager.saveDic[saveKey];
+        if (eventFlow.Equals("badending"))
+        {
+            isCleared = true;
+            minute.ignoreRaycast_inSubCam = true;
+            BadEnding();
+        }
+        else if (eventFlow.Equals("happyending"))
+        {
+            isCleared = true;
+            minute.ignoreRaycast_inSubCam = true;
+            HappyEnding();
+        }
     }
 }

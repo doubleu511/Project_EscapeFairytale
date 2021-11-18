@@ -112,6 +112,7 @@ public class ItemPlacer : SelectableObject, ISaveAble
         return false;
     }
 
+    [ContextMenu("CountPrint")]
     public int GetItemCount()
     {
         int count = 0;
@@ -122,7 +123,7 @@ public class ItemPlacer : SelectableObject, ISaveAble
                 count++;
             }
         }
-
+        print(count);
         return count;
     }
 
@@ -153,7 +154,6 @@ public class ItemPlacer : SelectableObject, ISaveAble
         if (eventFlow != "")
         {
             string[] data = eventFlow.Split(' ');
-            print(eventFlow);
             for (int i = 0; i < data.Length; i++)
             {
                 int id = int.Parse(data[i]);

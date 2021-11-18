@@ -171,6 +171,7 @@ public class PickableObject : SelectableObject, ISaveAble
                         GameManager.Instance.isUsedItem = true;
                         UIManager.TutorialPanel("일부 아이템은 \"F\"키를 눌러서 상호작용이 가능합니다.");
                         UIManager.TutorialPanel("<size=65>인벤토리를 열어서 아이템을 클릭하여 선택하고, 특정 상황에서 F키를 눌러 사용할 수 있습니다.</size>");
+                        UIManager.TutorialPanel("<size=65>컵케이크와 우유는 갯수가 정해져 있으니, 주의하세요!</size>");
                     }
                 }
 

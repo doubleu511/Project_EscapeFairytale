@@ -22,7 +22,7 @@ MonoBehaviour:
     itemName: "\uBE48 \uAD6C\uB450 \uC0C1\uC790"
     itemLore: "<i>\"\uBC97\uC740 \uAD6C\uB450\uB294 \uC0C1\uC790\uC5D0 \uB193\uB3C4\uB85D
       \uD569\uC2DC\uB2E4.\"</i>"
-    itemSprite: {fileID: 21300000, guid: 54ba470a8167a7e468fd7d93e2339e8c, type: 3}
+    itemSprite: {fileID: 21300000, guid: 9891c6570ae6b734eb3fda0df1b23ab4, type: 3}
   - itemId: 2
     itemName: "\uC791\uC740 \uCEF5\uCF00\uC774\uD06C"
     itemLore: "<b>\"Eat me\"</b>\n\uBA39\uC73C\uBA74 \uBB34\uC2A8 \uC77C\uC774 \uC77C\uC5B4\uB0A0\uAE4C?"
@@ -33,13 +33,15 @@ MonoBehaviour:
       \uC77C\uC5B4\uB0A0\uAE4C?"
     itemSprite: {fileID: 3492676253985515005, guid: dbc4b42acd7b199428008c3376c46a71, type: 3}
   - itemId: 4
-    itemName: "\uD558\uD2B8"
-    itemLore: "\uC598 \uBB50\uC784?"
-    itemSprite: {fileID: 21300000, guid: 0c59d6948dc26e747984046246361a31, type: 3}
+    itemName: "\uC720\uB9AC \uD558\uD2B8"
+    itemLore: "\uC720\uB9AC\uB85C \uB41C \uB9E4\uC6B0 \uC791\uC740 \uD558\uD2B8\uC774\uB2E4.\n\uC774\uAC78
+      \uC5B4\uB514\uC5D0 \uC368\uC57C \uD560\uAE4C..?"
+    itemSprite: {fileID: 21300000, guid: c6e46d19674bd224c8b2c26daa54fd30, type: 3}
   - itemId: 5
     itemName: "\uAC00\uC704"
-    itemLore: "\uBB34\uC5B8\uAC00\uB97C \uC790\uB97C \uC218 \uC788\uC744\uB4EF \uD558\uB2E4."
-    itemSprite: {fileID: 21300000, guid: a32b7339763611741abe9f542067db4e, type: 3}
+    itemLore: "\uB0A0\uC774 \uB0A0\uCE74\uB85C\uC6B4 \uAC00\uC704\uB2E4.\n\uBB34\uC5B8\uAC00\uB97C
+      \uC790\uB97C \uC218 \uC788\uC744\uB4EF \uD558\uB2E4."
+    itemSprite: {fileID: 21300000, guid: e75fb088556d9af40a4daf1e96c2914a, type: 3}
   - itemId: 6
     itemName: "\uD638\uBC15"
     itemLore: "\uD638\uBC15 \uBA39\uACE0\uC2F6\uB2E4"
@@ -50,7 +52,8 @@ MonoBehaviour:
     itemSprite: {fileID: 21300000, guid: 54ba470a8167a7e468fd7d93e2339e8c, type: 3}
   - itemId: 8
     itemName: "\uAC70\uC9D3\uB9D0 \uB098\uBB34 \uC5F4\uC1E0"
-    itemLore: "\uB098\uBB34\uC5D0\uC11C \uB098\uC628 \uC5F4\uC1E0"
+    itemLore: "\uB098\uBB34\uAC00\uC9C0\uB97C \uC798\uB77C \uB9CC\uB4E0 \uC5F4\uC1E0\uC774\uB2E4.\n\uC81C\uC791\uBC95\uB300\uB85C\uB77C\uBA74
+      \uC774\uAC8C \uB9DE\uACA0\uC9C0."
     itemSprite: {fileID: 21300000, guid: 4b691af9a1987664788c6910679ebe71, type: 3}
   - itemId: 9
     itemName: "\uC1E0 \uC5F4\uC1E0"
