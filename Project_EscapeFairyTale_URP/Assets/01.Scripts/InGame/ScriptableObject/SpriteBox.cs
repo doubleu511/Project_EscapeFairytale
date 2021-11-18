@@ -14,6 +14,7 @@ public class SpriteBox : ScriptableObject
     public Sprite UI_Mouse_Click;
     public Sprite UI_Keyboard;
     public Sprite UI_Keyboard_Click;
+    public Sprite[] UI_Book_Covers;
     [Header("MainMenu-Game")]
     public Sprite NewGame;
 }

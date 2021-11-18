@@ -22,4 +22,11 @@ MonoBehaviour:
   UI_Mouse_Click: {fileID: 21300000, guid: 38203bf8e16313b4ba5b62a8dd0cb488, type: 3}
   UI_Keyboard: {fileID: 21300000, guid: e5dfd13f348c72a48bec3b9bb53fe508, type: 3}
   UI_Keyboard_Click: {fileID: 21300000, guid: 26c126f108840504ba35129b319eee12, type: 3}
+  UI_Book_Covers:
+  - {fileID: -2004810194838453514, guid: 6054747980936f54db2af81fa729d3e8, type: 3}
+  - {fileID: -3696763441444391088, guid: 6054747980936f54db2af81fa729d3e8, type: 3}
+  - {fileID: 286242350097926733, guid: 6054747980936f54db2af81fa729d3e8, type: 3}
+  - {fileID: 5658430763639307210, guid: 6054747980936f54db2af81fa729d3e8, type: 3}
+  - {fileID: -7468351513692147727, guid: 6054747980936f54db2af81fa729d3e8, type: 3}
+  - {fileID: 3279631260101135749, guid: 6054747980936f54db2af81fa729d3e8, type: 3}
   NewGame: {fileID: 21300000, guid: b824e69bce82d314fbb9f2372944cfdc, type: 3}

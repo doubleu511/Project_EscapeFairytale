@@ -112,6 +112,20 @@ public class ItemPlacer : SelectableObject, ISaveAble
         return false;
     }
 
+    public int GetItemCount()
+    {
+        int count = 0;
+        for (int i = 0; i < placeAbles.Length; i++)
+        {
+            if (!placeAbles[i])
+            {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
     public void TempSave()
     {
         if (saveKey != "")

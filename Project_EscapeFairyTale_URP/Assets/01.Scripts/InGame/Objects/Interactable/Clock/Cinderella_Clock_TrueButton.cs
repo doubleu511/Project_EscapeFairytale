@@ -6,6 +6,7 @@ using DG.Tweening;
 public class Cinderella_Clock_TrueButton : SelectableObject
 {
     private static Cinderella_Clock_TrueButton instance;
+    public static bool cin_bad = false;
 
     public Cinderella_Clock clock;
     public Cinderella_Clock_minute minute;
@@ -23,6 +24,7 @@ public class Cinderella_Clock_TrueButton : SelectableObject
     public GameObject glass_shoes;
     public GameObject glass_key;
     public GameObject iron_key;
+    public Door lastDoor;
 
     private bool _isCleared = false;
     public static bool isCleared { get { return instance._isCleared; }
@@ -131,6 +133,8 @@ public class Cinderella_Clock_TrueButton : SelectableObject
     {
         instance.glass_segment.SetActive(false);
         instance.iron_key.SetActive(true);
+        instance.lastDoor.requireItemId = 9;
+        cin_bad = true;
     }
 
     public static void HappyEnding()
@@ -138,5 +142,7 @@ public class Cinderella_Clock_TrueButton : SelectableObject
         instance.glass_segment.SetActive(false);
         instance.glass_shoes.SetActive(true);
         instance.glass_key.SetActive(true);
+        instance.lastDoor.requireItemId = 10;
+        cin_bad = false;
     }
 }

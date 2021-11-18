@@ -22,6 +22,20 @@ public class EndingDoor : MonoBehaviour
     public GameObject[] DisappearBird;
     public GameObject AppearBird;
 
+    public ItemPlacer pib;
+    public ItemPlacer alice;
+
+    private bool pib_bad = false;
+    private bool alice_bad = false;
+
+    public Sprite[] cin_ending;
+    public Sprite[] alice_ending;
+    public Sprite[] pib_ending; // 0은 해피, 1은 배드로 한다.
+    public Sprite theEnd;
+    private List<Sprite> endingBook = new List<Sprite>();
+    private Sprite[] endingBookSpr;
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -41,15 +55,62 @@ public class EndingDoor : MonoBehaviour
 
     IEnumerator BookAppear()
     {
+        EndingCheck();
         yield return new WaitForSecondsRealtime(3);
-        UIManager.BookDetailUI(new Sprite[1] { GameManager.Instance.spriteBox.UI_Bird }, Color.black);
+        UIManager.BookDetailUI(endingBookSpr, Color.red);
         MouseEvent.MouseLock(false);
+    }
+
+    private void EndingCheck()
+    {
+        // 이전에 엔딩 타입을 검사한다
+        if (!Cinderella_Clock_TrueButton.cin_bad)
+        {
+            endingBook.Add(cin_ending[0]);
+        }
+        else
+        {
+            endingBook.Add(cin_ending[1]);
+        }
+
+        if (pib.GetItemCount() <= 0)
+        {
+            endingBook.Add(pib_ending[1]);
+            pib_bad = true;
+        }
+        else
+        {
+            endingBook.Add(pib_ending[0]);
+        }
+
+        if (alice.GetItemCount() <= 1)
+        {
+            endingBook.Add(alice_ending[1]);
+            alice_bad = true;
+        }
+        else
+        {
+            endingBook.Add(alice_ending[0]);
+        }
+        endingBook.Add(theEnd);
+
+        endingBookSpr = endingBook.ToArray();
     }
 
     private void Ending()
     {
-        // 이전에 엔딩 타입을 검사한다
-
+        if(!pib_bad && !alice_bad && !Cinderella_Clock_TrueButton.cin_bad)
+        {
+            type = EndType.HAPPY;
+        }
+        else if (pib_bad && alice_bad && Cinderella_Clock_TrueButton.cin_bad)
+        {
+            type = EndType.BAD;
+        }
+        else
+        {
+            type = EndType.NORMAL;
+        }
 
         Text endText = UIManager.instance.blackScreenEndText;
         CanvasGroup blackScreen = UIManager.instance.blackScreenCanvasGroup;
