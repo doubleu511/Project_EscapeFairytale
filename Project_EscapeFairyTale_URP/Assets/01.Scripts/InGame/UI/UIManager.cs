@@ -464,7 +464,9 @@ public class UIManager : MonoBehaviour
     public static void PauseUI(bool value)
     {
         GameManager.Instance.player.playerState = value ? PlayerState.PAUSED : PlayerState.NORMAL;
-        MouseEvent.MouseLock(!value);
+
+        if (!GameManager.Instance.player.isSubCam)
+            MouseEvent.MouseLock(!value);
 
         Time.timeScale = value ? 0 : 1;
         instance.pausePanel.interactable = value;

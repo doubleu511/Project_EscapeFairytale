@@ -266,6 +266,9 @@ public class GameManager : MonoBehaviour
             {
                 if (!pickableObjectList[i].gameObject.activeSelf)
                 {
+                    Book book = pickableObjectList[i].GetComponent<Book>();
+                    if (book != null) continue;
+
                     return pickableObjectList[i];
                 }
             }
