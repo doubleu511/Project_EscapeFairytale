@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SelectableObject_Parent : SelectableObject
 {
+    // 오브젝트가 여러개 합쳐져있어 하나로 이루어져있고, 그 중 하나의 오브젝트가 마우스와 상호작용 하고있다면
+    // 전체의 오브젝트가 같은 상호작용을 받아야하기 때문에, Parent를 생성하여 관리한다.
+
     public List<SelectableObject> selectableObjects; // 부모만 설정해준다.
 
     [HideInInspector] public bool isSubCameraMove;

@@ -69,33 +69,33 @@ public class GameManager : MonoBehaviour
             Debug.LogError("다수의 게임매니저 실행중");
         }
 
-        Instance = this;
-        allSource = FindObjectsOfType<AudioSource>();
+        Instance = this; // 싱글톤
+        allSource = FindObjectsOfType<AudioSource>(); // 모든 사운드 소스를 찾는다.
 
-        PickableObject[] pickableObjects = FindObjectsOfType<PickableObject>();
+        PickableObject[] pickableObjects = FindObjectsOfType<PickableObject>(); // 주울 수 있는 것들을 모두 담아준다.
         foreach(PickableObject item in pickableObjects)
         {
             pickableObjectList.Add(item);
         }
 
-        DataLoad();
+        DataLoad(); // 데이터 로드
     }
 
     void Start()
     {
-        color_select = color_anim1;
-        foodGenerate.GetComponentsInChildren<Transform>(foodGeneratePoses);
-        foodGeneratePoses.RemoveAt(0);
+        color_select = color_anim1; // 선택 가능 오브젝트 아웃라인 색깔 설정 -> 애니메이션 후 오브젝트에서 참조하게
+        foodGenerate.GetComponentsInChildren<Transform>(foodGeneratePoses); // 랜덤 생성될 음식위치들 저장
+        foodGeneratePoses.RemoveAt(0); // 부모는 지운다
 
         ColorChange(false);
     }
 
     public static void Save()
     {
-        Instance.StartCoroutine(Instance.SaveCoroutine());
+        Instance.StartCoroutine(Instance.SaveCoroutine()); // 세이브 코루틴
     }
 
-    IEnumerator SaveCoroutine()
+    IEnumerator SaveCoroutine() // 세이브 링 출현 후 세이브
     {
         UIManager.CanvasGroup_DefaultShow(UIManager.instance.saveRing, true, true);
         yield return new WaitForSeconds(1);
@@ -104,8 +104,9 @@ public class GameManager : MonoBehaviour
     }
 
     [ContextMenu("Save")]
-    public void DataSave()
+    public void DataSave() // 필요한 데이터를 저장하고, 로드할때 string을 형식에 맞게 변환하여 로드한다.
     {
+        // 딕셔너리를 직렬화하여 json으로 저장한다.
         string json = JsonUtility.ToJson(new Serialization<string, string>(saveDic));
         SecurityPlayerPrefs.SetString("object-save", json);
         SecurityPlayerPrefs.SetString("playerPos-save", $"{player.transform.position.x} {player.transform.position.y} {player.transform.position.z}");
@@ -176,12 +177,12 @@ public class GameManager : MonoBehaviour
     }
 
     [ContextMenu("Reset")]
-    public void debug_Reset()
+    public void debug_Reset() // 디버그 - 데이터 리셋
     {
         DataReset();
     }
 
-    public static void DataReset()
+    public static void DataReset() // 디버그 - 데이터 리셋
     {
         SecurityPlayerPrefs.SetString("object-save", "{}");
 
@@ -205,7 +206,7 @@ public class GameManager : MonoBehaviour
         print("Reset Complete");
     }
 
-    private void ColorChange(bool start)
+    private void ColorChange(bool start) // 선택 가능 오브젝트 아웃라인 색깔 애니메이션
     {
         if (start)
         {
@@ -217,12 +218,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public static void PlaySFX(AudioClip clip, float volume = 1)
+    public static void PlaySFX(AudioClip clip, float volume = 1) // 효과음 재생
     {
         Instance.defaultSFXSource.PlayOneShot(clip, volume * SettingManager.sfxVolume);
     }
 
-    public static void PlaySFX(AudioSource source, AudioClip clip, SoundType type, float volume = 1)
+    public static void PlaySFX(AudioSource source, AudioClip clip, SoundType type, float volume = 1) // 효과음 소스를 넣은 후 조절
     {
         if (type == SoundType.BGM)
         {
@@ -236,13 +237,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SoundSourceInit()
+    public void SoundSourceInit() // 효과음 초기화
     {
         foreach (AudioSource item in allSource)
         {
             if (item.outputAudioMixerGroup != null)
             {
-                if (item.outputAudioMixerGroup.name == "BGM")
+                if (item.outputAudioMixerGroup.name == "BGM") // BGM이라면 볼륨을 설정된 수치로 바꿔준다.
                 {
                     item.DOComplete();
                     item.volume = SettingManager.bgmVolume;
@@ -252,13 +253,13 @@ public class GameManager : MonoBehaviour
     }
 
     [ContextMenu("DataLog")]
-    public void SaveLog()
+    public void SaveLog() // 디버그 - 오브젝트 저장 데이터 로그 출력
     {
         string a = JsonUtility.ToJson(new Serialization<string, string>(saveDic));
         print(a);
     }
 
-    public PickableObject FindDisabledObject(int itemId)
+    public PickableObject FindDisabledObject(int itemId) // 지금 꺼져있는 오브젝트를 리스트에서 찾아서 리턴해준다.
     {
         for(int i = 0; i<pickableObjectList.Count;i++)
         {
@@ -266,7 +267,7 @@ public class GameManager : MonoBehaviour
             {
                 if (!pickableObjectList[i].gameObject.activeSelf)
                 {
-                    Book book = pickableObjectList[i].GetComponent<Book>();
+                    Book book = pickableObjectList[i].GetComponent<Book>(); // 근데 책이라면, 아이템 아이디를 다른 방식으로 썼으므로 넘어간다.
                     if (book != null) continue;
 
                     return pickableObjectList[i];
@@ -277,7 +278,7 @@ public class GameManager : MonoBehaviour
         return null;
     }
 
-    public void CreateMuffinTest()
+    public void CreateMuffinTest() // 만약 맵에 남아있는 머핀 수가 1개 이하라면, 머핀을 새로 만드는 함수
     {
         const int MUFFIN_ID = 2;
 
@@ -306,7 +307,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void CreateMilkTest()
+    public void CreateMilkTest() // 만약 맵에 남아있는 우유 수가 1개 이하라면, 우유를 새로 만드는 함수
     {
         const int MILK_ID = 3;
 

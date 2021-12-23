@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PickableObject : SelectableObject, ISaveAble
 {
-    public int itemId;
+    // 주울 수 있는 오브젝트 - 선택 가능 오브젝트 중 인벤토리에 넣을 수 있는 오브젝트들
+
+    public int itemId; // 주워서 나올 아이템 아이디 - ItemInfo에서 아이템 배열에 따라 설정해준다.
 
     [HideInInspector]
     public ItemPlacer itemPlacer;
@@ -60,7 +62,7 @@ public class PickableObject : SelectableObject, ISaveAble
         return this.gameObject;
     }
 
-    public void Drop()
+    public void Drop() // Q를 눌러서 버렸을때
     {
         Rigidbody rb = GetComponent<Rigidbody>();
 
@@ -92,7 +94,7 @@ public class PickableObject : SelectableObject, ISaveAble
         }
     }
 
-    public virtual void Load()
+    public virtual void Load() // 포지션, 로테이션, 스케일을 모두 저장하고, 로드한다.
     {
         eventFlow = GameManager.saveDic[saveKey];
         if (eventFlow.Equals("false"))
@@ -116,7 +118,7 @@ public class PickableObject : SelectableObject, ISaveAble
         }
     }
 
-    public override void OnClicked()
+    public override void OnClicked() // 클릭시에는 인벤토리가 찼는지 확인하고 아이템을 줍게한다.
     {
         if(GameManager.Instance.inventoryManager.TryGetRemainingTab(itemId, out TabScript tab))
         {
@@ -133,12 +135,12 @@ public class PickableObject : SelectableObject, ISaveAble
             GameManager.PlaySFX(GameManager.Instance.audioBox.object_pickup);
             GameManager.Instance.inventoryManager.SelectedItemRefresh();
             eventFlow = "false";
-            if (itemPlacer != null)
+            if (itemPlacer != null) // itemPlacer에 있는 "주울 수 있는 아이템"이라면?
             {
                 const int MUFFIN_ID = 2;
                 const int MILK_ID = 3;
 
-                if (itemId == MUFFIN_ID)
+                if (itemId == MUFFIN_ID) // 음식 카운트를 위해 머핀이나 우유라면 남은 갯수를 추가히켜준다.
                 {
                     GameManager.Instance.muffinCountLeft++;
                 }

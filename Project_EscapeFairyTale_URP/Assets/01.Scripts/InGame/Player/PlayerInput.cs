@@ -13,6 +13,9 @@ public class PlayerInput : MonoBehaviour
 
     void InputInGame()
     {
+        // 인풋 - 플레이어 스테이트에 따라서 적용될 인풋을 다르게 설정하여 조절한다.
+
+
         if (Input.GetKeyDown(KeyCode.R)) // 재시작
         {
             if (GameManager.Instance.isGameOver)
@@ -26,7 +29,7 @@ public class PlayerInput : MonoBehaviour
         if (GameManager.Instance.player.playerState == PlayerState.WAKING_UP) return;
         if (GameManager.Instance.player.playerState == PlayerState.ENDING) return;
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E)) // 인벤토리
         {
             if (GameManager.Instance.player.playerState != PlayerState.OPEN_BOOK)
             {
@@ -42,7 +45,7 @@ public class PlayerInput : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape)) // 일시 정지 또는 취소
         {
             if (GameManager.Instance.player.playerState == PlayerState.OPEN_INVENTORY)
             {
@@ -128,7 +131,7 @@ public class PlayerInput : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space)) // 튜토리얼 스킵
         {
             if(UIManager.instance.isTutorialPanelAppear)
             {

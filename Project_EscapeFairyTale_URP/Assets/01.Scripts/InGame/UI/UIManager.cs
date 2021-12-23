@@ -10,6 +10,10 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance = null;
 
+    // UIManager는 싱글톤을 사용하고, static 함수들을 이용하여 instance 안에있는 변수를 함수에 사용하는 식으로
+    // UIManager.instance를 사용하지 않아도 간단히 사용할수 있게 시도해보았다.
+    // 모든 UI 애니메이션을 모았다.
+
     [Header("InGame")]
     public CanvasGroup inGameCanvasGroup;
     public CanvasGroup blackScreenCanvasGroup;
@@ -256,6 +260,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    // 팁 UI - 오른쪽 아래에 등장
     public static void Tip_RBAppear(Sprite sprite, string text, float appearTime, float waitTime, float disappearTime)
     {
         instance.tip_rb.DOComplete();
@@ -267,6 +272,8 @@ public class UIManager : MonoBehaviour
         instance.tip_rb.DOFade(0, disappearTime).SetDelay(waitTime);
     }
 
+
+    // 팁 UI - 플레이어의 스케일이 바뀔때 아래쪽 중앙에 등장
     public static void Tip_SizeChange(int index)
     {
         instance.tip_size.DOComplete();
@@ -277,6 +284,7 @@ public class UIManager : MonoBehaviour
         instance.tip_size.DOFade(0, 0.5f).SetDelay(3f);
     }
 
+    // 게임 오버 UI - 게임 오버되었을때 화면에 띄울 스프라이트를 매개변수로 두고 호출
     public static void GameOverUI(Sprite reasonSprite)
     {
         //GameManager.Instance.player.playerState = PlayerState.DEAD; 는 죽을게 확정될때 해준다.
@@ -297,6 +305,7 @@ public class UIManager : MonoBehaviour
         //});
     }
 
+    // 기본적인 캔버스 애니메이션 함수 - 오버로딩하여 다양하게 쓸 수 있게 해준다.
     public static void CanvasGroup_DefaultShow(CanvasGroup group, bool show)
     {
         group.DOComplete();
@@ -325,6 +334,7 @@ public class UIManager : MonoBehaviour
 
     #region LetterUI
 
+    // 쪽지 UI - 스프라이트만을 사용할 수 있고, 폰트와 텍스트를 추가하여 인스펙터에서 직접 쓸 수 있게 오버로딩도 하였다
     public static void LetterUI(Sprite letter)
     {
         MouseEvent.MouseLock(false);
@@ -358,6 +368,7 @@ public class UIManager : MonoBehaviour
 
     #region BookUI
 
+    // 책 UI - 책 넘기기, 닫기 등의 상호작용이 가능하도록 버튼에 이벤트를 추가
     public static void BookDefaultUI(bool show)
     {
         CanvasGroup_DefaultShow(instance.bookDefault, show, false);
@@ -424,6 +435,7 @@ public class UIManager : MonoBehaviour
 
     #region CameraMove
 
+    // 플레이어 시점인 메인 카메라에서 -> 시야를고정하고 자세히 탐색하는 서브 카메라로 옮기는 함수
     public static void ChangeToSubCamera(Vector3 pos, Quaternion rotation, bool backButtonAppear = true)
     {
         GetMainCam().gameObject.SetActive(false);
@@ -436,11 +448,13 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.player.isSubCam = true;
     }
 
+    // 메인 카메라를 리턴한다.
     public static Camera GetMainCam()
     {
         return instance.mainCamera;
     }
 
+    // 서브 카메라에서 메인 카메라로 옮긴다.
     public static void ChangeToMainCamera()
     {
         GetMainCam().gameObject.SetActive(true);
@@ -461,6 +475,7 @@ public class UIManager : MonoBehaviour
 
     #region PauseMenu
 
+    // 일시정지 UI - value에 따라 타임스케일을 0으로 해준다.
     public static void PauseUI(bool value)
     {
         GameManager.Instance.player.playerState = value ? PlayerState.PAUSED : PlayerState.NORMAL;
@@ -493,6 +508,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    // 확인 UI - yes / no 응답한것에 따라 델리게이트(이벤트) 함수를 집어넣어 다음 할 함수를 매개변수로 한다.
     public static void ConfirmUI(string qustion, string leftBtnAnswer, string rightBtnAnswer, Action leftBtnAction, Action rightBtnAction = null)
     {
         ConfirmPanelAppear(true);

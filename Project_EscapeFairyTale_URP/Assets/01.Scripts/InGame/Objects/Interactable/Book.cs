@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Book : PickableObject, ISaveAble
 {
+    // 책은 아이템 아이디를 사용하되 책 고유의 아이디를 사용한다.
+
     protected override void Start()
     {
         if (!saveKey.Equals(""))

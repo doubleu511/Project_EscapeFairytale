@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class RopePanel : MonoBehaviour
 {
+    // 더미데이터....(게임에 사용되지 않음)./
+
     public Image keyboardImg;
     public RectTransform keyboardValue;
     public Vector2 keyboardTargetValue;

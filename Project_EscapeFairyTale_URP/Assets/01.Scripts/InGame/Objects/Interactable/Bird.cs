@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Bird : SelectableObject
 {
+    // 새 - 해피 엔딩을 보고 난 이후 하게될 미니게임 오브젝트
+
     public override void OnClicked()
     {
         base.OnDisHighlighted();

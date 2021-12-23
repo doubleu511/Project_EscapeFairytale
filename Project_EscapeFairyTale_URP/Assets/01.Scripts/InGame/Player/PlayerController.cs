@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(SpeedCheck());
     }
 
-    void Update()
+    void Update() // 죽거나, 일어나고 있는 중이거나, 엔딩때거나, 미끄러질때는 못 움직이게 한다.
     {
         if (playerState == PlayerState.DEAD) return;
         if (playerState == PlayerState.WAKING_UP) return;
@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
         cc.Move(dir * currentSpeed * ScaleToSpeed() * Time.deltaTime);
     }
 
-    public bool IsCheckGrounded()
+    public bool IsCheckGrounded() // 자신이 지금 땅에 닿고있는지 확인한다.
     {
         if (cc.isGrounded) return true;
 
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
         return Physics.Raycast(ray, maxDistance, _fieldLayer);
     }
 
-    float ScaleToSpeed()
+    float ScaleToSpeed() // 자신의 스케일에 따라 속도를 바꿔준다.
     {
         if(transform.localScale.x <= 0.04)
         {
@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator SpeedCheck()
+    IEnumerator SpeedCheck() // 지금 속도를 체크하고 애니메이션 파라미터로 넘긴다.
     {
         while(true)
         {
@@ -123,11 +123,11 @@ public class PlayerController : MonoBehaviour
 
             Vector3 dis = currentPos - secondPos;
 
-            playerAnim.SetFloat("speed", (dis.sqrMagnitude / transform.localScale.x / transform.localScale.x) * 1000); // 너무 작아서 10,000 곱해줌
+            playerAnim.SetFloat("speed", (dis.sqrMagnitude / transform.localScale.x / transform.localScale.x) * 1000); // 너무 작아서 1,000 곱해줌
         }
     }
 
-    void Event_WakeEnd()
+    void Event_WakeEnd() // 애니메이션 이벤트 함수 - 기상 끝
     {
         UIManager.InGameAppear(true);
         playerState = PlayerState.NORMAL;

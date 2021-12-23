@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class NumberMatchModule : Module
 {
+    // 숫자가 같은지 확인하여 맞다면 정답 이벤트를 호출한다.
+
     public Counter[] numbers;
     public int[] answers;
     public UnityEvent correctEvent;

@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class Serialization<TKey, TValue> : ISerializationCallbackReceiver
+public class Serialization<TKey, TValue> : ISerializationCallbackReceiver // 이 인터페이스가 구현되면 JsonUtility에 넣을 수 있는 것 같다.
 {
+    // 제네릭으로 형식을 받아서 리스트로 만들어서 직렬화 해준다.
+
     [SerializeField]
     List<TKey> keys;
     [SerializeField]

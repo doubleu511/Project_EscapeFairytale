@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RotateMe : MonoBehaviour
 {
+    // 나 자신을 회전시키는 컴포넌트
+
     public bool isMainTitleCamera;
 
     [SerializeField] private Vector3 rotate;

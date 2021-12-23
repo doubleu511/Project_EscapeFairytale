@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Counter : MonoBehaviour
 {
+    // 자신이 인덱스를 임의의 방법으로 더하거나/빼서 저장하고, 모듈에 이를 저장시킨다.
+
     [SerializeField] protected int maxIndex;
     [HideInInspector] public int index = 0;
     [HideInInspector] public Module parentModule;
